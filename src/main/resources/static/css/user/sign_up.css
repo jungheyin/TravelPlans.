@@ -1,0 +1,19 @@
+@charset "UTF-8";
+
+#wrap{
+	width:500px;
+}
+
+header{
+	height:110px;
+}
+
+.content #signUpBtn{
+	background-color: #76AF78;
+	font-weight: bold;
+	color: white;
+}
+
+footer {
+	height:100px;
+}

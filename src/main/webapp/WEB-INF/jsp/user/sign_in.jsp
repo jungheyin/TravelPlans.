@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>travel plans.</title>
+<title>travel plans.:login</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
@@ -22,7 +22,7 @@
 	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 	crossorigin="anonymous"></script>
 
-<link rel="stylesheet" type="text/css" href="/static/css/user/travelplans.css">
+<link rel="stylesheet" type="text/css" href="/static/css/user/sign_in.css">
 </head>
 <body>
 	<div id="wrap" class="container">
@@ -32,18 +32,24 @@
 			</div>
 		</header>
 		
-		<section class="content">
-			<a id="loginBtn" class="btn d-block btn-lg font-weight-bold text-white mt-4" 
-				href="/travelplans/sign_in_view">
-				L O G I N
-			</a>
-			<div class="d-flex justify-content-between mt-3 px-1">
-				<a href="#" class="text-dark font-weight-bold">아이디/비밀번호 찾기</a>
-				<a href="/travelplans/sign_up_view" class="text-dark font-weight-bold">회원가입</a>
-			</div>
+		<section class="content mt-4">
+				<div >
+					<input type="text" id="loginId" class="form-control mb-3" 
+					 placeholder="ID">
+				</div>
+				<div>				
+					<input type="password" id="password" class="form-control" 
+						placeholder="PASSWORD">
+				</div>
+				
+				<button type="button" class="btn w-100 btn-lg font-weight-bold text-white mt-4" 
+					id="loginBtn">
+					GO ON A TRIP.
+				</button>
+				
 		</section>
 		
-		<footer class="d-flex justify-content-center align-items-end">
+		<footer class="d-flex justify-content-center">
 			<small class="text-secondary">
 				Copyright 2022 travel plans. All rights reserved.
 			</small>

@@ -8,10 +8,11 @@ header {
 	height: 300px;	
 }
 
-.content {height:200px;}
+.content {height:400px;}
 
 .content #loginBtn {
  	background-color: #7BB0DB;
 }
 
 footer {height:100px;}
+
