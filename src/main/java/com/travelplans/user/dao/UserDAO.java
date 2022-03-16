@@ -3,6 +3,8 @@ package com.travelplans.user.dao;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import com.travelplans.user.model.User;
+
 @Repository
 public interface UserDAO {
 
@@ -13,4 +15,8 @@ public interface UserDAO {
 			@Param("password") String password, 
 			@Param("nickname") String nickname, 
 			@Param("email") String email);
+	
+	public User getUserByLoginIdPassword(
+			@Param("loginId") String loginId, 
+			@Param("password") String password);
 }

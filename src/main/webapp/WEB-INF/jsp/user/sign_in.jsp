@@ -26,15 +26,17 @@
 </head>
 <body>
 	<div id="wrap" class="container">
-		<header class="d-flex align-items-center justify-content-center mt-3">
+		<header class="d-flex align-items-end justify-content-center mb-5">
 			<div>
 				<h1 class="font-weight-bold text-center">L O G I N</h1>
-				<small class="loginText font-weight-bold">travel plans에 오신걸 환영합니다 :)</small>
+				<a href="/travelplans/travelplans_view">
+					<span class="loginText font-weight-bold m-5">travel plans.</span>
+				</a>
 			</div>
 		</header>
 		
 		<section class="content">
-				<div >
+				<div>
 					<input type="text" id="loginId" class="form-control mb-3" 
 					 placeholder="ID">
 				</div>
@@ -43,11 +45,10 @@
 						placeholder="PASSWORD">
 				</div>
 				
-				<button type="button" class="btn w-100 btn-lg font-weight-bold text-white mt-4" 
+				<button class="btn w-100 btn-lg font-weight-bold text-white mt-4" 
 					id="loginBtn">
-					GO ON A TRIP.
+						GO ON A TRIP.
 				</button>
-				
 		</section>
 		
 		<footer class="d-flex justify-content-center">
@@ -56,5 +57,48 @@
 			</small>
 		</footer>
 	</div>
+
+<script>
+$(document).ready(function() {
+	
+	$('#loginId').on('keyup', function() {
+		let regLoginId = $(this).val();
+		$(this).val((regLoginId.replace(/[ㄱ-힣~!@#$%^&*()_+|<>?:{}= ]/g,'')));
+	});
+	
+	$('#loginBtn').on('click', function() {
+		
+		let loginId = $('#loginId').val().trim();
+		
+		if (loginId == '') {
+			alert("아이디를 입력하세요.");
+			return false;
+		}
+		
+		let password = $('#password').val();
+		
+		if (password == '') {
+			alert("비밀번호를 입력하세요.");
+			return false;
+		}
+		
+		$.ajax({
+			type: "POST"
+			, url: "/user/sign_in"
+			, data: {"loginId":loginId, "password":password}
+			, success: function(data) {
+				if (data.result == 'success') {
+					location.href ="/mypage/mypage_view";
+				} else {
+					alert(data.errorMessage);
+				}
+			}
+			,error: function(e) {
+				alert("실패");
+			}
+		});	
+	});
+});
+</script>
 </body>
 </html>

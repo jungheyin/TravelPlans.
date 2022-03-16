@@ -8,6 +8,56 @@ header{
 	height:150px;
 }
 
+header .logoText {
+	color: #7BB0DB;
+	}
+
+/* infoText */
+#idCheckOk{ 
+	color: #7BB0DB;
+	font-weight:bold;
+	}
+#idCheckNot{ 
+	color: #f96060;
+	font-weight:bold;
+	}
+#idCheckLength{ 
+	color: #ffcc85;
+	font-weight:bold;
+	}
+
+#passwordOk{ 
+	color: #7BB0DB;
+	font-weight:bold;
+	}
+#passwordRule{ 
+	color: #ffcc85;
+	font-weight:bold;
+	}
+
+#passwordSame{ 
+	color:#7BB0DB;
+	font-weight:bold;
+	}
+#passwordDifferent{ 
+	color: #f96060;
+	font-weight:bold;
+	}
+#confirmPasswordRule{ 
+	color: #ffcc85;
+	font-weight:bold;
+	}
+
+#emailOk{ 
+	color: #7BB0DB;
+	font-weight:bold;
+	}
+#emailRule{ 
+	color: #f96060;
+	font-weight:bold;
+	}
+
+
 .content #signUpBtn{
 	background-color: #AEADCA;
 	font-weight: bold;

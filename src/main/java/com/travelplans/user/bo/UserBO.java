@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.travelplans.user.dao.UserDAO;
+import com.travelplans.user.model.User;
 
 @Service
 public class UserBO {
@@ -19,5 +20,10 @@ public class UserBO {
 	public int addUser(String loginId, String password, String nickname, String email) {
 		
 		return userDAO.insertUser(loginId, password, nickname, email) ;
+	}
+	
+	public User getUserByLoginIdPassword(String loginId, String password) {
+		
+		return userDAO.getUserByLoginIdPassword(loginId, password);
 	}
 }
