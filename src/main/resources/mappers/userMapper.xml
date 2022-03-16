@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.travelplans.user.dao.UserDAO">
+
+	<select id="selectLoginId" parameterType="String" resultType="boolean">
+		SELECT 
+			COUNT(*)
+		FROM
+			`user`
+		WHERE `loginId` = #{loginId}
+	</select>
+	
+	<insert id="insertUser" parameterType="map">
+		INSERT INTO `user`
+		(
+			`loginId`
+			,`password`
+			,`nickname`
+			,`email`
+			,`createdAt`
+ 			,`updatedAt`
+		)
+		VALUES
+		(
+			#{loginId}
+			,#{password}
+			,#{nickname}
+			,#{email}
+			,NOW()
+			,NOW()
+		)
+	</insert>
+</mapper>

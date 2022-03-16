@@ -1,11 +1,15 @@
 @charset "UTF-8";
 
 #wrap { 
-	width:500px;
+	width:450px;
 }
 
 header {
 	height: 300px;	
+}
+
+header .loginText {
+	color: #7BB0DB;
 }
 
 .content {height:400px;}

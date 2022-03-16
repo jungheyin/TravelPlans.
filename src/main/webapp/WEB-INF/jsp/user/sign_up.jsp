@@ -26,76 +26,73 @@
 </head>
 <body>
 	<div id="wrap" class="container">
-		<header class="d-flex justify-content-center mt-3">
-			<h1>travel plans.</h1>
+		<header class="d-flex align-items-center justify-content-center">
+			<h2>SIGN UP</h2>
 		</header>
 		<section class="content">
 			<!-- 닉네임 -->
 			<div class="form-group">
-				<h5 class="m-1">NICKNAME</h5> 
-				<input type="text" id="nickname" class="form-control" placeholder="닉네임">
+				<h6 class="ml-1">NICKNAME</h6> 
+				<input type="text" id="nickname" class="form-control text-" placeholder="닉네임">
 			</div>
 			
 			<!-- 로그인 아이디 -->
 			<div class="form-group">
 				<div class="d-flex justify-content-between">
-					<h5 class="m-1">LOGINID</h5> <!-- input event 사용하기 -->
+					<h6 class="m-1">ID</h6> <!-- input event 사용하기 -->
 					
 					<div class="mt-2 mr-2">
-						<small class="text-primary d-none">사용 가능한 아이디입니다.</small>
-						<small class="text-danger d-none">사용할 수 없는 아이디입니다.</small>
-						<small class="text-warning d-none">아이디는 4글자 이상 가능합니다.</small>
-						<small class="text-warning">아이디를 입력 해주세요..</small>
+						<small id="idCheckOk" class="text-primary d-none">사용 가능한 아이디입니다.</small>
+						<small id="idCheckNot" class="text-primary d-none">사용할 수 없는 아이디입니다.</small>
+						<small id="idCheckLength" class="text-warning d-none">아이디는 4글자 이상 가능합니다.</small>
 					</div>
 				</div>
-				<input type="text" id="loginId" class="form-control" placeholder="4자 이상">
+				<div>
+					<input type="text" id="loginId" class="form-control mr-2" placeholder="4자 이상">
+				</div>
 			</div>
 			
 			<!-- 비밀번호-->
 			<div class="form-group">
 				<div class="d-flex justify-content-between">
-					<h5 class="m-1">PASSWORD</h5> <!-- input event 사용하기 -->
+					<h6 class="m-1">PASSWORD</h6> <!-- input event 사용하기 -->
 					
 					<div class="mt-2 mr-2">
-						<small class="text-primary d-none">사용 가능한 비밀번호입니다.</small>
-						<small class="text-danger d-none">비밀번호가 다릅니다.</small>
-						<small class="text-warning">특수문자/문자/숫자 포함해 8~15자리 애내 입력헤 주세요.</small>
-						<small class="text-danger d-none">비밀번호를 입력해 주세요.</small>
+						<small id="passwordOk" class="text-primary d-none">사용 가능한 비밀번호입니다.</small>
+						<small id="passwordRule" class="text-warning d-none">특수문자/문자/숫자 포함해 8~15자리 애내 입력헤 주세요.</small>
 					</div>
 				</div>
-				<input type="password" id="password" class="form-control" placeholder="특수문자/문자/숫자 포함해 8~15자리 이내 입력해 주세요.">
+				<input type="password" id="password" class="form-control" placeholder="특수문자/문자/숫자 포함해 8~15자리">
 			</div>
 			
 			<!-- 확인 비밀번호-->
 			<div class="form-group">
 				<div class="d-flex justify-content-between">
-					<h5 class="m-1">PASSWORD</h5> <!-- input event 사용하기 -->
+					<h6 class="m-1">PASSWORD</h6> <!-- input event 사용하기 -->
 					
 					<div class="mt-2 mr-2">
-						<small class="text-primary d-none">비밀번호가 같습니다.</small>
-						<small class="text-danger d-none">비밀번호가 다릅니다.</small>
-						<small class="text-warning d-none">특수문자/문자/숫자 포함해 8~15자리 애내 입력헤 주세요.</small>
-						<small class="text-danger ">비밀번호를 입력해 주세요.</small>
+						<small id="passwordSame" class="text-primary d-none">비밀번호가 같습니다.</small>
+						<small id="passwordDifferent" class="text-danger d-none">비밀번호가 다릅니다.</small>
+						<small id="confirmPasswordRule" class="text-warning d-none">특수문자/문자/숫자 포함해 8~15자리 애내 입력헤 주세요.</small>
 					</div>
 				</div>
-				<input type="password" id="confirmPassword" class="form-control" placeholder="특수문자/문자/숫자 포함해 8~15자리 이내 입력해 주세요.">
+				<input type="password" id="confirmPassword" class="form-control" placeholder="특수문자/문자/숫자 포함해 8~15자리">
 			</div>
 			
 			<!-- 이메일 -->
 			<div class="form-group">
 				<div class="d-flex justify-content-between">
-					<h5 class="m-1">EMAIL</h5> <!-- input event 사용하기 -->
+					<h6 class="m-1">EMAIL</h6> <!-- input event 사용하기 -->
 					
 					<div class="mt-2 mr-2">
-						<small class="text-primary d-none">사용 가능한 이메일입니다.</small>
-						<small class="text-danger d-none">메일 형식으로 입력해주세요.</small>
-						<small class="text-warning">이메일를 입력 해주세요.</small>
+						<small id="emailOk" class="text-primary d-none">사용 가능한 이메일입니다.</small>
+						<small id="emailRule" class="text-danger d-none">메일 형식으로 입력해주세요.</small>
 					</div>
 				</div>
 				<input type="text" id="email" class="form-control" placeholder="travel@plans.com">
 				
 				<button id="signUpBtn" type="button" class="btn btn-lg w-100 mt-5">
-					SIGN UP
+					J O I N
 				</button>
 			</div>
 		</section>
@@ -106,5 +103,189 @@
 			</small>
 		</footer>
 	</div>
+	
+<script>
+
+$(document).ready(function() {
+	
+	$('#loginId').on('blur', function(e) {
+		
+		let loginId = $('#loginId').val().trim();
+		
+		//alert(loginId);
+		
+		$('#idCheckOk').addClass('d-none');
+		$('#idCheckLength').addClass('d-none');
+		$('#idCheckNot').addClass('d-none');
+		
+		if (loginId.length < 4) {
+			$('#idCheckLength').removeClass('d-none');
+			return;
+		} 
+		
+		
+		$.ajax({
+			type: "POST"
+			, url: "/user/is_duplicated_id"
+			, data: {"loginId":loginId}
+			, success : function(data) {
+				if (data.result) {
+					$('#idCheckNot').removeClass('d-none');
+				} else if (data.result == false){
+					$('#idCheckOk').removeClass('d-none');
+				} else {
+					alert("다시 시도하기");
+				}
+			}
+			, error: function(e) {
+				alert("실패");
+			}
+		});
+		
+	});
+	
+	function passwordCheck(password) {
+		var regExp = /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{8,16}$/;
+ 
+		return regExp.test(password);
+	}	
+	
+	$('#password').on('blur', function() { 
+		
+		let password = $('#password').val();
+		
+		$('#passwordOk').addClass('d-none');
+		$('#passwordRule').addClass('d-none');
+		
+		if (password == '') {
+			return;
+		}
+		
+		if (!passwordCheck(password)) {
+			$('#passwordRule').removeClass('d-none');
+			return;
+		} else {
+			$('#passwordOk').removeClass('d-none');
+			return;
+		}
+		
+	});
+	
+	$('#confirmPassword').on('blur', function() {
+		
+		let password = $('#password').val();
+		let confirmPassword = $('#confirmPassword').val();
+		
+		$('#passwordSame').addClass('d-none');
+		$('#passwordDifferent').addClass('d-none');
+		$('#confirmPasswordRule').addClass('d-none');
+		
+		if (confirmPassword == '') {
+			return;
+		}
+		
+		if(!passwordCheck(confirmPassword)) {
+			$('#confirmPasswordRule').removeClass('d-none');
+			return;
+		} 
+		
+		if (password != confirmPassword) {
+			$('#passwordDifferent').removeClass('d-none');
+			return;
+		} else if (password == confirmPassword) {
+			$('#passwordSame').removeClass('d-none');
+			return;
+		}
+	});
+	
+	function emailCheck(email) {
+		var reg = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+		return reg.test(email);
+	}
+	
+	$('#email').on('blur', function() {
+		
+		let email = $('#email').val().trim();
+		
+		$('#emailOk').addClass('d-none');
+		$('#emailRule').addClass('d-none');
+		
+		if (!emailCheck(email)) {
+			$('#emailRule').removeClass('d-none');
+			return;
+		} else {
+			$('#emailOk').removeClass('d-none');
+			return;
+		}
+	});
+	
+	
+	$('#signUpBtn').on('click', function() {
+		
+		let nickname = $('#nickname').val().trim();
+		let loginId = $('#loginId').val().trim();
+		let password = $('#password').val();
+		let confirmPassword = $('#confirmPassword').val();
+		let email = $('#email').val().trim();
+		
+		if (nickname == '') {
+			alert("닉네임을 입력해주세요.");
+			return;
+		}
+		
+		if (loginId == '') {
+			alert("아이디를 입력해주세요.");
+			return;
+		}
+		
+		if (password == '' || confirmPassword == '') {
+			alert("비밀번호를 입력해주세요.");
+			return;
+		}
+		
+		if (email == '') {
+			alert("이메일을 입력해주세요.");
+			return;
+		}
+		
+		if ($('#idCheckOk').hasClass('d-none')) {
+			alert("아이디를 확인해 주세요.");
+			return;
+		}
+		
+		if ($('#passwordSame').hasClass('d-none')) {
+			alert("비밀번호를 확인해 주세요.");
+			return;
+		}
+		
+		if ($('#emailOk').hasClass('d-none')) {
+			alert("이메일를 확인해 주세요.");
+			return;
+		}
+		
+
+		
+		$ajax({
+			type: "POST"
+			, url: "/travelplans/sign_up"
+			, data: {"nickname":nickname, "loginId":loginId, "password":password,"email":email}
+			, success: function(data) {
+				if (data.result == 'success') {
+					alert("회원가입 성공 :)");
+					location.href="/travelplans/travelplans_view";
+				} else if (data.result == 'error') {
+					// 이미 가입된 정보
+				}
+			}
+			, error: function(e) {
+				alert(실패);
+			}
+		});
+		
+	});
+	
+	
+});
+</script>
 </body>
 </html>

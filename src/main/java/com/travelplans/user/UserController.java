@@ -25,4 +25,10 @@ public class UserController {
 		
 		return "user/sign_up";
 	}
+	
+	@RequestMapping("/find_user_view")
+	public String findUserView() {
+		
+		return "user/find_user";
+	}
 }

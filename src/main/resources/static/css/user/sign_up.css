@@ -5,11 +5,11 @@
 }
 
 header{
-	height:110px;
+	height:150px;
 }
 
 .content #signUpBtn{
-	background-color: #76AF78;
+	background-color: #AEADCA;
 	font-weight: bold;
 	color: white;
 }

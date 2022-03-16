@@ -28,7 +28,7 @@
 	<div id="wrap" class="container">
 		<header class="d-flex align-items-end justify-content-center">
 			<div>
-				<span class="display-4 font-weight-bold">travel plans.</span>
+				<h1 class="font-weight-bold">travel plans.</h1>
 			</div>
 		</header>
 		
@@ -37,9 +37,13 @@
 				href="/travelplans/sign_in_view">
 				L O G I N
 			</a>
-			<div class="d-flex justify-content-between mt-3 px-1">
-				<a href="#" class="text-dark font-weight-bold">아이디/비밀번호 찾기</a>
-				<a href="/travelplans/sign_up_view" class="text-dark font-weight-bold">회원가입</a>
+			<div class="d-flex justify-content-between mt-1 mx-3">
+				<a href="/travelplans/find_user_view" >
+					<small class="text-dark font-weight-bold">아이디/비밀번호 찾기</small>
+				</a>
+				<a href="/travelplans/sign_up_view">
+					<small class="text-dark font-weight-bold">회원가입</small>
+				</a>
 			</div>
 		</section>
 		

@@ -26,13 +26,14 @@
 </head>
 <body>
 	<div id="wrap" class="container">
-		<header class="d-flex align-items-end justify-content-center">
+		<header class="d-flex align-items-center justify-content-center mt-3">
 			<div>
-				<span class="display-4 font-weight-bold">travel plans.</span>
+				<h1 class="font-weight-bold text-center">L O G I N</h1>
+				<small class="loginText font-weight-bold">travel plans에 오신걸 환영합니다 :)</small>
 			</div>
 		</header>
 		
-		<section class="content mt-4">
+		<section class="content">
 				<div >
 					<input type="text" id="loginId" class="form-control mb-3" 
 					 placeholder="ID">
