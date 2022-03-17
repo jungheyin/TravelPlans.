@@ -37,7 +37,7 @@
 				href="/travelplans/sign_in_view">
 				L O G I N
 			</a>
-			<div class="d-flex justify-content-between mt-1 mx-3">
+			<div class="d-flex justify-content-between mt-3 mx-3">
 				<a href="/travelplans/find_user_view" >
 					<small class="text-dark font-weight-bold">아이디/비밀번호 찾기</small>
 				</a>

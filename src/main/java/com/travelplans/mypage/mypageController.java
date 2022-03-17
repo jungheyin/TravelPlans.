@@ -12,4 +12,10 @@ public class mypageController {
 		
 		return "mypage/mypage";
 	}
+	
+	@RequestMapping("/setting_view")
+	public String settingView() {
+		
+		return "mypage/setting";
+	}
 }

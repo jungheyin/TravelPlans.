@@ -1,9 +1,11 @@
 @charset "UTF-8";
 
 #wrap{
-	width: 800px}
+	width: 800px;
+}
 
 header .logoutNav {
+	height:30px;
 	background-color: #7BB0DB;
 }
 
@@ -24,23 +26,21 @@ header .mypageBox {
 
 
 .contents .planBox {
-	width: 360px;
-	height: 120px;
+	width: 600px;
+	height: 80px;
 	background-color: #ffcc85;
 }
 
 .tripTitle {
 	font-weight: bold;
+	font-size: 18px;
 }
-
 .tripDate {
 	font-weight: bold;
-	font-size: 10px;
+	font-size: 12px;
 }
 .tripPrice {
 	font-weight: bold;
 	font-size: 14px;
-	color: #747879; /*색상 다시 고민해 봐야함*/
 
 } 	
-/* 7e878f 747879 #c0c0c0*/

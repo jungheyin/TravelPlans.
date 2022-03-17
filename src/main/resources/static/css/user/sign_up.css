@@ -1,16 +1,23 @@
 @charset "UTF-8";
 
+#travelplans {
+	width: 800px;
+	height:30px;
+	background-color: #7BB0DB;
+}
 #wrap{
 	width:500px;
 }
 
 header{
-	height:150px;
+	height:120px;
 }
+
 
 header .logoText {
 	color: #7BB0DB;
 	}
+
 
 /* infoText */
 #idCheckOk{ 

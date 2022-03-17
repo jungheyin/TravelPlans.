@@ -25,83 +25,80 @@
 <link rel="stylesheet" type="text/css" href="/static/css/user/sign_up.css">
 </head>
 <body>
-	<div id="wrap" class="container">
-		<header class="mt-5">
-			<div class="d-flex justify-content-center">
+	<div id="travelplans" class="container">
+		<div class="travelplansBar ml-2">
+			<a href="/travelplans/travelplans_view">
+				<span class="font-weight-bold ml-2 text-white">travel plans.</span>
+			</a>
+		</div>
+	</div>
+	<div id="wrap" class="container ">
+		<header>
+			<div class="d-flex justify-content-center m-5">
 				<h2 class="font-weight-bold">SIGN UP</h2>
-			</div>
-			<div class="d-flex justify-content-center">
-				<a href="/travelplans/travelplans_view">
-					<span class="logoText font-weight-bold">travel plans.</span>
-				</a>
 			</div>
 		</header>
 		<section class="content">
-			<!-- 닉네임 -->
-			<div class="form-group">
-				<h6 class="ml-1">NICKNAME</h6> 
-				<input type="text" id="nickname" class="form-control text-" placeholder="닉네임">
-			</div>
 			
-			<!-- 로그인 아이디 -->
-			<div class="form-group">
-				<div class="d-flex justify-content-between">
-					<h6 class="m-1">ID</h6> <!-- input event 사용하기 -->
-					
-					<div class="mt-2 mr-2">
-						<small id="idCheckOk" class="d-none">사용 가능한 아이디입니다.</small>
-						<small id="idCheckNot" class="d-none">중복된 아이디입니다.</small>
-						<small id="idCheckLength" class="d-none">아이디는 4글자 이상 가능합니다.</small>
+				<div class="form-group">
+					<h6 class="ml-1">NICKNAME</h6> 
+					<input type="text" id="nickname" class="form-control text-" placeholder="닉네임">
+				</div>
+		
+				<div class="form-group">
+					<div class="d-flex justify-content-between">
+						<div>
+							<h6 class="m-1">ID</h6> <!-- input event 사용하기 -->
+						</div>
+						<div class="mt-2 mr-2">
+							<small id="idCheckOk" class="d-none">사용 가능한 아이디입니다.</small>
+							<small id="idCheckNot" class="d-none">중복된 아이디입니다.</small>
+							<small id="idCheckLength" class="d-none">아이디는 4글자 이상 가능합니다.</small>
+						</div>
+					</div>
+					<div>
+						<input type="text" id="loginId" class="form-control mr-2" placeholder="4자 이상">
 					</div>
 				</div>
-				<div>
-					<input type="text" id="loginId" class="form-control mr-2" placeholder="4자 이상">
-				</div>
-			</div>
 			
-			<!-- 비밀번호-->
-			<div class="form-group">
-				<div class="d-flex justify-content-between">
-					<h6 class="m-1">PASSWORD</h6> <!-- input event 사용하기 -->
-					
-					<div class="mt-2 mr-2">
-						<small id="passwordOk" class="d-none">사용 가능한 비밀번호입니다.</small>
-						<small id="passwordRule" class="d-none">특수문자/문자/숫자 포함해 8~15자리 애내 입력헤 주세요.</small>
+				<div class="form-group">
+					<div class="d-flex justify-content-between">
+						<h6 class="m-1">PASSWORD</h6> <!-- input event 사용하기 -->
+						
+						<div class="mt-2 mr-2">
+							<small id="passwordOk" class="d-none">사용 가능한 비밀번호입니다.</small>
+							<small id="passwordRule" class="d-none">특수문자/문자/숫자 포함해 8~15자리 애내 입력헤 주세요.</small>
+						</div>
 					</div>
+					<input type="password" id="password" class="form-control" placeholder="특수문자/문자/숫자 포함해 8~15자리">
 				</div>
-				<input type="password" id="password" class="form-control" placeholder="특수문자/문자/숫자 포함해 8~15자리">
-			</div>
+				<div class="form-group">
+					<div class="d-flex justify-content-between">
+						<h6 class="m-1">PASSWORD</h6> <!-- input event 사용하기 -->
+						
+						<div class="mt-2 mr-2">
+							<small id="passwordSame" class="d-none">비밀번호가 같습니다.</small>
+							<small id="passwordDifferent" class="d-none">비밀번호가 다릅니다.</small>
+							<small id="confirmPasswordRule" class="d-none">특수문자/문자/숫자 포함해 8~15자리 애내 입력헤 주세요.</small>
+						</div>
+					</div>
+					<input type="password" id="confirmPassword" class="form-control" placeholder="특수문자/문자/숫자 포함해 8~15자리">
+				</div>
+				<div class="form-group">
+					<div class="d-flex justify-content-between">
+						<h6 class="m-1">EMAIL</h6> <!-- input event 사용하기 -->
+						
+						<div class="mt-2 mr-2">
+							<small id="emailOk" class="d-none">사용 가능한 이메일입니다.</small>
+							<small id="emailRule" class="d-none">메일 형식으로 입력해주세요.</small>
+						</div>
+					</div>
+					<input type="text" id="email" class="form-control" placeholder="travel@plans.com">
+				</div>
 			
-			<!-- 확인 비밀번호-->
-			<div class="form-group">
-				<div class="d-flex justify-content-between">
-					<h6 class="m-1">PASSWORD</h6> <!-- input event 사용하기 -->
-					
-					<div class="mt-2 mr-2">
-						<small id="passwordSame" class="d-none">비밀번호가 같습니다.</small>
-						<small id="passwordDifferent" class="d-none">비밀번호가 다릅니다.</small>
-						<small id="confirmPasswordRule" class="d-none">특수문자/문자/숫자 포함해 8~15자리 애내 입력헤 주세요.</small>
-					</div>
-				</div>
-				<input type="password" id="confirmPassword" class="form-control" placeholder="특수문자/문자/숫자 포함해 8~15자리">
-			</div>
-			
-			<!-- 이메일 -->
-			<div class="form-group">
-				<div class="d-flex justify-content-between">
-					<h6 class="m-1">EMAIL</h6> <!-- input event 사용하기 -->
-					
-					<div class="mt-2 mr-2">
-						<small id="emailOk" class="d-none">사용 가능한 이메일입니다.</small>
-						<small id="emailRule" class="d-none">메일 형식으로 입력해주세요.</small>
-					</div>
-				</div>
-				<input type="text" id="email" class="form-control" placeholder="travel@plans.com">
-				
 				<button id="signUpBtn" type="button" class="btn btn-lg w-100 mt-5">
 					J O I N
 				</button>
-			</div>
 		</section>
 		
 		<footer class="d-flex align-items-end justify-content-center">
