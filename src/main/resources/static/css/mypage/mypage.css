@@ -1,0 +1,46 @@
+@charset "UTF-8";
+
+#wrap{
+	width: 800px}
+
+header .logoutNav {
+	background-color: #7BB0DB;
+}
+
+header .mypageBox {
+	height: 100px;
+}
+
+.addPlans {
+	font-weight: bold;
+	color: #7BB0DB;
+	
+}
+
+.SettingText {
+	font-weight: bold;
+	color: #7BB0DB
+}
+
+
+.contents .planBox {
+	width: 360px;
+	height: 120px;
+	background-color: #ffcc85;
+}
+
+.tripTitle {
+	font-weight: bold;
+}
+
+.tripDate {
+	font-weight: bold;
+	font-size: 10px;
+}
+.tripPrice {
+	font-weight: bold;
+	font-size: 14px;
+	color: #747879; /*색상 다시 고민해 봐야함*/
+
+} 	
+/* 7e878f 747879 #c0c0c0*/
