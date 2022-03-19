@@ -29,13 +29,16 @@
 		
 		<header>
 			<div class="logoutNav d-flex justify-content-end">
-				<a href="/travelplans/travelplans_view">
+				<a href="/travelplans/sign_out">
 					<small class="font-weight-bold mr-2 text-dark">LOGOUT</small>
 				</a>
 			</div>
 			
-			<div class="mypageBox d-flex justify-content-between mt-2 mx-2">
-				<h4 class="logo font-weight-bold">travle plans.</h4>
+			<div class="mypageBox d-flex justify-content-between mt-1 mx-2">
+				<div class="d-flex">
+					<img src="/static/icons/airplan.png" alt="로고" width="25px" height="25px" class="mt-2 ml-2">
+					<h4 class="font-weight-bold mt-2 mr-1">travel plans.</h4>
+				</div>
 				<!-- TODO: user의 nickname정보 넣기 -->
 				<h6 class="font-weight-bold mt-2">여행자 님</h6>
 			</div>
@@ -50,7 +53,7 @@
 				</div>
 				<div class="d-flex">
 					<label>
-						<a href="/my_travel/reservation_view" class="mr-3">
+						<a href="/my_travel/reservation_traffic_view" class="mr-3">
 							<img src="/static/icons/plus.png" alt="추가" width="20px">
 							<small class="addPlans">추가</small>
 						</a>

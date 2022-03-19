@@ -30,8 +30,8 @@
 		<header class="d-flex align-items-end justify-content-center mb-5">
 			<div>
 				<h1 class="font-weight-bold text-center">L O G I N</h1>
-				<a href="/travelplans/travelplans_view">
-					<span class="loginText font-weight-bold m-5">travel plans.</span>
+				<a href="/travelplans/travelplans_view" class="d-flex justify-content-center">
+					<span class="loginText font-weight-bold mt-2 mr-1">travel plans.</span>
 				</a>
 			</div>
 		</header>

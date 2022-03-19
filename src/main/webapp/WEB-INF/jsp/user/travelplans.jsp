@@ -27,8 +27,10 @@
 <body>
 	<div id="wrap" class="container">
 		<header class="d-flex align-items-end justify-content-center">
-			<div>
-				<h1 class="font-weight-bold">travel plans.</h1>
+			<div class="d-flex">
+				<h1 class="font-weight-bold mt-2 mr-1">travel</h1>
+				<img src="/static/icons/airplan.png" alt="로고" width="45px" height="45px" class="mt-2 ml-2">
+				<h1 class="font-weight-bold mt-2 mr-1">plans.</h1>
 			</div>
 		</header>
 		
@@ -47,11 +49,11 @@
 			</div>
 		</section>
 		
-		<footer class="d-flex justify-content-center align-items-end">
+		<!-- <footer class="d-flex justify-content-center align-items-end">
 			<small class="text-secondary">
 				Copyright 2022 travel plans. All rights reserved.
 			</small>
-		</footer>
+		</footer> -->
 	</div>
 </body>
 </html>

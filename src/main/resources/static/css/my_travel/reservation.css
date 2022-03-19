@@ -1,0 +1,83 @@
+@charset "UTF-8";
+
+#wrap {
+	width: 800px;
+}
+
+header {
+	height: 100px;
+}
+header .mypage{
+	height: 30px;
+	background-color: #7BB0DB;
+}
+
+.mypageText {
+	color: #7BB0DB;
+	font-weight: bold;
+}
+
+#redBox{
+	width: 35px;
+	height: 35px;
+	background-color: #ed5d47;
+	font-weight:bold;
+}
+#yellowBox {
+	width: 35px;
+	height: 35px;
+	background-color: #ffcc85;
+	font-weight:bold;
+}
+#greenBox {
+	width: 35px;
+	height: 35px;
+	background-color: #76af7b;
+	font-weight:bold;
+}
+#skyBlueBox {
+	width: 35px;
+	height: 35px;
+	background-color: #7BB0DB;
+	font-weight:bold;
+}
+#pupleBox {
+	width: 35px;
+	height: 35px;
+	background-color: #b191bd;
+	font-weight:bold;
+}
+
+.traffic {
+	min-height: 700px;
+}
+
+.inputBox {
+	width: 400px
+}
+
+.nav-link {
+	font-weight: bold;
+	color: black;
+}
+.nav-link:hover {
+	font-weight: bold;
+	color: #7BB0DB;
+}
+
+.contents .trfficBtn {
+	font-weight: bold;
+	background-color: #7BB0DB;
+	color: white;
+}
+
+.contents .accomSaveBtn {
+	font-weight: bold;
+	background-color: #7BB0DB;
+	color: white;
+}
+.contents .reservationBtn {
+	font-weight: bold;
+	background-color: #7BB0DB;
+	color: white;
+}

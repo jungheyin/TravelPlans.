@@ -25,7 +25,7 @@ header .logoText {
 	font-weight:bold;
 	}
 #idCheckNot{ 
-	color: #f96060;
+	color: #ed5d47;
 	font-weight:bold;
 	}
 #idCheckLength{ 
@@ -47,7 +47,7 @@ header .logoText {
 	font-weight:bold;
 	}
 #passwordDifferent{ 
-	color: #f96060;
+	color: #ed5d47;
 	font-weight:bold;
 	}
 #confirmPasswordRule{ 
@@ -60,7 +60,7 @@ header .logoText {
 	font-weight:bold;
 	}
 #emailRule{ 
-	color: #f96060;
+	color: #ed5d47;
 	font-weight:bold;
 	}
 
