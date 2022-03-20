@@ -2,13 +2,10 @@
     pageEncoding="UTF-8"%>
 <div id="reservation">
 
-	<div class="d-flex justify-content-between mr-2 mb-4">
-		<div></div>
+	<div class="d-flex justify-content-center mr-2 mb-4">
 		<div class="ml-5 mt-3 font-weight-bold">
 			예약정보 등록하기
 		</div>
-		<a href="#"><img src="/static/icons/plus_skyBlue.png" alt="추가"
-			width="45px"></a>
 	</div>
 	
 	<div class="reservationInfo d-flex justify-content-center">

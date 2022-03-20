@@ -6,9 +6,10 @@
 		placeholder="여행 제목">
 
 	<div class="d-flex mt-3 mr-5">
-		<a href="#"><div id="redBox"></div></a> <a href="#"><div
-				id="yellowBox" class="mx-4"></div></a> <a href="#"><div
-				id="greenBox"></div></a> <a href="#"><div id="skyBlueBox"
-				class="mx-4"></div></a> <a href="#"><div id="pupleBox"></div></a>
+		<a href="#"><div id="redBox"></div></a> 
+		<a href="#"><div id="yellowBox" class="mx-4"></div></a> 
+		<a href="#"><div id="greenBox"></div></a> 
+		<a href="#"><div id="skyBlueBox" class="mx-4"></div></a> 
+		<a href="#"><div id="pupleBox"></div></a>
 	</div>
 </div>

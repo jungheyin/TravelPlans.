@@ -12,10 +12,6 @@ header .mypage{
 	background-color: #7BB0DB;
 }
 
-.mypageText {
-	color: #7BB0DB;
-	font-weight: bold;
-}
 
 #redBox{
 	width: 35px;
@@ -65,7 +61,7 @@ header .mypage{
 	color: #7BB0DB;
 }
 
-.contents .trfficBtn {
+.contents .trafficBtn {
 	font-weight: bold;
 	background-color: #7BB0DB;
 	color: white;
