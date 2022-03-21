@@ -50,8 +50,7 @@
 
 					<div class="font-weight-bold ml-1 mb-1">메모</div>
 					<textarea rows="5" class="memo form-control mb-2"
-						placeholder="메모(50자 이내)">
-					</textarea>
+						placeholder="메모(50자 이내)"></textarea>
 
 					<button type="button" class="trafficBtn btn w-100 mt-2 mb-4">
 						S A V E

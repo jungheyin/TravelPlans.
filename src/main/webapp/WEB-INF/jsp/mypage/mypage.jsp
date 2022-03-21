@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,7 +43,7 @@
 					<h4 class="font-weight-bold mt-2 mr-1">travel plans.</h4>
 				</div>
 				<!-- TODO: user의 nickname정보 넣기 -->
-				<h6 class="font-weight-bold mt-2">여행자 님</h6>
+				<h6 class="font-weight-bold mt-2">${userNickname} 님</h6>
 			</div>
 			
 			
@@ -53,7 +56,7 @@
 				</div>
 				<div class="d-flex">
 					<label>
-						<a href="/my_travel/reservation_traffic_view" class="mr-3">
+						<a href="/my_travel/new_plan_view" class="mr-3">
 							<img src="/static/icons/plus.png" alt="추가" width="20px">
 							<small class="addPlans">추가</small>
 						</a>
@@ -70,41 +73,50 @@
 			<hr>
 			
 			<!-- user의 my plans 리스트 -->
+			<c:forEach items="${tripList}" var="trip">
 			<div class="d-flex justify-content-center mb-3">
-				<div class="planBox d-flex justify-content-between">
-					<div class="ml-3 mt-4">
-						<!-- trip의 title  -->
-						<div class="tripTitle">제주도 여행</div>
-						<!-- trip의 startDate ~ endDate -->
-						<div class="tripDate text-dark">10월25일 ~ 10월31일 (2022)</div>
-					</div>
-					
-					<div class="d-flex align-items-center mr-2">
-						<!-- trip의 price -->
-						<div class="mr-4">
-							<span class="tripPrice mr-2">￦ 5,000</span>
-						</div>
-						<!-- my travel 페이지로 이동 -->
-						<a href="/my_travel/detail_view?tripId={tripId}" class="mr-3">
-							<img src="/static/icons/right.png" alt="들어가기" width="25px" height="25px">
-						</a>
-					</div>
-				</div>
-			</div>
 			
-			<div class="d-flex justify-content-center mb-3">
 				<div class="planBox d-flex justify-content-between">
 					<div class="ml-3 mt-4">
 						<!-- trip의 title  -->
-						<div class="tripTitle">제주도 여행</div>
-						<!-- trip의 startDate ~ endDate -->
-						<div class="tripDate text-dark">10월25일 ~ 10월31일 (2022)</div>
+						<div class="tripTitle">${trip.title}</div>
+						<!-- trip의 startDate ~ endDate (year) : 수정해야한다. -->
+						
+						<div class="d-flex">
+							<div class="tripDate">
+								<fmt:parseDate value="${trip.startDate}" pattern="yyyy-MM-dd" var="date"/>
+								<fmt:formatDate var="startDate" value="${date}" pattern="MM월 dd일" />
+								${startDate}
+								
+							</div>
+							<div class="tripDate">
+								<c:choose> 
+									<c:when test="${trip.endDate != null}">
+										~
+								<fmt:parseDate value="${trip.endDate}" pattern="yyyy-MM-dd" var="date"/>
+								<fmt:formatDate var="endDate" value="${date}" pattern="MM월 dd일" />
+								${endDate}
+									</c:when>
+									<c:when test="${trip.endDate == null}">
+									
+									</c:when>
+								</c:choose>
+							</div>
+							
+							<div class="tripDate">
+								<!-- 변경해야함 -->
+								(${fn:substring(trip.startDate, 0,4)})
+								
+							</div>
+						</div>
 					</div>
 					
 					<div class="d-flex align-items-center mr-2">
 						<!-- trip의 price -->
 						<div class="mr-4">
-							<span class="tripPrice mr-2">￦ 5,000</span>
+							<span class="tripPrice mr-2">
+								￦<fmt:formatNumber value="${trip.price}" type="number" />
+							</span>
 						</div>
 						<!-- my travel 페이지로 이동 -->
 						<a href="/my_travel/detail_view?tripId={tripId}" class="mr-3">
@@ -113,9 +125,16 @@
 					</div>
 				</div>
 			</div>
+			</c:forEach>
+			
+			
 		</section>
 		
-		<footer></footer>
 	</div>
+	
+<script>
+
+let p
+</script>
 </body>
 </html>

@@ -8,6 +8,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/my_travel")
 public class MytravelController {
 	
+	
+	@RequestMapping("/new_plan_view")
+	public String newPlanView(Model model) {
+		
+		model.addAttribute("travelNameViewName", "travelName");
+		return"my_travel/template/layout";
+	}
+	
 	/**
 	 * 교통수단 화면
 	 * @param model

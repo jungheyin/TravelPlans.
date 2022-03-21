@@ -92,7 +92,7 @@ public class UserRestController {
 			  HttpSession session = request.getSession();
 			  session.setAttribute("userId", user.getId());
 			  session.setAttribute("userLoginId", user.getLoginId());
-			  session.setAttribute("UserNickname", user.getNickname());
+			  session.setAttribute("userNickname", user.getNickname());
 		  }	else {
 			  logger.error("[login false] 로그인 실패. 사용자 없음");
 			  result.put("result", "error");

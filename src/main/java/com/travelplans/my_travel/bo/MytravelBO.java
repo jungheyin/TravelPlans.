@@ -11,11 +11,11 @@ public class MytravelBO {
 	@Autowired
 	private MytravelDAO mytravelDAO;
 
-	public int addTraffic(String traffic, String trafficInfo, String start, String startDate, String startTime,
+	public void addTraffic(String traffic, String trafficInfo, String start, String startDate, String startTime,
 			String arrive, String arriveDate, String arriveTime, String price, String memo) {
 		
 		
-		return mytravelDAO.insertTraffic(traffic, trafficInfo, start, startDate, startTime,
+		mytravelDAO.insertTraffic(traffic, trafficInfo, start, startDate, startTime,
 					arrive, arriveDate, arriveTime, price, memo);
 		
 	};

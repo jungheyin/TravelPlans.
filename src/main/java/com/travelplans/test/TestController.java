@@ -19,7 +19,7 @@ public class TestController {
 	
 	@Autowired
 	private TestDAO testDAO;
-
+	
 	@ResponseBody
 	@RequestMapping("/test1") 
 	public String helloworld() {
@@ -29,7 +29,7 @@ public class TestController {
 	@ResponseBody
 	@RequestMapping("/test2")
 	public Map<String, Object> getUser() {
-		logger.warn("##### test2 È£Ãâ!!!");
+		logger.warn("##### test2 È£ï¿½ï¿½!!!");
 		
 	return testDAO.selectUser();
 		
@@ -39,4 +39,8 @@ public class TestController {
 		return "test/test";
 	}
 	
+	@RequestMapping("/color_test_view")
+	public String colorTestView() {
+		return "test/colorTest";
+	}
 }

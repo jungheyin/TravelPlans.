@@ -1,10 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
+<span class="font-weight-bold ml-2">NEW PLAN</span>
 	
-
-	<span class="font-weight-bold ml-2">NEW PLAN</span>
-	
-	<div class="border mt-3 ml-3">
+	<div id="bgBox" class="bgBox border mt-3 ml-3">
 		<div class="d-flex justify-content-between">
 			<div class="font-weight-bold ml-3 mb-2 mt-3">travel name</div>
 			<div>
@@ -17,7 +15,7 @@
 			<input type="text" id="tripTitile" class="form-control col-6 ml-3 mb-5"
 				placeholder="여행 제목">
 		
-			<div class="d-flex mr-5">
+			<div id="colorList" class="d-flex mr-5">
 				<div class="redBox">
 					<input type="button" class="redBtn d-none" value="redBox">
 				</div>
@@ -34,18 +32,13 @@
 					<input type="button" class="pupleBox d-none" value="pupleBox">
 				</div>
 			</div>
-			
-			<div>
-			
-			
-			</div>
 		</div>
 	</div>
 <script>
 
 $(document).ready(function() {
 	
-
+	
 	
 	$('#checkImg').on('click', function() {
 		$('#tripSaveBtn').click();

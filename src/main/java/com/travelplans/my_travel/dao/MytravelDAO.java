@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MytravelDAO {
 	
-	public int insertTraffic(
+	public void insertTraffic(
 			@Param("traffic") String traffic, 
 			@Param("trafficInfo") String trafficInfo, 
 			@Param("start") String start, 

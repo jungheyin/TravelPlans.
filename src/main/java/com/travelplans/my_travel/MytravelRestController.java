@@ -24,7 +24,7 @@ public class MytravelRestController {
 	
 	@Autowired
 	private MytravelBO mytravelBO;
-	// /my_travel/reservation_traffic_add
+	
 	@PostMapping("/reservation_traffic_add")
 	public Map<String, Object> addTraffic(
 			@RequestParam("traffic") String traffic,
@@ -57,9 +57,9 @@ public class MytravelRestController {
 		}
 		
 		// insert BO
+		mytravelBO.addTraffic(traffic, trafficInfo, start, startDate, startTime, 
+				arrive, arriveDate, arriveTime, price, memo);
 		
-		
-		// map 결과
 		
 		return result;
 	}
