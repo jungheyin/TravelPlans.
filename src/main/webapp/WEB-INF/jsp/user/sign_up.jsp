@@ -289,7 +289,7 @@ $(document).ready(function() {
 				}
 			}
 			, error: function(e) {
-				alert(실패);
+				alert("실패");
 			}
 		});
 		

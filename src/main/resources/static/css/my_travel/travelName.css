@@ -7,39 +7,56 @@
 header {
 	height: 100px;
 }
+
 header .mypage{
 	height: 30px;
 	background-color: #7BB0DB;
 }
 
-.redBox{
-	width: 35px;
-	height: 35px;
+
+#redBox {
+	border: solid;
+	border-width: 1px;
+	border-color: white;
+	width: 40px;
+	height: 40px;
 	background-color: #ed5d47;
-	font-weight:bold;
-}
-.yellowBox {
-	width: 35px;
-	height: 35px;
-	background-color: #ffcc85;
-	font-weight:bold;
-}
-.greenBox {
-	width: 35px;
-	height: 35px;
-	background-color: #76af7b;
-	font-weight:bold;
-}
-.skyBlueBox {
-	width: 35px;
-	height: 35px;
-	background-color: #7BB0DB;
-	font-weight:bold;
-}
-.pupleBox {
-	width: 35px;
-	height: 35px;
-	background-color: #b191bd;
-	font-weight:bold;
+	margin-right: 25px
 }
 
+#yellowBox {
+	border: solid;
+	border-width: 1px;
+	border-color: white;
+	width: 40px;
+	height: 40px;
+	background-color: #ffcc85;
+	margin-right: 25px
+}
+#greenBox {
+	border: solid;
+	border-width: 1px;
+	border-color: white;
+	width: 40px;
+	height: 40px;
+	background-color: #76af7b;
+	margin-right: 25px
+}
+#skyBlueBox {
+	border: solid;
+	border-width: 1px;
+	border-color: white;
+	width: 40px;
+	height: 40px;
+	background-color: #7BB0DB;
+	margin-right: 25px
+}
+#pupleBox {
+	border: solid;
+	border-width: 1px;
+	border-color: white;
+	width: 40px;
+	height: 40px;
+	background-color: #AEADCA;
+	margin-right: 25px
+}

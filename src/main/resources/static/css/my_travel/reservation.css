@@ -32,18 +32,18 @@ header .mypage{
 	color: #7BB0DB;
 }
 
-.contents .trafficBtn {
+.contents #trafficBtn {
 	font-weight: bold;
 	background-color: #7BB0DB;
 	color: white;
 }
 
-.contents .accomSaveBtn {
+.contents #accomSaveBtn {
 	font-weight: bold;
 	background-color: #7BB0DB;
 	color: white;
 }
-.contents .reservationBtn {
+.contents #reservationBtn {
 	font-weight: bold;
 	background-color: #7BB0DB;
 	color: white;

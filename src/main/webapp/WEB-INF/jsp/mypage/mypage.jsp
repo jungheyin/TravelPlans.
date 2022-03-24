@@ -56,7 +56,7 @@
 				</div>
 				<div class="d-flex">
 					<label>
-						<a href="/my_travel/new_plan_view" class="mr-3">
+						<a href="/my_travel/new_travel_view" class="mr-3">
 							<img src="/static/icons/plus.png" alt="추가" width="20px">
 							<small class="addPlans">추가</small>
 						</a>
@@ -82,22 +82,21 @@
 						<div class="tripTitle">${trip.title}</div>
 						<!-- trip의 startDate ~ endDate (year) : 수정해야한다. -->
 						
-						<div class="d-flex">
+						<div class="d-flex mb-2">
 							<div class="tripDate">
 								<fmt:parseDate value="${trip.startDate}" pattern="yyyy-MM-dd" var="date"/>
 								<fmt:formatDate var="startDate" value="${date}" pattern="MM월 dd일" />
 								${startDate}
-								
 							</div>
 							<div class="tripDate">
 								<c:choose> 
-									<c:when test="${trip.endDate != null}">
+									<c:when test="${trip.startDate != trip.endDate}">
 										~
 								<fmt:parseDate value="${trip.endDate}" pattern="yyyy-MM-dd" var="date"/>
 								<fmt:formatDate var="endDate" value="${date}" pattern="MM월 dd일" />
 								${endDate}
 									</c:when>
-									<c:when test="${trip.endDate == null}">
+									<c:when test="${trip.startDate == trip.endDate}">
 									
 									</c:when>
 								</c:choose>
@@ -134,7 +133,7 @@
 	
 <script>
 
-let p
+
 </script>
 </body>
 </html>
