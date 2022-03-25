@@ -21,7 +21,7 @@ header .mypage{
 	width: 40px;
 	height: 40px;
 	background-color: #ed5d47;
-	margin-right: 25px
+	margin-right: 20px
 }
 
 #yellowBox {
@@ -31,7 +31,7 @@ header .mypage{
 	width: 40px;
 	height: 40px;
 	background-color: #ffcc85;
-	margin-right: 25px
+	margin-right: 20px
 }
 #greenBox {
 	border: solid;
@@ -40,7 +40,7 @@ header .mypage{
 	width: 40px;
 	height: 40px;
 	background-color: #76af7b;
-	margin-right: 25px
+	margin-right: 20px
 }
 #skyBlueBox {
 	border: solid;
@@ -49,7 +49,7 @@ header .mypage{
 	width: 40px;
 	height: 40px;
 	background-color: #7BB0DB;
-	margin-right: 25px
+	margin-right: 20px
 }
 #pupleBox {
 	border: solid;
@@ -58,5 +58,5 @@ header .mypage{
 	width: 40px;
 	height: 40px;
 	background-color: #AEADCA;
-	margin-right: 25px
+	margin-right: 20px
 }

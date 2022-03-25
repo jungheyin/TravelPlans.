@@ -13,7 +13,8 @@
 			<div class="inputBox">
 				<div class="airplansInput">
 					<div class="font-weight-bold ml-1 mb-1">숙소 이름</div>
-					<input type="text" id="name" class="form-control mb-2" placeholder="숙소 이름">
+					<input type="text" id="name" class="form-control mb-2" 
+						maxlength="27"placeholder="숙소 이름">
 
 
 					<div class="font-weight-bold ml-1 mb-1">날짜</div>
@@ -28,7 +29,7 @@
 
 					<div class="font-weight-bold ml-1 mb-1">메모</div>
 					<textarea rows="5" id="memo" class="form-control mb-2"
-						placeholder="메모(50자 이내)"></textarea>
+						maxlength="49" placeholder="메모(50자 이내)"></textarea>
 
 					<button type="button" id="accomSaveBtn" class=" btn w-100 mt-2">
 					S A V E</button>
@@ -48,6 +49,23 @@ $(document).ready(function() {
 		, showButtonPanel: true
 		, currentText: '오늘'
 		, minDate: 0
+	});
+	
+	// price
+	$('#price').on('keyup', function() {
+		let target = $(this).val();
+		target = target.replace(/,/gi, '');
+		let regexg =  /^[0-9]*$/;
+		
+		if(!regexg.test(target)) {
+			$(this).val('');
+			return;
+		} else {
+			target = target.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+			
+			$(this).val(target);
+		}
+		
 	});
 	
 	$('#accomSaveBtn').on('click', function() {

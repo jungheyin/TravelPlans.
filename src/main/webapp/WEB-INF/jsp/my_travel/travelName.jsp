@@ -15,7 +15,7 @@
 			<div class="d-flex justify-content-between">
 			
 				<input type="text" id="tripTitle" name="tripTitle" class="form-control col-6 ml-3 mb-4"
-					placeholder="여행 제목">
+					maxlength="20" placeholder="여행 제목">
 					
 				 <div id="colorBox" class="d-flex">
 				 

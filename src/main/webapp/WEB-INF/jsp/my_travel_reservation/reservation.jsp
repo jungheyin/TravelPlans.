@@ -13,10 +13,12 @@
 			<div class="inputBox">
 				<div class="airplansInput">
 					<div class="font-weight-bold ml-1 mb-1">제목</div>
-					<input type="text" id="title" class="form-control mb-2" placeholder="제목">
+					<input type="text" id="title" class="form-control mb-2" 
+						maxlength="17" placeholder="제목">
 
 					<div class="font-weight-bold ml-1 mb-1">예약자 이름</div>
-					<input type="text" id="booker" class="form-control mb-2" placeholder="예약자 이름">
+					<input type="text" id="booker" class="form-control mb-2" 
+						maxlength="17" placeholder="예약자 이름">
 
 					<div class="font-weight-bold ml-1 mb-1">날짜</div>
 					<input type="text" id="date" class="form-control mb-2" placeholder="날짜" value="${trip.startDate}">
@@ -29,7 +31,7 @@
 						oninput="this.value = this.value.replace(/[^0-9.]/g, '')">
 
 					<div class="font-weight-bold ml-1 mb-1">메모</div>
-					<textarea rows="5" id="memo" class="form-control mb-2"
+					<textarea rows="5" id="memo" class="form-control mb-2" maxlength="49"
 						placeholder="메모(50자 이내)"></textarea>
 
 					<button type="button" id="reservationBtn" class="btn w-100 mt-2">
@@ -49,6 +51,22 @@ $(document).ready(function() {
 		, showButtonPanel: true
 		, currentText: '오늘'
 		, minDate: 0
+	});
+	
+	$('#price').on('keyup', function() {
+		let target = $(this).val();
+		target = target.replace(/,/gi, '');
+		let regexg =  /^[0-9]*$/;
+		
+		if(!regexg.test(target)) {
+			$(this).val('');
+			return;
+		} else {
+			target = target.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+			
+			$(this).val(target);
+		}
+		
 	});
 	
 	$('#reservationBtn').on('click', function() {

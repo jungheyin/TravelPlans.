@@ -14,7 +14,7 @@
 		
 			<div class="d-flex justify-content-center">
 				<select class="category custom-select mb-2" id="category">
-					<option value="choice">선택</option>
+					<option value="choice">교통수단 선택</option>
 					<option value="airplans">비행기</option>
 					<option value="train">기차</option>
 					<option value="expressBus">고속버스</option>
@@ -24,8 +24,8 @@
 			
 			<div class="inputBox">
 				<div id="airplansInput" class="form-group">
-					<div class="font-weight-bold ml-1 mb-1">이름</div>
-					<input type="text" class="trafficInfo form-control mb-2" placeholder="이름">
+					<div id="trafficInfo" class="font-weight-bold ml-1 mb-1">이름</div>
+					<input type="text" class="trafficInfoInput form-control mb-2" maxlength="20" placeholder="교통수단을 선택해 주세요.">
 
 					<div class="font-weight-bold ml-1 mb-1">출발</div>
 					<input type="text" class="start form-control mb-2" placeholder="출발">
@@ -49,11 +49,10 @@
 
 
 					<div class="font-weight-bold ml-1 mb-1">가격</div>
-					<input type="text" class="price form-control mb-2" placeholder="가격"
-						 oninput="this.value = this.value.replace(/[^0-9.]/g, '')">
+					<input type="text" id="price" class=" form-control mb-2" placeholder="가격">
 
 					<div class="font-weight-bold ml-1 mb-1">메모</div>
-					<textarea rows="5" class="memo form-control mb-2"
+					<textarea rows="5" class="memo form-control mb-2" maxlength="49"
 						placeholder="메모(50자 이내)"></textarea>
 
 					<button type="button" id="trafficBtn" class="btn w-100 mt-2 mb-4">
@@ -95,21 +94,84 @@ $(document).ready(function(e) {
 		
 	});
 	
+	// 드롭다운 선택시 #trafficInfo값 바꾸기
 	
-	// validation check
-	$('#trafficBtn').on('click', function() {
-		//alert("클릭");
-
+	$('.category').on('change', function() {
 		let target = document.getElementById('category');
 		var traffic = target.options[target.selectedIndex].value;
 		console.log(traffic);
+		
+		if (traffic == 'choice') {
+			$('#trafficInfo').text("이름");
+			$('.trafficInfoInput').attr("placeholder", "교통수단을 선택해 주세요.");
+			$('.trafficInfoInput').val('');
+			return;
+		} else if (traffic == 'airplans') {
+			$('#trafficInfo').text("항공사");
+			$('.trafficInfoInput').attr("placeholder", "항공사");
+			$('.trafficInfoInput').val('');
+			return;
+		} else if (traffic == 'train') {
+			$('#trafficInfo').text("기차 종류");
+			$('.trafficInfoInput').attr("placeholder", "기차 종류");
+			$('.trafficInfoInput').val('');
+			return;
+		} else if (traffic == 'expressBus') {
+			$('#trafficInfo').text("버스 종류");
+			$('.trafficInfoInput').attr("placeholder", "버스 종류");
+			$('.trafficInfoInput').val('');
+			return;
+		} else if (traffic == 'direct') {
+			$('#trafficInfo').text("이름");
+			$('.trafficInfoInput').attr("placeholder", "이름");
+			$('.trafficInfoInput').val('');
+			return;
+		} 
+	});
+	
+	$('.trafficInfoInput').on('click', function() {
+		let target = document.getElementById('category');
+		var traffic = target.options[target.selectedIndex].value;
+		console.log(traffic);
+		
+		if (traffic == 'choice') {
+			alert("교통수단 선택을 먼저해주세요.");
+			$(this).attr("readonly", true);
+			return;
+		} else if (traffic != 'choice') {
+			$(this).attr("readonly", false);
+			return;
+		}
+	});
+	
+	// price 숫자만 입력하게 하기
+	$('#price').on('keyup', function() {
+		let target = $(this).val();
+		let regexg =  /^[0-9]*$/;
+		
+		if(!regexg.test(target)) {
+			$(this).val('');
+			return;
+		} else {
+			
+			$(this).val(target);
+		}
+		
+	});
+	
+	
+	// validation check
+	$('#trafficBtn').on('click', function() {
+
+		let target = document.getElementById('category');
+		var traffic = target.options[target.selectedIndex].value;
 		
 		if (traffic == 'choice') {
 			alert("교통수단을 선택해 주세요.");
 			return;
 		} 
 		
-		let trafficInfo = $('.trafficInfo').val().trim();
+		let trafficInfo = $('.trafficInfoInput').val().trim();
 		if (trafficInfo == '') {
 			alert("이름을 입력해 주세요.");
 			return;
@@ -129,11 +191,11 @@ $(document).ready(function(e) {
 		let arriveDate = $('#arriveDate').val();
 		let arriveTime = $('#arriveTime').val();
 		
-		let price = $('.price').val().trim();
+		let price = $('#price').val().trim();
 		let memo = $('.memo').val().trim();
 		
-		alert(traffic + trafficInfo + start + startDate + startTime +
-				arrive + arriveDate + arriveTime + price + memo);
+		alert("traffic:" +traffic+ "trafficInfo:" + trafficInfo + "start:" + start + "startDate:" + startDate +
+				"startTime:" + startTime + "arrive:" + arrive + "arriveDate:" + arriveDate + "arriveTime:" + arriveTime + "price:" + price + "memo:" + memo);
 		
 		 $.ajax({
 			type: "POST"

@@ -57,7 +57,7 @@
 						</div>
 					</div>
 					<div>
-						<input type="text" id="loginId" class="form-control mr-2" placeholder="4자 이상">
+						<input type="text" id="loginId" class="form-control mr-2" maxlength="18" placeholder="4자 이상">
 					</div>
 				</div>
 			
@@ -70,7 +70,7 @@
 							<small id="passwordRule" class="d-none">특수문자/문자/숫자 포함해 8~15자리 애내 입력헤 주세요.</small>
 						</div>
 					</div>
-					<input type="password" id="password" class="form-control" placeholder="특수문자/문자/숫자 포함해 8~15자리">
+					<input type="password" id="password" class="form-control" maxlength="15" placeholder="특수문자/문자/숫자 포함해 8~15자리">
 				</div>
 				<div class="form-group">
 					<div class="d-flex justify-content-between">
@@ -93,7 +93,7 @@
 							<small id="emailRule" class="d-none">메일 형식으로 입력해주세요.</small>
 						</div>
 					</div>
-					<input type="text" id="email" class="form-control" placeholder="travel@plans.com">
+					<input type="text" id="email" class="form-control" maxlength="128" placeholder="travel@plans.com">
 				</div>
 			
 				<button id="signUpBtn" type="button" class="btn btn-lg w-100 mt-5">
