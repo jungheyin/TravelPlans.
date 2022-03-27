@@ -1,4 +1,4 @@
-package com.travelplans.my_travel;
+package com.travelplans.reservation;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,66 +9,43 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.travelplans.my_travel.bo.MytravelBO;
-import com.travelplans.my_travel.model.Trip;
+import com.travelplans.new_travel.bo.NewTravelBO;
+import com.travelplans.new_travel.model.Travel;
+import com.travelplans.reservation.bo.ReservationBO;
 
 @RestController
-@RequestMapping("/my_travel")
-public class MytravelRestController {
+@RequestMapping("/reservation")
+public class ReservationRestController {
 	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
+
+	@Autowired
+	private ReservationBO reservationBO;
 	
 	@Autowired
-	private MytravelBO mytravelBO;
-	
+	private NewTravelBO newTravelBO;
 	
 	/**
-	 *  새로운 travel 추가
-	 * @param title
-	 * @param color
+	 * 교통수단 저장
+	 * @param traffic
+	 * @param trafficInfo
+	 * @param start
 	 * @param startDate
-	 * @param endDate
+	 * @param startTime
+	 * @param arrive
+	 * @param arriveDate
+	 * @param arriveTime
+	 * @param price
+	 * @param memo
 	 * @param request
-	 * @param model
 	 * @return
 	 */
-	@PostMapping("/new_travel_add")
-	public Map<String, Object> addNewTravel(
-			@RequestParam("title") String title,
-			@RequestParam("color") String color,
-			@RequestParam("startDate") String startDate,
-			@RequestParam("endDate") String endDate,
-			HttpServletRequest request
-			) {
-		
-		Map<String, Object> result = new HashMap<>();
-		result.put("result", "success");
-		
-		HttpSession session = request.getSession();
-		Integer userId = (Integer)session.getAttribute("userId");
-		
-		if (userId == null) {
-			logger.error("[my_travel/new_travel_add] 로그인 풀림");
-			result.put("result", "error");
-			result.put("errorMessage", "로그인 후 이용해 주세요.");
-			return result;
-		}
-		
-		mytravelBO.addTrip(userId, title, color, startDate, endDate);
-		
-		
-		return result;
-		
-	}
-
-	
-	@PostMapping("/reservation_traffic_add")
+	@PostMapping("/traffic_add")
 	public Map<String, Object> addTraffic(
 			@RequestParam("traffic") String traffic,
 			@RequestParam("trafficInfo") String trafficInfo, 
@@ -89,23 +66,34 @@ public class MytravelRestController {
 		Integer userId = (Integer)session.getAttribute("userId");
 		
 		if (userId == null) {
-			logger.error("[my_travel/reservation_traffic_add] 로그인 풀림");
+			logger.error("[reservation/add_traffic] 로그인 풀림");
 			result.put("result","error");
 			result.put("errorMessage", "로그인 후 이용해 주세에ㅛ.");
 		}
 		
-		Trip trip = mytravelBO.getLastTrip();
-		int tripId = trip.getId();
+		Travel travel = reservationBO.getLastTravel();
+		int travelId = travel.getId();
 		
-		mytravelBO.addTraffic(tripId, traffic, trafficInfo, start, startDate, startTime, arrive, arriveDate, arriveTime, price, memo);
+		reservationBO.addTraffic(travelId, traffic, trafficInfo, start, startDate, startTime, arrive, arriveDate, arriveTime, price, memo);
 		
 		return result;
 	}
 	
-	@PostMapping("/reservation_accommodation_add")
+	/**
+	 *  숙소 저장
+	 * @param name
+	 * @param date
+	 * @param locaion
+	 * @param price
+	 * @param memo
+	 * @param request
+	 * @return
+	 */
+	@PostMapping("/accommodation_add")
 	public Map<String, Object> addAccommodation(
 			@RequestParam("name") String name,
-			@RequestParam("date") String date,
+			@RequestParam("startDate") String startDate,
+			@RequestParam("endDate") String endDate,
 			@RequestParam(value="locaion", required=false) String locaion,
 			@RequestParam(value="price", required=false) Integer price,
 			@RequestParam(value="memo", required=false) String memo,
@@ -121,22 +109,34 @@ public class MytravelRestController {
 		
 		// 로그아웃시 error메시지
 		if (userId == null) {
-			logger.error("[my_travel/reservation_accommodation_add 로그인 풀림");
+			logger.error("[reservation/add_accommodation] 로그인 풀림");
 			result.put("result", "error");
 			result.put("errorMessage", "로그인 후 이용해 주세요.");
 		}
 		
 		// tripId가져오기
-		Trip trip = mytravelBO.getLastTrip();
-		int tripId = trip.getId();
+		Travel travel = reservationBO.getLastTravel();
+		int travelId = travel.getId();
 		
 		// insertBo만들기
-		mytravelBO.addAccommodation(tripId, name, date, locaion, price, memo);
+		reservationBO.addAccommodation(travelId, name, startDate, endDate, locaion, price, memo);
 		
 		return result;
 	}
 	
-	@PostMapping("/reservation_reservation_add") 
+	
+	/**
+	 *  예약정보 저장
+	 * @param title
+	 * @param booker
+	 * @param date
+	 * @param locaion
+	 * @param price
+	 * @param memo
+	 * @param request
+	 * @return
+	 */
+	@PostMapping("/reservation_add") 
 	public Map<String, Object> addReservation(
 			@RequestParam("title") String title,
 			@RequestParam("booker") String booker,
@@ -156,28 +156,33 @@ public class MytravelRestController {
 		
 		// 로그아웃시 error메세지
 		if (userId == null) {
-			logger.error("[/my_travel/reservation_reservation_add] 로그인 풀림");
+			logger.error("[/reservation/add_reservation] 로그인 풀림");
 			result.put("result", "error");
 			result.put("errorMessage", "로그인 후 이용해 주세요.");
 		}
 		
 		// tripId 가져오기
-		Trip trip = mytravelBO.getLastTrip();
-		int tripId = trip.getId();
+		Travel travel = reservationBO.getLastTravel();
+		int travelId = travel.getId();
 		
 		// insertBO 
-		mytravelBO.addReservation(tripId, title, booker, date, locaion, price, memo);
+		reservationBO.addReservation(travelId, title, booker, date, locaion, price, memo);
 		
 		return result;
 		
 		
 	}
+	
+	
+	// traffic 수정
+	
+	// accommodation 수정
+	
+	// reservation 수정
+	
+	// traffic 삭제
+	
+	// accommodation 삭제
+		
+	// reservation 삭제
 }
-
-
-
-
-
-
-
-

@@ -2,35 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
-<mapper namespace="com.travelplans.my_travel.dao.MytravelDAO">
-
-<insert id="insertTrip" parameterType="map">
-	INSERT INTO `trip`
-	(
-		`userId`
-		,`title`
-		,`color`
-		,`startDate`
-		,`endDate`
-		,`createdAt`
-		,`updatedAt`
-	)
-	VALUES
-	(
-		#{userId}
-		,#{title}
-		,#{color}
-		,#{startDate}
-		,#{endDate}
-		,NOW()
-		,NOW()
-	)
-</insert>
-
-<insert id="insertTraffic" parameterType="map">
+ <mapper namespace="com.travelplans.reservation.dao.ReservationDAO">
+ 
+ <insert id="insertTraffic" parameterType="map">
 	INSERT INTO `traffic`
 	(
-		`tripId`
+		`travelId`
 		,`traffic`
 		,`trafficInfo`
 		,`start`
@@ -46,7 +23,7 @@
 	)
 	VALUES
 	(
-		#{tripId}
+		#{travelId}
 		,#{traffic}
 		,#{trafficInfo}
 		,#{start}
@@ -65,9 +42,10 @@
 <insert id="insertAccommodation" parameterType="map">
 	INSERT INTO `accommodation`
 	( 
-		`tripId`
+		`travelId`
 		,`name`
-		,`date`
+		,`startDate`
+		,`endDate`
 		,`location`
 		,`price`
 		,`memo`
@@ -76,9 +54,10 @@
 	)
 	VALUES
 	(
-		#{tripId}
+		#{travelId}
 		,#{name}
-		,#{date}
+		,#{startDate}
+		,#{endDate}
 		,#{location}
 		,#{price}
 		,#{memo}
@@ -88,9 +67,9 @@
 </insert>
 
 <insert id="insertReservation" parameterType="map">
-INSERT INTO `reservationInfo`
+INSERT INTO `reservation`
 	( 
-		`tripId`
+		`travelId`
 		,`title`
 		,`booker`
 		,`date`
@@ -102,7 +81,7 @@ INSERT INTO `reservationInfo`
 	)
 	VALUES
 	(
-		#{tripId}
+		#{travelId}
 		,#{title}
 		,#{booker}
 		,#{date}
@@ -114,7 +93,7 @@ INSERT INTO `reservationInfo`
 	)
 </insert>
 
-<select id="selectLastTrip" resultType="com.travelplans.my_travel.model.Trip">
+<select id="selectLastTravel" resultType="com.travelplans.new_travel.model.Travel">
 	SELECT 
 		`id`
 		,`userId`
@@ -126,10 +105,10 @@ INSERT INTO `reservationInfo`
 		,`createdAt`
 		,`updatedAt`
 	FROM
-		`trip`
+		`travel`
 	ORDER BY `id` DESC
 	LIMIT 1
 </select>
-
-
-</mapper>
+ 
+ 
+ </mapper>

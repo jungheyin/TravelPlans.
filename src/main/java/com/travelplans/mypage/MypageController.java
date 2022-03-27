@@ -13,7 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.travelplans.mypage.bo.MypageBO;
-import com.travelplans.mypage.model.Trip;
+import com.travelplans.mypage.model.Travel;
 
 @Controller
 @RequestMapping("/mypage")
@@ -38,8 +38,8 @@ public class MypageController {
 		
 		// list 글쓰기 목록 가져오기
 		// db에서 가져오기
-		List<Trip> tripList = mypageBO.getTripList();
-		model.addAttribute("tripList",tripList);
+		List<Travel> travelList = mypageBO.getTravelList();
+		model.addAttribute("travelList",travelList);
 		
 		return "mypage/mypage";
 	}

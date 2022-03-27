@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="com.travelplans.new_travel.dao.NewTravelDAO">
+ 
+ <insert id="insertTravel" parameterType="map">
+	INSERT INTO `travel`
+	(
+		`userId`
+		,`title`
+		,`color`
+		,`startDate`
+		,`endDate`
+		,`createdAt`
+		,`updatedAt`
+	)
+	VALUES
+	(
+		#{userId}
+		,#{title}
+		,#{color}
+		,#{startDate}
+		,#{endDate}
+		,NOW()
+		,NOW()
+	)
+</insert>
+
+<select id="selectTravelById" resultType="com.travelplans.new_travel.model.Travel">
+	SELECT 
+		`id`
+		,`userId`
+		,`title`
+		,`color`
+		,`startDate`
+		,`endDate`
+		,`price`
+		,`createdAt`
+		,`updatedAt`
+	FROM
+		`travel`
+	WHERE
+		`id` = #{id}
+</select>
+
+
+<update id="updateTravelByIdUserId" parameterType="map">
+UPDATE `travel`
+SET
+	`title` = #{title}
+	, `color` = #{color}
+	, `startDate` = #{startDate}
+	, `endDate` = #{endDate}
+	, `updatedAt` = NOW()
+WHERE 
+	`id` = #{travelId}
+	AND `userId` = #{userId}
+</update>
+ </mapper>

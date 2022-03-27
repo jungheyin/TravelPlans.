@@ -8,13 +8,13 @@
 				<div>
 					<img src="/static/icons/check.png" id="checkImg" width="20px" 
 						class="mr-3 mt-3">
-					<button type="button" id="tripSaveBtn" class="btn d-none"></button>
+					<button type="button" id="travelSaveBtn" class="btn d-none"></button>
 				</div>
 			</div>
 			
 			<div class="d-flex justify-content-between">
 			
-				<input type="text" id="tripTitle" name="tripTitle" class="form-control col-6 ml-3 mb-4"
+				<input type="text" id="travelTitle" name="travelTitle" class="form-control col-6 ml-3 mb-4"
 					maxlength="20" placeholder="여행 제목">
 					
 				 <div id="colorBox" class="d-flex">
@@ -75,8 +75,6 @@ $(document).ready(function() {
 	$("#endDate").datepicker("setDate", new Date());
 	
 	
-	
-	
 	$('#redBox').on('click', function() { // redBox 클깃시 redBtn이 클릭된다.
 		$('.redRadio').click();
 		// bgBox을 target으로 잡아 배경색으로 넣어준다.
@@ -111,10 +109,10 @@ $(document).ready(function() {
 	
 	
 	$('#checkImg').on('click', function() {
-		$('#tripSaveBtn').click();
+		$('#travelSaveBtn').click();
 		
 		
-		let title = $('#tripTitle').val().trim();
+		let title = $('#travelTitle').val().trim();
 		
 		if (title == '') {
 			alert("여행 제목을 입력해 주세요.");
@@ -134,11 +132,11 @@ $(document).ready(function() {
 		
 		$.ajax({
 			type: "POST"
-			,url: "/my_travel/new_travel_add"
+			,url: "/new_travel/create"
 			, data: {"title":title, "color":color, "startDate":startDate, "endDate":endDate}
 			, success: function(data) {
 				if (data.result == 'success') {
-					location.href="/my_travel/reservation_traffic_view";
+					location.href="/reservation/traffic_create_view";
 				} else if (data.result == 'error'){
 					alert(errorMessage);
 				}

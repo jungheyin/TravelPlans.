@@ -33,8 +33,8 @@
 					
 					<!-- 데이터피커 -->
 					<div class="d-flex mb-2">
-						<input type="text" id="startDate" class="form-control mbt-2" value="${trip.startDate}"> 
-						<input type="time" id="startTime" class="form-control mbt-2">
+						<input type="text" id="startDate" class="form-control mb-2 mr-1" value="${travel.startDate}"> 
+						<input type="time" id="startTime" class="form-control mb-2">
 					</div>
 
 					<div class="font-weight-bold ml-1 mb-1">도착</div>
@@ -43,8 +43,8 @@
 					
 					<!-- 데이터 피커 -->
 					<div class="d-flex mb-2">
-						<input type="text" id="arriveDate" class="form-control mbt-2" value="${trip.startDate}"> 
-						<input type="time" id="arriveTime" class="form-control mbt-2">
+						<input type="text" id="arriveDate" class="form-control mb-2 mr-1" value="${travel.startDate}"> 
+						<input type="time" id="arriveTime" class="form-control mb-2">
 					</div>
 
 
@@ -144,21 +144,26 @@ $(document).ready(function(e) {
 		}
 	});
 	
+	
 	// price 숫자만 입력하게 하기
 	$('#price').on('keyup', function() {
-		let target = $(this).val();
+		let target = $('#price').val();
+		target = target.replace(/,/gi, '');
+		
 		let regexg =  /^[0-9]*$/;
 		
 		if(!regexg.test(target)) {
 			$(this).val('');
 			return;
 		} else {
+			target = target.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 			
 			$(this).val(target);
 		}
 		
 	});
 	
+	 
 	
 	// validation check
 	$('#trafficBtn').on('click', function() {
@@ -191,15 +196,18 @@ $(document).ready(function(e) {
 		let arriveDate = $('#arriveDate').val();
 		let arriveTime = $('#arriveTime').val();
 		
-		let price = $('#price').val().trim();
+		let priceStr = $('#price').val().trim();
+		let price = priceStr.split(',').join("");
+		
 		let memo = $('.memo').val().trim();
 		
-		alert("traffic:" +traffic+ "trafficInfo:" + trafficInfo + "start:" + start + "startDate:" + startDate +
-				"startTime:" + startTime + "arrive:" + arrive + "arriveDate:" + arriveDate + "arriveTime:" + arriveTime + "price:" + price + "memo:" + memo);
+		/* console.log("traffic:" +traffic+ ",trafficInfo:" + trafficInfo + ",start:" + start + ",startDate:" + startDate +
+				",startTime:" + startTime + ",arrive:" + arrive + ",arriveDate:" + arriveDate + ",arriveTime:" + arriveTime +
+				",price:" + price + ",memo:" + memo); */
 		
-		 $.ajax({
+		  $.ajax({
 			type: "POST"
-			, url: "/my_travel/reservation_traffic_add"
+			, url: "/reservation/traffic_add"
 			, data: {"traffic":traffic, "trafficInfo":trafficInfo, 
 					"start":start, "startDate":startDate,"startTime":startTime, 
 					"arrive":arrive, "arriveDate":arriveDate, "arriveTime":arriveTime, 
@@ -208,7 +216,7 @@ $(document).ready(function(e) {
 				if (data.result == 'success') {
 					// 성공 - 새로고침
 					 alert(trafficInfo +"저장");
-					location.replace("/my_travel/reservation_traffic_view");
+					location.replace("/reservation/traffic_create_view");
 				} else {
 					// 실패
 					alert("저장에 실패했습니다.");
@@ -218,7 +226,7 @@ $(document).ready(function(e) {
 			, error : function(e) {
 				alert("실패");
 			}
-		}); 
+		});  
 	});
 });
 

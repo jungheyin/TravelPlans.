@@ -16,12 +16,12 @@
 					<input type="text" id="title" class="form-control mb-2" 
 						maxlength="17" placeholder="제목">
 
-					<div class="font-weight-bold ml-1 mb-1">예약자 이름</div>
+					<div class="font-weight-bold ml-1 mb-1">예약자</div>
 					<input type="text" id="booker" class="form-control mb-2" 
-						maxlength="17" placeholder="예약자 이름">
+						maxlength="17" placeholder="예약자">
 
 					<div class="font-weight-bold ml-1 mb-1">날짜</div>
-					<input type="text" id="date" class="form-control mb-2" placeholder="날짜" value="${trip.startDate}">
+					<input type="text" id="date" class="form-control mb-2" placeholder="날짜" value="${travel.startDate}">
 
 					<div class="font-weight-bold ml-1 mb-1">위치</div>
 					<input type="text" id="location" class="form-control mb-2" placeholder="위치">
@@ -85,19 +85,22 @@ $(document).ready(function() {
 		
 		let date = $('#date').val();
 		let location = $('#location').val().trim();
-		let price = $('#price').val().trim();
+		
+		let priceStr = $('#price').val().trim();
+		let price = priceStr.split(',').join("");
+		
 		let memo = $('#memo').val().trim();
 		
 		alert(title + booker + date + location + price + memo);
 		
 		$.ajax({
 			type: "POST"
-			, url: "/my_travel/reservation_reservation_add"
+			, url: "/reservation/reservation_add"
 			, data: {"title":title, "booker":booker, "date":date, "location":location,"price":price,"memo":memo}
 			, success: function(data) {
 				if (data.result == 'success') {
 					alert(title +" 성공");
-					location.replace("/my_travel/reservation_reservation_view");
+					location.replace("reservation/reservation_create_view");
 				} else {
 					alert(errorMessage);
 				}

@@ -1,8 +1,8 @@
-package com.travelplans.my_travel.model;
+package com.travelplans.new_travel.model;
 
 import java.util.Date;
 
-public class Trip {
+public class Travel {
 	private int id;
 	private int userId;
 	private String title;

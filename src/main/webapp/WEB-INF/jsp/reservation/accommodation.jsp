@@ -18,8 +18,10 @@
 
 
 					<div class="font-weight-bold ml-1 mb-1">날짜</div>
-					<input type="text" id="date" class="form-control mb-2" placeholder="날짜" value="${trip.startDate}">
-					
+					<div class="d-flex mb-2">
+					<input type="text" id="startDate" class="form-control mr-1" placeholder="시작날짜" value="${travel.startDate}">
+					<input type="text" id="endDate" name="endDate" class="form-control" placeholder="마지막날짜" value="${travel.endDate}">
+					</div>
 					<div class="font-weight-bold ml-1 mb-1">위치</div>
 					<input type="text" id="location" class="form-control mb-2" placeholder="위치">
 
@@ -31,7 +33,7 @@
 					<textarea rows="5" id="memo" class="form-control mb-2"
 						maxlength="49" placeholder="메모(50자 이내)"></textarea>
 
-					<button type="button" id="accomSaveBtn" class=" btn w-100 mt-2">
+					<button type="button" id="accoSaveBtn" class=" btn w-100 mt-2">
 					S A V E</button>
 				</div>
 			</div>
@@ -43,18 +45,20 @@
 <script>
 $(document).ready(function() {
 	
-	$("#date").datepicker({
+	$.datepicker.setDefaults({
 		dayNamesMin: ['일', '월', '화', '수', '목', '금', '토']
 		, dateFormat: 'yy-mm-dd'
 		, showButtonPanel: true
 		, currentText: '오늘'
-		, minDate: 0
+		,minDate: $('#startDate').val()
 	});
 	
-	// price
+	$('#endDate').datepicker();
+	
 	$('#price').on('keyup', function() {
-		let target = $(this).val();
+		let target = $('#price').val();
 		target = target.replace(/,/gi, '');
+		
 		let regexg =  /^[0-9]*$/;
 		
 		if(!regexg.test(target)) {
@@ -68,7 +72,8 @@ $(document).ready(function() {
 		
 	});
 	
-	$('#accomSaveBtn').on('click', function() {
+	
+	$('#accoSaveBtn').on('click', function() {
 		
 		let name = $('#name').val().trim();
 		if (name == '') {
@@ -76,22 +81,26 @@ $(document).ready(function() {
 			return;
 		}
 		
-		let date = $('#date').val();
+		let startDate = $('#startDate').val();
+		let endDate = $('#endDate').val();
 		
 		let location = $('#location').val().trim();
-		let price = $('#price').val().trim();
+		
+		let priceStr = $('#price').val().trim();
+		let price = priceStr.split(',').join("");
+		
 		let memo = $('#memo').val().trim();
 		
-		alert(name + date + location + price + memo);
+		alert(name + startDate + endDate + location + price + memo);
 		
-		$.ajax({
+		 $.ajax({
 			type: "POST"
-			, url : "/my_travel/reservation_accommodation_add"
-			, data: {"name":name, "date":date, "location":location, "price":price, "memo":memo}
+			, url : "/reservation/accommodation_add"
+			, data: {"name":name, "startDate":startDate, "endDate":endDate, "location":location, "price":price, "memo":memo}
 			, success: function(data) {
 				if (data.result == 'success') {
 					alert(name + "저장");
-					location.replace("/my_travel/reservation_accommodation_view");
+					location.replace("/reservation/accommodation_view");
 				} else {
 					alert(errorMessage);
 				}
@@ -99,7 +108,7 @@ $(document).ready(function() {
 			, error: function(e) {
 				alert("실패했습니다.");
 			}
-		});
+		}); 
 	});
 	
 	

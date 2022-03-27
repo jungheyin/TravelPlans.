@@ -4,7 +4,7 @@
 
  <mapper namespace="com.travelplans.mypage.dao.MypageDAO">
  
- <select id="selsectTripList" resultType="com.travelplans.mypage.model.Trip">
+ <select id="selsectTravelList" resultType="com.travelplans.mypage.model.Travel">
  	SELECT 
  		`id`
  		,`userId`
@@ -16,6 +16,6 @@
 		,`createdAt`
 		,`updatedAt`
  	FROM
- 		`trip`
+ 		`travel`
  </select>
  </mapper>

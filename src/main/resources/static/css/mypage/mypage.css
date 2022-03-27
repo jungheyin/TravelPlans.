@@ -25,22 +25,22 @@ header .mypageBox {
 }
 
 
-.contents .planBox {
+.contents .itineraryBox {
 	width: 600px;
 	height: 80px;
-	background-color: #ffcc85;
+	/* background-color: #ffcc85; 임시 */
 }
 
-.tripTitle {
+.travelTitle {
 	font-weight: bold;
-	font-size: 18px;
+	font-size: 17px;
 }
-.tripDate {
+.travelDate {
 	font-weight: bold;
-	font-size: 12px;
+	font-size: 13px;
 }
-.tripPrice {
+.travelPrice {
 	font-weight: bold;
-	font-size: 14px;
+	font-size: 15px;
 
 } 	

@@ -13,8 +13,6 @@ header .mypage{
 }
 
 
-
-
 .traffic {
 	min-height: 700px;
 }
@@ -38,7 +36,7 @@ header .mypage{
 	color: white;
 }
 
-.contents #accomSaveBtn {
+.contents #accoSaveBtn {
 	font-weight: bold;
 	background-color: #7BB0DB;
 	color: white;

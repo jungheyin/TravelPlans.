@@ -2,7 +2,7 @@ package com.travelplans.mypage.model;
 
 import java.util.Date;
 
-public class Trip {
+public class Travel {
 	
 	private int id;
 	private int userId;
