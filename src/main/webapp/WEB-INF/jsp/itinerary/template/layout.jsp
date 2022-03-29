@@ -22,7 +22,7 @@
 	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 	crossorigin="anonymous"></script>
 
-<link rel="stylesheet" type="text/css" href="/static/css/my_travel/schedule.css">
+<link rel="stylesheet" type="text/css" href="/static/css/my_travel/itinerary.css">
 </head>
 <body>
 	<div id="wrap" class="container">
@@ -34,7 +34,7 @@
 				<jsp:include page="../include/nav.jsp" />
 			</nav>
 			<article class="mr-4">
-				<jsp:include page="../${scheduleViewName}.jsp" />
+				<jsp:include page="../${itineraryViewName}.jsp" />
 			</article>
 		</section>
 	</div>

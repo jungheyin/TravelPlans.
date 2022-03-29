@@ -1,10 +1,15 @@
 package com.travelplans.reservation.bo;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.travelplans.new_travel.model.Travel;
 import com.travelplans.reservation.dao.ReservationDAO;
+import com.travelplans.reservation.model.Accommodation;
+import com.travelplans.reservation.model.Reservation;
+import com.travelplans.reservation.model.Traffic;
 
 @Service
 public class ReservationBO {
@@ -30,7 +35,25 @@ public class ReservationBO {
 	public Travel getLastTravel() {
 		return reservationDAO.selectLastTravel();
 	}
-	
 
+	public List<Traffic> getTrafficList(int travelId) {
+	  
+		List<Traffic> trafficList = reservationDAO.selectTrafficList(travelId);
+		
+	  return trafficList; 
+	}
+	 
+	public List<Accommodation> getAccommodationList(int travelId) {
+		
+		List<Accommodation> accommodationList = reservationDAO.selectAccommodationList(travelId);
+		
+		return accommodationList; 
+	}
 	
+	public List<Reservation> getReservationList(int travelId) {
+		
+		List<Reservation> reservationList = reservationDAO.selectReservationList(travelId);
+		
+		return reservationList;
+	}
 }

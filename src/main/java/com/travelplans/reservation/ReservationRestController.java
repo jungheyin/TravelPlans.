@@ -71,8 +71,10 @@ public class ReservationRestController {
 			result.put("errorMessage", "로그인 후 이용해 주세에ㅛ.");
 		}
 		
-		Travel travel = reservationBO.getLastTravel();
-		int travelId = travel.getId();
+		
+		 Travel travel = reservationBO.getLastTravel(); 
+		 int travelId = travel.getId();
+		 
 		
 		reservationBO.addTraffic(travelId, traffic, trafficInfo, start, startDate, startTime, arrive, arriveDate, arriveTime, price, memo);
 		
@@ -114,9 +116,8 @@ public class ReservationRestController {
 			result.put("errorMessage", "로그인 후 이용해 주세요.");
 		}
 		
-		// tripId가져오기
-		Travel travel = reservationBO.getLastTravel();
-		int travelId = travel.getId();
+		 Travel travel = reservationBO.getLastTravel(); 
+		 int travelId = travel.getId();
 		
 		// insertBo만들기
 		reservationBO.addAccommodation(travelId, name, startDate, endDate, locaion, price, memo);
@@ -161,10 +162,9 @@ public class ReservationRestController {
 			result.put("errorMessage", "로그인 후 이용해 주세요.");
 		}
 		
-		// tripId 가져오기
-		Travel travel = reservationBO.getLastTravel();
-		int travelId = travel.getId();
-		
+		 Travel travel = reservationBO.getLastTravel(); 
+		 int travelId = travel.getId();
+		 
 		// insertBO 
 		reservationBO.addReservation(travelId, title, booker, date, locaion, price, memo);
 		

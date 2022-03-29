@@ -12,7 +12,7 @@
 		<h4 class="font-weight-bold mt-2 mr-1">travel plans.</h4>
 	</div>
 	<!-- new 여행계획2으로 이동 -->
-	<a href="/my_travel/schedule_reservationInfo_view" class="mt-2 mr-3">
+	<a href="/itinerary/traffic_info_view?travelId=${travel.id}" class="mt-2 mr-3">
 		<img src="/static/icons/airplans_black.png" alt="비행기아이콘" width="30px">
 	</a>
 </div>

@@ -1,9 +1,14 @@
 package com.travelplans.reservation.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.travelplans.new_travel.model.Travel;
+import com.travelplans.reservation.model.Accommodation;
+import com.travelplans.reservation.model.Reservation;
+import com.travelplans.reservation.model.Traffic;
 
 @Repository
 public interface ReservationDAO {
@@ -41,4 +46,9 @@ public interface ReservationDAO {
 	
 	public Travel selectLastTravel();
 	
+	public List<Traffic> selectTrafficList(int travelId);
+	
+	public List<Accommodation> selectAccommodationList(int travelId);
+	
+	public List<Reservation> selectReservationList(int travelId);
 }

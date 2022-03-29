@@ -128,7 +128,7 @@ $(document).ready(function() {
 		let startDate = $('#startDate').val();
 		let endDate = $('#endDate').val();
 		
-		 alert(${travel.id} + title + color + startDate + endDate);
+		// alert(${travel.id} + title + color + startDate + endDate);
 		
 		 $.ajax({
 			type: "PUT"
@@ -137,7 +137,7 @@ $(document).ready(function() {
 			, success: function(data) {
 				if (data.result == 'success') {
 					alert(title + "수정되었습니다.");
-					location.href="/reservation/traffic_create_view?travelId=${travel.title}";
+					location.href="/reservation/traffic_create_view?travelId=${travel.id}";
 				} else if (data.result == 'error'){
 					alert(errorMessage);
 				}

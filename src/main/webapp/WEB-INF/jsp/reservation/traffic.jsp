@@ -201,26 +201,23 @@ $(document).ready(function(e) {
 		
 		let memo = $('.memo').val().trim();
 		
-		/* console.log("traffic:" +traffic+ ",trafficInfo:" + trafficInfo + ",start:" + start + ",startDate:" + startDate +
+		alert(${travel.id} +"traffic:" +traffic+ ",trafficInfo:" + trafficInfo + ",start:" + start + ",startDate:" + startDate +
 				",startTime:" + startTime + ",arrive:" + arrive + ",arriveDate:" + arriveDate + ",arriveTime:" + arriveTime +
-				",price:" + price + ",memo:" + memo); */
+				",price:" + price + ",memo:" + memo);
 		
 		  $.ajax({
 			type: "POST"
 			, url: "/reservation/traffic_add"
-			, data: {"traffic":traffic, "trafficInfo":trafficInfo, 
+			, data: {"travelId":${travel.id}, "traffic":traffic, "trafficInfo":trafficInfo, 
 					"start":start, "startDate":startDate,"startTime":startTime, 
 					"arrive":arrive, "arriveDate":arriveDate, "arriveTime":arriveTime, 
 					"price":price, "memo":memo}
 			, success: function(data) {
 				if (data.result == 'success') {
-					// 성공 - 새로고침
-					 alert(trafficInfo +"저장");
-					location.replace("/reservation/traffic_create_view");
+					 alert(start + " → " + arrive +" 저장");
+					location.replace("/reservation/traffic_create_view?travelId=${travel.id}");
 				} else {
-					// 실패
 					alert("저장에 실패했습니다.");
-					
 				}
 			}
 			, error : function(e) {

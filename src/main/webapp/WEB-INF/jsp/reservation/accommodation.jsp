@@ -26,14 +26,13 @@
 					<input type="text" id="location" class="form-control mb-2" placeholder="위치">
 
 					<div class="font-weight-bold ml-1 mb-1">가격</div>
-					<input type="text" id="price" class="form-control mb-2" placeholder="가격"
-						 oninput="this.value = this.value.replace(/[^0-9.]/g, '')">
+					<input type="text" id="price" class="form-control mb-2" placeholder="가격">
 
 					<div class="font-weight-bold ml-1 mb-1">메모</div>
 					<textarea rows="5" id="memo" class="form-control mb-2"
 						maxlength="49" placeholder="메모(50자 이내)"></textarea>
 
-					<button type="button" id="accoSaveBtn" class=" btn w-100 mt-2">
+					<button type="button" id="accoSaveBtn" class="btn w-100 mt-2">
 					S A V E</button>
 				</div>
 			</div>
@@ -50,10 +49,22 @@ $(document).ready(function() {
 		, dateFormat: 'yy-mm-dd'
 		, showButtonPanel: true
 		, currentText: '오늘'
-		,minDate: $('#startDate').val()
+		, minDate: $('#startDate').val()
 	});
 	
+	$('#startDate').datepicker();
+	
 	$('#endDate').datepicker();
+	
+	$("#startDate").on('change', function() {
+		
+		let startDate = $('#startDate').val();
+		$("#startDate").datepicker("setDate",startDate);
+		
+	//	let arrviveDate = startDate;
+		$("#endDate").datepicker("setDate", startDate);
+		
+	});
 	
 	$('#price').on('keyup', function() {
 		let target = $('#price').val();
@@ -91,16 +102,16 @@ $(document).ready(function() {
 		
 		let memo = $('#memo').val().trim();
 		
-		alert(name + startDate + endDate + location + price + memo);
+		 alert(${travel.id} + name + startDate + endDate + location + price + memo);
 		
 		 $.ajax({
 			type: "POST"
 			, url : "/reservation/accommodation_add"
-			, data: {"name":name, "startDate":startDate, "endDate":endDate, "location":location, "price":price, "memo":memo}
+			, data: {"travelId":${travel.id}, "name":name, "startDate":startDate, "endDate":endDate, "location":location, "price":price, "memo":memo}
 			, success: function(data) {
 				if (data.result == 'success') {
-					alert(name + "저장");
-					location.replace("/reservation/accommodation_view");
+					alert(name + " 저장");
+					location.replace("/reservation/accommodation_create_view?travelId=${travel.id}");
 				} else {
 					alert(errorMessage);
 				}
@@ -110,10 +121,5 @@ $(document).ready(function() {
 			}
 		}); 
 	});
-	
-	
-	
-	
-	
 });
 </script>

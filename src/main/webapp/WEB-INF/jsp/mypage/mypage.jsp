@@ -156,7 +156,6 @@ $(document).ready(function() {
 			return;
 		}  */
 	
-	}
 });
 
 </script>

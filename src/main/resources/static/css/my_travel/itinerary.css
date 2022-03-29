@@ -12,12 +12,11 @@ header .mypage{
 	background-color: #7BB0DB;
 }
 
-
 .contents {
-	min-height: 900px;
+	min-height: 1000px;
 }
 nav {
-	width:190px;
+	width:130px;
 }
 
 nav .nav-link {
@@ -27,6 +26,19 @@ nav .nav-link {
 nav .nav-link:hover {
 	color:#7BB0DB;
 }
+
+/* traffic */
+
+#trafficSubject {
+	color:#7BB0DB;
+}
+
+/* accommodation */
+
+
+/* reservation */
+
+/* itinerary */
 article {
 	width:600px;
 }
@@ -53,3 +65,4 @@ article .reservationBg {
 	height:35px;
 	background-color: #7BB0DB;
 }
+

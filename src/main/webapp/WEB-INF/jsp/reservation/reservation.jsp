@@ -27,8 +27,7 @@
 					<input type="text" id="location" class="form-control mb-2" placeholder="위치">
 
 					<div class="font-weight-bold ml-1 mb-1">가격</div>
-					<input type="text" id="price" class="form-control mb-2" placeholder="가격"
-						oninput="this.value = this.value.replace(/[^0-9.]/g, '')">
+					<input type="text" id="price" class="form-control mb-2" placeholder="가격">
 
 					<div class="font-weight-bold ml-1 mb-1">메모</div>
 					<textarea rows="5" id="memo" class="form-control mb-2" maxlength="49"
@@ -91,16 +90,16 @@ $(document).ready(function() {
 		
 		let memo = $('#memo').val().trim();
 		
-		alert(title + booker + date + location + price + memo);
+		// alert(title + booker + date + location + price + memo);
 		
 		$.ajax({
 			type: "POST"
 			, url: "/reservation/reservation_add"
-			, data: {"title":title, "booker":booker, "date":date, "location":location,"price":price,"memo":memo}
+			, data: {"travelId":${travel.id}, "title":title, "booker":booker, "date":date, "location":location,"price":price,"memo":memo}
 			, success: function(data) {
 				if (data.result == 'success') {
 					alert(title +" 성공");
-					location.replace("reservation/reservation_create_view");
+					location.replace("/reservation/reservation_create_view?travelId=${travel.id}");
 				} else {
 					alert(errorMessage);
 				}
