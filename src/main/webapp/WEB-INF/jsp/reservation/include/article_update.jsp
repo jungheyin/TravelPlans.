@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
@@ -41,17 +42,3 @@
 			</div>
 		
 	</div>
-<script>
-
-$(document).ready(function() {
-	
-// travel.color의 색상을 가져온다.
- 
-// css에 색상을 넣기 
-
-	
-
-	
-});
-
-</script>

@@ -17,10 +17,6 @@ import com.travelplans.reservation.model.Traffic;
 @RequestMapping("/itinerary")
 public class ItineraryController {
 	
-		// TODO: 스케줄 부분
-		// 2. 공통: list를 만들어서 뿌려준다.
-		// 3. model.addAttribute로 view 뿌려주기!!!
-		
 		
 	@Autowired
 	private ReservationBO reservationBO;
@@ -36,6 +32,9 @@ public class ItineraryController {
 		
 		List<Traffic> trafficList = reservationBO.getTrafficList(travelId);
 		
+		Traffic traffic = reservationBO.getTrafficById(travelId);
+		
+		model.addAttribute("traffic", traffic);
 		model.addAttribute("travel", travel);
 		model.addAttribute("trafficList", trafficList);
 		model.addAttribute("itineraryViewName", "trafficInfo");

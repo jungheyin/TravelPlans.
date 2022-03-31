@@ -9,13 +9,15 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.travelplans.reservation.bo.ReservationBO;
+import com.travelplans.reservation.model.Traffic;
 
 @RestController
 @RequestMapping("/reservation")
@@ -154,33 +156,86 @@ public class ReservationRestController {
 		return result;
 	}
 	
-	@GetMapping("/pass_travelId") 
-	public Map<String, Object> passTravelId(
+	/*
+	 * {"travelId":travelId, "traffic":traffic, "trafficInfo":trafficInfo,
+	 * "start":start, "startDate":startDate,"startTime":startTime, "arrive":arrive,
+	 * "arriveDate":arriveDate, "arriveTime":arriveTime, "price":price, "memo":memo}
+	 */
+	// traffic 수정
+	@PutMapping("/traffic_update")
+	public Map<String, Object> updateTraffic(
+			@RequestParam("trafficId") int trafficId,
 			@RequestParam("travelId") int travelId,
+			@RequestParam("traffic") String traffic,
+			@RequestParam("trafficInfo") String trafficInfo, 
+			@RequestParam("start") String start, 
+			@RequestParam("startDate") String startDate, 
+			@RequestParam(value="startTime", required=false) String startTime, 
+			@RequestParam(value="arrive", required=false) String arrive, 
+			@RequestParam(value="arriveDate", required=false) String arriveDate,
+			@RequestParam(value="arriveTime", required=false) String arriveTime,
+			@RequestParam(value="price", required=false) Integer price, 
+			@RequestParam(value="memo", required=false) String memo,
 			HttpServletRequest request) {
 		
 		Map<String, Object> result = new HashMap<>();
 		result.put("result", "success");
-				
+		
 		HttpSession session = request.getSession();
 		Integer userId = (Integer)session.getAttribute("userId");
 		
 		if (userId == null) {
-			logger.error("[/pass_travelId] 로그인 풀림");
+			logger.error("[reservation/traffic_update] 로그인 풀림");
 			result.put("result", "error");
-			result.put("result", "로그인 후 이용해 주세요.");
+			result.put("errorMessage", "로그인 후 이용해 주세요.");
+		}
+		
+		
+		int upCount = reservationBO.updateTraffic(trafficId, travelId, traffic, trafficInfo, start, startDate, startTime, 
+				arrive, arriveDate, arriveTime, price, memo);
+		
+		if (upCount < 0 ) {
+			result.put("result", "error");
+			result.put("errorMassage", "수정에 실패했습니다.");
 		}
 		
 		return result;
+		
+		
 	}
-	// traffic 수정
 	
 	// accommodation 수정
 	
 	// reservation 수정
 	
 	// traffic 삭제
-	
+	@DeleteMapping("/delete_traffic")
+	public Map<String, Object> deleteTraffic(
+			@RequestParam("trafficId") int trafficId,
+			@RequestParam("travelId") int travelId,
+			HttpServletRequest request
+			) {
+		
+		Map<String, Object> result = new HashMap<>();
+		result.put("result", "success");
+		
+		HttpSession session = request.getSession();
+		Integer userId = (Integer)session.getAttribute("userId");
+		
+		if(userId == null) {
+			logger.error("[reservation/delete_traffic] 로그인 풀림");
+			result.put("result", "error");
+			result.put("errorMessage", "로그인 후 이용해 주세요.");
+		}
+		
+		Traffic traffic = reservationBO.getTrafficById(trafficId);
+		trafficId = traffic.getId();
+		
+		// delete BO
+		int delCount = reservationBO.deleteTraffic(trafficId, travelId);
+		
+		return result;
+	}
 	// accommodation 삭제
 		
 	// reservation 삭제

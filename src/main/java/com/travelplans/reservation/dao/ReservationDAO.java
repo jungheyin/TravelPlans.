@@ -46,11 +46,38 @@ public interface ReservationDAO {
 	
 	public Travel selectLastTravel();
 	
-	public Travel selectTravelById();
+	public Travel selectTravelById(int id);
+	
+	public Traffic selectTrafficById(int trafficId);
 	
 	public List<Traffic> selectTrafficList(int travelId);
 	
 	public List<Accommodation> selectAccommodationList(int travelId);
 	
 	public List<Reservation> selectReservationList(int travelId);
+	
+	public int updateTrafficByIdTravelId(
+			@Param("trafficId") int trafficId,
+			@Param("travelId") int travelId,
+			@Param("traffic") String traffic,
+			@Param("trafficInfo") String trafficInfo,
+			@Param("start") String start,
+			@Param("startDate") String startDate, 
+			@Param("startTime") String startTime,
+			@Param("arrive") String arrive,
+			@Param("arriveDate") String arriveDate,
+			@Param("arriveTime") String arriveTime,
+			@Param("price") Integer price,
+			@Param("memo") String memo);
+	
+	
+	
+	
+	
+	public int deleteTrafficByIdTravelId (int trafficid, int travelId);
+	
+	
+	
 }
+
+

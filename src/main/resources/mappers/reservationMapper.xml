@@ -127,6 +127,28 @@ INSERT INTO `reservation`
 		`id` = #{id}
 </select>
 
+<select id="selectTrafficById" resultType="com.travelplans.reservation.model.Traffic">
+	SELECT
+		 `id`
+		,`travelId`
+		,`traffic`
+		,`trafficInfo`
+		,`start`
+		,`startDate`
+		,`startTime`
+		,`arrive`
+		,`arriveDate`
+		,`arriveTime`
+		,`price`
+		,`memo`
+		,`createdAt`
+		,`updatedAt`
+ 	FROM
+ 		`traffic`
+ 	WHERE
+ 		`id` = #{trafficId}
+</select>
+
  <select id="selectTrafficList" resultType="com.travelplans.reservation.model.Traffic">
  	SELECT
 		 `id`
@@ -184,4 +206,35 @@ INSERT INTO `reservation`
 	WHERE
 		`travelId` = #{travelId}
  </select>
+
+ <update id="updateTrafficByIdTravelId" parameterType="map">
+ UPDATE `traffic`
+SET
+	`traffic` = #{traffic}
+	, `trafficInfo` = #{trafficInfo}
+	, `start` = #{start}
+	, `startDate` = #{startDate}
+	, `startTime` = #{startTime}
+	, `arrive` = #{arrive}
+	, `arriveDate` = #{arriveDate}
+	, `arriveTime` = #{arriveTime}
+	, `price` = #{price}
+	, `memo` = #{memo}
+	, `updatedAt` = NOW()
+WHERE 
+	`id` = #{trafficId}
+	AND `travelId` = #{travelId}
+ </update>
+ 
+ 
+ <delete id="deleteTrafficByIdTravelId" parameterType="map">
+ 	DELETE
+ 	FROM
+ 		`traffic`
+ 	WHERE
+ 		`id` = #{trafficId}
+ 		AND travelId = #{travelId}
+ </delete>
+ 
+ 
  </mapper>

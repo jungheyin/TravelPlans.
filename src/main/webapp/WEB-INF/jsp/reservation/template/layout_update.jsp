@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>travel plans: new travel</title>
+<title>Insert title here</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
@@ -25,7 +25,7 @@
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-<link rel="stylesheet" type="text/css" href="/static/css/my_travel/reservation.css">	
+<link rel="stylesheet" type="text/css" href="/static/css/my_travel/reservation_update.css">
 </head>
 <body>
 	
@@ -34,13 +34,10 @@
 			<jsp:include page="../include/gnb.jsp" />
 		</header>
 		<article>
-			<jsp:include page="../include/article.jsp" />
+			<jsp:include page="../include/article_update.jsp" />
 		</article>
-		<nav>
-			<jsp:include page="../include/nav.jsp" />
-		</nav>
 		<section class="contents">
-			<jsp:include page="../${reservationViewName}.jsp" />
+			<jsp:include page="../${reservationUpdateViewName}.jsp" />
 		</section>
 	</div>
 	

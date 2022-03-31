@@ -1,17 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <div id="traffic">
 	<div class="d-flex justify-content-center mr-2 mb-4">
 		<div class="ml-5 mt-3 font-weight-bold">
-			교통수단 예약정보 등록하기
+			교통수단 예약정보 수정하기
 		</div>
 	</div>
 
 	<div class="traffic d-flex justify-content-center">
 		<div>
 			<div class="d-flex justify-content-center">
+				<c:set var="option" value="${traffic.traffic}"/>
 				<select class="category custom-select mb-2" id="category">
 					<option value="choice">교통수단 선택</option>
 					<option value="airplans">비행기</option>
@@ -24,35 +26,36 @@
 			<div class="inputBox">
 				<div id="airplansInput" class="form-group">
 					<div id="trafficInfo" class="font-weight-bold ml-1 mb-1">이름</div>
-					<input type="text" class="trafficInfoInput form-control mb-2" maxlength="20" placeholder="교통수단을 선택해 주세요.">
+					<input type="text" class="trafficInfoInput form-control mb-2" maxlength="20" placeholder="교통수단을 선택해 주세요."
+						 value="${traffic.trafficInfo}">
 
 					<div class="font-weight-bold ml-1 mb-1">출발</div>
-					<input type="text" class="start form-control mb-2" placeholder="출발">
+					<input type="text" class="start form-control mb-2" value="${traffic.start}">
 					
 					
 					<!-- 데이터피커 -->
 					<div class="d-flex mb-2">
-						<input type="text" id="startDate" class="form-control mb-2 mr-1" value="${travel.startDate}"> 
-						<input type="time" id="startTime" class="form-control mb-2">
+						<input type="text" id="startDate" class="form-control mb-2 mr-1" value="${traffic.startDate}"> 
+						<input type="time" id="startTime" class="form-control mb-2" value="${traffic.startTime}">
 					</div>
 
 					<div class="font-weight-bold ml-1 mb-1">도착</div>
-					<input type="text" class="arrive form-control mb-2" placeholder="도착">
+					<input type="text" class="arrive form-control mb-2" value="${traffic.arrive}">
 					
 					
 					<!-- 데이터 피커 -->
 					<div class="d-flex mb-2">
-						<input type="text" id="arriveDate" class="form-control mb-2 mr-1" value="${travel.startDate}"> 
-						<input type="time" id="arriveTime" class="form-control mb-2">
+						<input type="text" id="arriveDate" class="form-control mb-2 mr-1" value="${traffic.arriveDate}"> 
+						<input type="time" id="arriveTime" class="form-control mb-2" value="${traffic.arriveTime}">
 					</div>
 
 
 					<div class="font-weight-bold ml-1 mb-1">가격</div>
-					<input type="text" id="price" class=" form-control mb-2" placeholder="가격">
+					<input type="text" id="price" class=" form-control mb-2" value="${traffic.price}">
 
 					<div class="font-weight-bold ml-1 mb-1">메모</div>
 					<textarea rows="5" class="memo form-control mb-2" maxlength="49"
-						placeholder="메모(50자 이내)"></textarea>
+						placeholder="메모(50자 이내)">${traffic.memo}</textarea>
 
 					<button type="button" id="trafficBtn" class="btn w-100 mt-2 mb-4" data-travel-id=${travel.id}>
 						S A V E
@@ -199,19 +202,19 @@ $(document).ready(function(e) {
 				",startTime:" + startTime + ",arrive:" + arrive + ",arriveDate:" + arriveDate + ",arriveTime:" + arriveTime +
 				",price:" + price + ",memo:" + memo);
 		
-		  $.ajax({
-			type: "POST"
-			, url: "/reservation/traffic_add"
-			, data: {"travelId":travelId, "traffic":traffic, "trafficInfo":trafficInfo, 
+		   $.ajax({
+			type: "PUT"
+			, url: "/reservation/traffic_update"
+			, data: {"trafficId": ${traffic.id},"travelId":travelId, "traffic":traffic, "trafficInfo":trafficInfo, 
 					"start":start, "startDate":startDate,"startTime":startTime, 
 					"arrive":arrive, "arriveDate":arriveDate, "arriveTime":arriveTime, 
 					"price":price, "memo":memo}
 			, success: function(data) {
 				if (data.result == 'success') {
-					 alert(start + " → " + arrive +" 저장");
-					location.replace("/reservation/traffic_create_view?travelId=${travel.id}");
+					 alert(start + " → " + arrive +" 수정");
+					location.replace("/itinerary/traffic_info_view?travelId=${travel.id}");
 				} else {
-					alert("저장에 실패했습니다.");
+					alert("수정에 실패했습니다.");
 				}
 			}
 			, error : function(e) {
