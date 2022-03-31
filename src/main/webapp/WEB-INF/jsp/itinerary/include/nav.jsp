@@ -22,7 +22,7 @@
 		</li>
 		<li class="nav-item">
 			<a class="nav-link font-weight-bold" 
-				href="/itinerary/create_view">
+				href="/itinerary/create_view?travelId=${travel.id}">
 				여행 일 정
 			</a>
 		</li>

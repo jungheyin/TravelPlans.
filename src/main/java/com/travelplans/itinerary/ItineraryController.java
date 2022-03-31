@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
+import com.travelplans.new_travel.model.Travel;
 import com.travelplans.reservation.bo.ReservationBO;
 import com.travelplans.reservation.model.Accommodation;
 import com.travelplans.reservation.model.Reservation;
@@ -29,11 +29,14 @@ public class ItineraryController {
 	// /itinerary/traffic_info_view
 	@RequestMapping("/traffic_info_view")
 	public String trafficInfoView(
-			@RequestParam("travelId") int travelId,
 			Model model) {
+		
+		Travel travel = reservationBO.getLastTravel();
+		int travelId = travel.getId();
 		
 		List<Traffic> trafficList = reservationBO.getTrafficList(travelId);
 		
+		model.addAttribute("travel", travel);
 		model.addAttribute("trafficList", trafficList);
 		model.addAttribute("itineraryViewName", "trafficInfo");
 
@@ -44,11 +47,14 @@ public class ItineraryController {
 	// /itinerary/accommodation_info_view
 	@RequestMapping("/accommodation_info_view")
 	public String accommodationInfoView(
-			@RequestParam("travelId") int travelId,
 			Model model) {
+		
+		Travel travel = reservationBO.getLastTravel();
+		int travelId = travel.getId();
 		
 		List<Accommodation> accommodationList = reservationBO.getAccommodationList(travelId);
 		
+		model.addAttribute("travel", travel);
 		model.addAttribute("accommodationList", accommodationList);
 		model.addAttribute("itineraryViewName", "accommodationInfo");
 		
@@ -59,11 +65,14 @@ public class ItineraryController {
 	// /itinerary/reservaion_info_view
 	@RequestMapping("/reservation_info_view")
 	public String reservationInfoView(
-			@RequestParam("travelId") int travelId,
 			Model model) {
+		
+		Travel travel = reservationBO.getLastTravel();
+		int travelId = travel.getId();
 		
 		List<Reservation> reservationList = reservationBO.getReservationList(travelId);
 		
+		model.addAttribute("travel", travel);
 		model.addAttribute("reservationList", reservationList);
 		model.addAttribute("itineraryViewName", "reservationInfo");
 		
@@ -73,10 +82,12 @@ public class ItineraryController {
 	// 여행계획 만드는 페이지
 	@RequestMapping("/create_view")
 	public String itinerary(
-			@RequestParam("travelId") int travelId,
 			Model model) {
+		Travel travel = reservationBO.getLastTravel();
 		
 		
+		
+		model.addAttribute("travel", travel);
 		model.addAttribute("itineraryViewName", "itinerary");
 
 		return "itinerary/template/layout";

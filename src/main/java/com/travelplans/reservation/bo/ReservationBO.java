@@ -1,5 +1,6 @@
 package com.travelplans.reservation.bo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,11 +36,20 @@ public class ReservationBO {
 	public Travel getLastTravel() {
 		return reservationDAO.selectLastTravel();
 	}
+	
+	public Travel getTravelById() {
+		return reservationDAO.selectTravelById();
+	}
 
-	public List<Traffic> getTrafficList(int travelId) {
-	  
-		List<Traffic> trafficList = reservationDAO.selectTrafficList(travelId);
+//	public Traffic getTrafficById(int travelId) {
 		
+//		return reservationDAO.selectTrafficByTravelId(travelId);
+//	}
+	
+	public List<Traffic> getTrafficList(int travelId) {
+	
+		List<Traffic> trafficList = reservationDAO.selectTrafficList(travelId);
+		 
 	  return trafficList; 
 	}
 	 

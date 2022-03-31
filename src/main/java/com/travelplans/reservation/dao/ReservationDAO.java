@@ -46,6 +46,8 @@ public interface ReservationDAO {
 	
 	public Travel selectLastTravel();
 	
+	public Travel selectTravelById();
+	
 	public List<Traffic> selectTrafficList(int travelId);
 	
 	public List<Accommodation> selectAccommodationList(int travelId);

@@ -32,7 +32,7 @@
 					<textarea rows="5" id="memo" class="form-control mb-2"
 						maxlength="49" placeholder="메모(50자 이내)"></textarea>
 
-					<button type="button" id="accoSaveBtn" class="btn w-100 mt-2">
+					<button type="button" id="accoSaveBtn" class="btn w-100 mt-2" data-travel-id=${travel.id}>
 					S A V E</button>
 				</div>
 			</div>
@@ -84,7 +84,7 @@ $(document).ready(function() {
 	});
 	
 	
-	$('#accoSaveBtn').on('click', function() {
+	$('#accoSaveBtn').on('click', function(e) {
 		
 		let name = $('#name').val().trim();
 		if (name == '') {
@@ -101,13 +101,14 @@ $(document).ready(function() {
 		let price = priceStr.split(',').join("");
 		
 		let memo = $('#memo').val().trim();
+		let travelId = $(this).data('travel-id');
 		
-		 alert(${travel.id} + name + startDate + endDate + location + price + memo);
+		 alert(travelId + name + startDate + endDate + location + price + memo);
 		
 		 $.ajax({
 			type: "POST"
 			, url : "/reservation/accommodation_add"
-			, data: {"travelId":${travel.id}, "name":name, "startDate":startDate, "endDate":endDate, "location":location, "price":price, "memo":memo}
+			, data: {"travelId":travelId, "name":name, "startDate":startDate, "endDate":endDate, "location":location, "price":price, "memo":memo}
 			, success: function(data) {
 				if (data.result == 'success') {
 					alert(name + " 저장");

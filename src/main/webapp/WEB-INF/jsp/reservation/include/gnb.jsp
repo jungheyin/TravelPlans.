@@ -12,7 +12,42 @@
 		<h4 class="font-weight-bold mt-2 mr-1">travel plans.</h4>
 	</div>
 	<!-- new 여행계획2으로 이동 -->
-	<a href="/itinerary/traffic_info_view?travelId=${travel.id}" class="mt-2 mr-3">
-		<img src="/static/icons/airplans_black.png" alt="비행기아이콘" width="30px">
+	<div class="mt-2 mr-3">
+		<img src="/static/icons/airplans_black.png" id="airplanImg" 
+			alt="비행기아이콘" width="30px">
+		<button type="button" id="nextBtn" class="btn d-none" data-travel-id=${travel.id}></button>
+	</div>
+	
+	
+	<!-- <a href="/itinerary/traffic_info_view?travelId=${travel.id}" class="mt-2 mr-3"> -->
 	</a>
 </div>
+
+<script>
+$(document).ready(function() {
+	
+	$('#airplanImg').on('click', function() {
+		$('#nextBtn').click();
+		
+		let travelId = $('#nextBtn').data('travel-id');
+		
+		// alert(travelId);
+		 $.ajax({
+			type: "GET"
+			,url: "/reservation/pass_travelId"
+			, data: {"travelId": ${travel.id}}
+			, success: function(data) {
+				if (data.result == 'success') {
+					location.href="/itinerary/traffic_info_view?travelId=${travel.id}";
+				} else {
+					alert(errorMessage);
+				}
+			}
+			, error: function(e) {
+				alert("실패했습니다.");
+			}
+		}); 
+		
+	});
+});
+</script>

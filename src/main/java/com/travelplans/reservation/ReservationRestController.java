@@ -9,26 +9,24 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.travelplans.new_travel.bo.NewTravelBO;
-import com.travelplans.new_travel.model.Travel;
 import com.travelplans.reservation.bo.ReservationBO;
 
 @RestController
 @RequestMapping("/reservation")
 public class ReservationRestController {
 	
+	private static final Map<String, Object> HttpSession = null;
+
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	private ReservationBO reservationBO;
-	
-	@Autowired
-	private NewTravelBO newTravelBO;
 	
 	/**
 	 * 교통수단 저장
@@ -47,6 +45,7 @@ public class ReservationRestController {
 	 */
 	@PostMapping("/traffic_add")
 	public Map<String, Object> addTraffic(
+			@RequestParam("travelId") int travelId,
 			@RequestParam("traffic") String traffic,
 			@RequestParam("trafficInfo") String trafficInfo, 
 			@RequestParam("start") String start, 
@@ -68,13 +67,8 @@ public class ReservationRestController {
 		if (userId == null) {
 			logger.error("[reservation/add_traffic] 로그인 풀림");
 			result.put("result","error");
-			result.put("errorMessage", "로그인 후 이용해 주세에ㅛ.");
+			result.put("errorMessage", "로그인 후 이용해 주세에요.");
 		}
-		
-		
-		 Travel travel = reservationBO.getLastTravel(); 
-		 int travelId = travel.getId();
-		 
 		
 		reservationBO.addTraffic(travelId, traffic, trafficInfo, start, startDate, startTime, arrive, arriveDate, arriveTime, price, memo);
 		
@@ -93,6 +87,7 @@ public class ReservationRestController {
 	 */
 	@PostMapping("/accommodation_add")
 	public Map<String, Object> addAccommodation(
+			@RequestParam("travelId") int travelId,
 			@RequestParam("name") String name,
 			@RequestParam("startDate") String startDate,
 			@RequestParam("endDate") String endDate,
@@ -101,25 +96,19 @@ public class ReservationRestController {
 			@RequestParam(value="memo", required=false) String memo,
 			HttpServletRequest request) {
 		
-		// map 결과 넣기
 		Map<String, Object> result = new HashMap<>();
 		result.put("result", "success");
 		
-		// session 가져오기
 		HttpSession session = request.getSession();
 		Integer userId = (Integer)session.getAttribute("userId");
 		
-		// 로그아웃시 error메시지
 		if (userId == null) {
 			logger.error("[reservation/add_accommodation] 로그인 풀림");
 			result.put("result", "error");
 			result.put("errorMessage", "로그인 후 이용해 주세요.");
 		}
 		
-		 Travel travel = reservationBO.getLastTravel(); 
-		 int travelId = travel.getId();
 		
-		// insertBo만들기
 		reservationBO.addAccommodation(travelId, name, startDate, endDate, locaion, price, memo);
 		
 		return result;
@@ -139,6 +128,7 @@ public class ReservationRestController {
 	 */
 	@PostMapping("/reservation_add") 
 	public Map<String, Object> addReservation(
+			@RequestParam("travelId") int travelId,
 			@RequestParam("title") String title,
 			@RequestParam("booker") String booker,
 			@RequestParam("date") String date,
@@ -147,33 +137,42 @@ public class ReservationRestController {
 			@RequestParam(value="memo", required=false) String memo,
 			HttpServletRequest request) {
 		
-		// map 결과 만들기
 		Map<String, Object> result = new HashMap<>();
 		result.put("result", "success");
 		
-		// session 가져오기
 		HttpSession session = request.getSession();
 		Integer userId = (Integer)session.getAttribute("userId");
 		
-		// 로그아웃시 error메세지
 		if (userId == null) {
 			logger.error("[/reservation/add_reservation] 로그인 풀림");
 			result.put("result", "error");
 			result.put("errorMessage", "로그인 후 이용해 주세요.");
 		}
 		
-		 Travel travel = reservationBO.getLastTravel(); 
-		 int travelId = travel.getId();
-		 
-		// insertBO 
 		reservationBO.addReservation(travelId, title, booker, date, locaion, price, memo);
 		
 		return result;
-		
-		
 	}
 	
-	
+	@GetMapping("/pass_travelId") 
+	public Map<String, Object> passTravelId(
+			@RequestParam("travelId") int travelId,
+			HttpServletRequest request) {
+		
+		Map<String, Object> result = new HashMap<>();
+		result.put("result", "success");
+				
+		HttpSession session = request.getSession();
+		Integer userId = (Integer)session.getAttribute("userId");
+		
+		if (userId == null) {
+			logger.error("[/pass_travelId] 로그인 풀림");
+			result.put("result", "error");
+			result.put("result", "로그인 후 이용해 주세요.");
+		}
+		
+		return result;
+	}
 	// traffic 수정
 	
 	// accommodation 수정

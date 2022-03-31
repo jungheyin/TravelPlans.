@@ -109,7 +109,24 @@ INSERT INTO `reservation`
 	ORDER BY `id` DESC
 	LIMIT 1
 </select>
- 
+
+ <select id="selectTravelById" resultType="com.travelplans.new_travel.model.Travel">
+	SELECT 
+		`id`
+		,`userId`
+		,`title`
+		,`color`
+		,`startDate`
+		,`endDate`
+		,`price`
+		,`createdAt`
+		,`updatedAt`
+	FROM
+		`travel`
+	WHERE 
+		`id` = #{id}
+</select>
+
  <select id="selectTrafficList" resultType="com.travelplans.reservation.model.Traffic">
  	SELECT
 		 `id`
@@ -132,7 +149,7 @@ INSERT INTO `reservation`
  		`travelId` = #{travelId}
  </select>
  
- <select id="selectAccommodationList" resultType="com.travelplans.reservation.model.Accommodation">
+<select id="selectAccommodationList" resultType="com.travelplans.reservation.model.Accommodation">
  	SELECT
 	 	`id`
 		,`travelId`
@@ -150,7 +167,7 @@ INSERT INTO `reservation`
 		`travelId` = #{travelId}
  </select>
  
-  <select id="selectReservationList" resultType="com.travelplans.reservation.model.Reservation">
+ <select id="selectReservationList" resultType="com.travelplans.reservation.model.Reservation">
  	SELECT
  		`id`
 		,`travelId`

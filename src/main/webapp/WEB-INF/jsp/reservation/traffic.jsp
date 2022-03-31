@@ -55,7 +55,7 @@
 					<textarea rows="5" class="memo form-control mb-2" maxlength="49"
 						placeholder="메모(50자 이내)"></textarea>
 
-					<button type="button" id="trafficBtn" class="btn w-100 mt-2 mb-4">
+					<button type="button" id="trafficBtn" class="btn w-100 mt-2 mb-4" data-travel-id=${travel.id}>
 						S A V E
 					</button>
 				</div>
@@ -67,7 +67,6 @@
 <script>
 $(document).ready(function(e) {
 	
-	// datepicker
 	$.datepicker.setDefaults({
 		dayNamesMin: ['일', '월', '화', '수', '목', '금', '토']
 		, dateFormat: 'yy-mm-dd'
@@ -94,7 +93,6 @@ $(document).ready(function(e) {
 		
 	});
 	
-	// 드롭다운 선택시 #trafficInfo값 바꾸기
 	
 	$('.category').on('change', function() {
 		let target = document.getElementById('category');
@@ -144,8 +142,6 @@ $(document).ready(function(e) {
 		}
 	});
 	
-	
-	// price 숫자만 입력하게 하기
 	$('#price').on('keyup', function() {
 		let target = $('#price').val();
 		target = target.replace(/,/gi, '');
@@ -163,9 +159,6 @@ $(document).ready(function(e) {
 		
 	});
 	
-	 
-	
-	// validation check
 	$('#trafficBtn').on('click', function() {
 
 		let target = document.getElementById('category');
@@ -201,14 +194,16 @@ $(document).ready(function(e) {
 		
 		let memo = $('.memo').val().trim();
 		
-		alert(${travel.id} +"traffic:" +traffic+ ",trafficInfo:" + trafficInfo + ",start:" + start + ",startDate:" + startDate +
+		let travelId = $(this).data('travel-id');
+		
+		alert(travelId +"traffic:" +traffic+ ",trafficInfo:" + trafficInfo + ",start:" + start + ",startDate:" + startDate +
 				",startTime:" + startTime + ",arrive:" + arrive + ",arriveDate:" + arriveDate + ",arriveTime:" + arriveTime +
 				",price:" + price + ",memo:" + memo);
 		
 		  $.ajax({
 			type: "POST"
 			, url: "/reservation/traffic_add"
-			, data: {"travelId":${travel.id}, "traffic":traffic, "trafficInfo":trafficInfo, 
+			, data: {"travelId":travelId, "traffic":traffic, "trafficInfo":trafficInfo, 
 					"start":start, "startDate":startDate,"startTime":startTime, 
 					"arrive":arrive, "arriveDate":arriveDate, "arriveTime":arriveTime, 
 					"price":price, "memo":memo}

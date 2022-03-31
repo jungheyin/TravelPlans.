@@ -5,16 +5,16 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <div>
 	<div class="d-flex justify-content-between">
-		<h5 id="trafficSubject" class="font-weight-bold mt-3 mb-4">교통수단</h5>
-		<a href="/reservation/traffic_create_view" class="mt-1 mr-2" >
+		<h5 id="trafficSubject" class="font-weight-bold mt-3 mb-4 ml-2">교통수단</h5>
+		<a href="/reservation/traffic_create_view?travelId=${travel.id}" class="mt-1 mr-2" >
 			<img src="/static/icons/plus_skyBlue.png" alt="추가" width="40px">
-		</a> 
+		</a>
 	</div>
 	<c:forEach var="traffic" items="${trafficList}">
 	<div class="border p-3 mb-3">
 		<div class="d-flex justify-content-end mb-2 mr-2">
 			<img src="/static/icons/delete.png" alt="삭제" width="25px">
-			<button type="button" class="deleteBtn btn d-none"></button>
+			<button type="button" class="deleteBtn btn d-none" data-traffic-id="${traffic.id}"></button>
 		</div>
 		<div class="d-flex justify-content-between mr-5">
 			<div class="d-flex">
@@ -41,15 +41,13 @@
 				<h5>${traffic.price}</h5>
 			</div>
 		</div>	
-		<div class="d-flex">
-			<h6 class="font-weight-bold mr-1">(</h6>
-			<h6 class="font-weight-bold">${traffic.start}</h6>
+		<div class="d-flex text-secondary">
+			<h6 class="font-weight-bold ml-1">${traffic.start}</h6>
 			<h6 class="font-weight-bold mx-2">→</h5>
 			<h6 class="font-weight-bold">${traffic.arrive}</h6>
-			<h6 class="mx-1">)</h6>
 		</div>
 		<!-- 시간설정해야한다. -->
-		<div class="d-flex mb-2 font-weight-bold text-dark">
+		<div class="d-flex mb-2 font-weight-bold text-secondary">
 			<div>${traffic.startDate}</div>
 			<div class="mx-1">${traffic.startTime}</div>
 			<div class="mx-1">-</div>
@@ -58,7 +56,7 @@
 		</div>
 			
 		<!-- TODO: 다시 해야함!! -->
-		<div class="mb-3">
+		<div class="mb-3 font-weight-bold text-dark">
 			<c:set var="memo" value="${traffic.memo}" />
 			<c:choose>
 				<c:when test="${memo == null}">
