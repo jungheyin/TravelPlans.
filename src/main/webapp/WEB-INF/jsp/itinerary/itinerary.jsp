@@ -6,7 +6,7 @@
 	<div>
 		<h4>SCHEDULE</h4>
 	</div>
-	<div id="dateBox" class="d-flex justify-content-between">
+	<div id="dateBox" class="d-flex justify-content-between mb-3">
 		<div class="d-flex">
 			<img src="/static/icons/schedule_white.png" width="30px" height="30px" class="m-1">
 			<input type="text" class="datePicker form-control" placeholder="5월 10일 ~ 5월 13일">

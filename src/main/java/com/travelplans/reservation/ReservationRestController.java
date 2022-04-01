@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.travelplans.reservation.bo.ReservationBO;
-import com.travelplans.reservation.model.Traffic;
 
 @RestController
 @RequestMapping("/reservation")
@@ -93,7 +92,7 @@ public class ReservationRestController {
 			@RequestParam("name") String name,
 			@RequestParam("startDate") String startDate,
 			@RequestParam("endDate") String endDate,
-			@RequestParam(value="locaion", required=false) String locaion,
+			@RequestParam(value="location", required=false) String location,
 			@RequestParam(value="price", required=false) Integer price,
 			@RequestParam(value="memo", required=false) String memo,
 			HttpServletRequest request) {
@@ -111,7 +110,7 @@ public class ReservationRestController {
 		}
 		
 		
-		reservationBO.addAccommodation(travelId, name, startDate, endDate, locaion, price, memo);
+		reservationBO.addAccommodation(travelId, name, startDate, endDate, location, price, memo);
 		
 		return result;
 	}
@@ -134,7 +133,7 @@ public class ReservationRestController {
 			@RequestParam("title") String title,
 			@RequestParam("booker") String booker,
 			@RequestParam("date") String date,
-			@RequestParam(value="locaion", required=false) String locaion,
+			@RequestParam(value="location", required=false) String location,
 			@RequestParam(value="price", required=false) Integer price,
 			@RequestParam(value="memo", required=false) String memo,
 			HttpServletRequest request) {
@@ -151,17 +150,28 @@ public class ReservationRestController {
 			result.put("errorMessage", "로그인 후 이용해 주세요.");
 		}
 		
-		reservationBO.addReservation(travelId, title, booker, date, locaion, price, memo);
+		reservationBO.addReservation(travelId, title, booker, date, location, price, memo);
 		
 		return result;
 	}
 	
-	/*
-	 * {"travelId":travelId, "traffic":traffic, "trafficInfo":trafficInfo,
-	 * "start":start, "startDate":startDate,"startTime":startTime, "arrive":arrive,
-	 * "arriveDate":arriveDate, "arriveTime":arriveTime, "price":price, "memo":memo}
+	/**
+	 * 교통수단 수정하기
+	 * @param trafficId
+	 * @param travelId
+	 * @param traffic
+	 * @param trafficInfo
+	 * @param start
+	 * @param startDate
+	 * @param startTime
+	 * @param arrive
+	 * @param arriveDate
+	 * @param arriveTime
+	 * @param price
+	 * @param memo
+	 * @param request
+	 * @return
 	 */
-	// traffic 수정
 	@PutMapping("/traffic_update")
 	public Map<String, Object> updateTraffic(
 			@RequestParam("trafficId") int trafficId,
@@ -195,20 +205,104 @@ public class ReservationRestController {
 				arrive, arriveDate, arriveTime, price, memo);
 		
 		if (upCount < 0 ) {
+			logger.error("[reservation/traffic_update] 수정 실패 {}, {}" + trafficId, travelId);
 			result.put("result", "error");
 			result.put("errorMassage", "수정에 실패했습니다.");
 		}
 		
 		return result;
 		
-		
 	}
 	
-	// accommodation 수정
-	
+	/**
+	 * 숙소 수정하기
+	 * @param accommodationId
+	 * @param travelId
+	 * @param name
+	 * @param startDate
+	 * @param endDate
+	 * @param location
+	 * @param price
+	 * @param memo
+	 * @param request
+	 * @return
+	 */
+	@PutMapping("/accommodation_update")
+	public Map<String, Object> updateAccommodation(
+			@RequestParam("accommodationId") int accommodationId,
+			@RequestParam("travelId") int travelId,
+			@RequestParam("name") String name,
+			@RequestParam("startDate") String startDate,
+			@RequestParam("endDate") String endDate,
+			@RequestParam(value="location", required=false) String location,
+			@RequestParam(value="price", required=false) Integer price,
+			@RequestParam(value="memo", required=false) String memo,
+			HttpServletRequest request) {
+		
+		Map<String, Object> result = new HashMap<>();
+		result.put("result", "success");
+		
+		HttpSession session = request.getSession();
+		Integer userId = (Integer)session.getAttribute("userId");
+		
+		if (userId == null) {
+			logger.error("[reservation/update_accommodation] 로그인 풀림");
+			result.put("result", "error");
+			result.put("errorMessage", "로그인 후 이용해 주세요.");
+		}
+		
+		int upCount = reservationBO.updateAccommodation(accommodationId, travelId, name, startDate, endDate, location, price, memo);
+		
+		if (upCount < 0 ) {
+			logger.error("[reservation/accommodation_update] 수정 실패 {},{}" + accommodationId, travelId);
+			result.put("result", "error");
+			result.put("errorMessage", "수정에 실패 했습니다.");
+		}
+		return result;
+	}
 	// reservation 수정
+	@PutMapping("/reservation_update")
+	public Map<String, Object> updateReservation(
+			@RequestParam("reservationId") int reservationId,
+			@RequestParam("travelId") int travelId,
+			@RequestParam("title") String title,
+			@RequestParam("booker") String booker,
+			@RequestParam("date") String date,
+			@RequestParam(value="location", required=false) String location,
+			@RequestParam(value="price", required=false) Integer price,
+			@RequestParam(value="memo", required=false) String memo,
+			HttpServletRequest request) {
+		
+		Map<String, Object> result = new HashMap<>();
+		result.put("result", "success");
+		
+		HttpSession session = request.getSession();
+		Integer userId = (Integer)session.getAttribute("userId");
+		
+		if (userId == null) {
+			logger.error("[reservation/update_reservation] 로그인 풀림");
+			result.put("result", "error");
+			result.put("errorMessage", "로그인 후 이용해 주세요.");
+		}
+		
+		int upCount = reservationBO.updateReservation(reservationId, travelId, title, booker, date, location, price, memo);
+		
+		if (upCount < 0 ) {
+			logger.error("[reservation/accommodation_update] 수정 실패 {},{}" + reservationId, travelId);
+			result.put("result", "error");
+			result.put("errorMessage", "수정에 실패 했습니다.");
+		}
+		return result;
+	}
 	
-	// traffic 삭제
+	
+	/**
+	 *  교통수단 삭제하기
+	 * @param trafficId
+	 * @param travelId
+	 * @param request
+	 * @return
+	 */
 	@DeleteMapping("/delete_traffic")
 	public Map<String, Object> deleteTraffic(
 			@RequestParam("trafficId") int trafficId,
@@ -228,15 +322,56 @@ public class ReservationRestController {
 			result.put("errorMessage", "로그인 후 이용해 주세요.");
 		}
 		
-		Traffic traffic = reservationBO.getTrafficById(trafficId);
-		trafficId = traffic.getId();
 		
-		// delete BO
 		int delCount = reservationBO.deleteTraffic(trafficId, travelId);
+		
+		if (delCount < 0) {
+			logger.error("[reservation/delete_traffic] 삭제 안됨!! {},{}" + trafficId, travelId);
+			result.put("result", "error");
+			result.put("errorMessage", "교통수단 정보 삭제 실패했습니다.");
+		}
 		
 		return result;
 	}
-	// accommodation 삭제
-		
+	
+	/**
+	 * 숙소 삭제하기
+	 * @param accommodationId
+	 * @param travelId
+	 * @param request
+	 * @return
+	 */
+	@DeleteMapping("/delete_accommodation")
+	public Map<String, Object> deleteAccommodaion(
+			@RequestParam("accommodationId") int accommodationId,
+			@RequestParam("travelId") int travelId,
+			HttpServletRequest request) {
+			
+		Map<String, Object> result = new HashMap<>();
+		result.put("result", "success");
+			
+		HttpSession session = request.getSession();
+		Integer userId = (Integer)session.getAttribute("userId");
+			
+		if(userId == null) {
+			logger.error("[reservation/delete_traffic] 로그인 풀림");
+			result.put("result", "error");
+			result.put("errorMessage", "로그인 후 이용해 주세요.");
+		}
+			
+			
+		int delCount = reservationBO.deleteAccommodation(accommodationId, travelId);
+					
+		if (delCount < 0) {
+			logger.error("[reservation/delete_traffic] 삭제 안됨!! {},{}" + accommodationId, travelId);
+			result.put("result", "error");
+			result.put("errorMessage", "교통수단 정보 삭제 실패했습니다.");
+		}
+			
+		return result;
+			
+	}
+	
+	
 	// reservation 삭제
 }

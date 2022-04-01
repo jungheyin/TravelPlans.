@@ -11,28 +11,32 @@
 		</a> 
 	</div>
 	<c:forEach var="accommodation" items="${accommodationList}">
+	
 	<div class="border p-3 mb-3">
 		<div class="d-flex justify-content-end mb-2 mr-2">
-			<img src="/static/icons/delete.png" alt="삭제" width="25px">
-			<button type="button" class="deleteBtn btn d-none" data-accommodation-id=${accommodation.id}></button>
+			<img src="/static/icons/delete.png" alt="삭제" width="25px" class="deleteImg">
+			<button type="button" class="deleteBtn btn d-none" data-accommodation-id="${accommodation.id}"></button>
 		</div>
 		<!-- name과 price : font-size조절하기 -->
 		<div class="d-flex justify-content-between mr-5">
-			<h5 class="font-weight-bold">${accommodation.name}</h5>
+			<a href="/reservation/accommodation_update_view?travelId=${travel.id}&accommodationId=${accommodation.id}"
+				class="text-dark">
+				<h5 class="font-weight-bold">${accommodation.name}</h5>
+			</a>
 				<!-- TODO: 콤마찍어야한다. -->
-				<h5>${accommodation.price}</h5>
+			<h5>${accommodation.price}</h5>
 		</div>	
 		<!-- 시간설정해야한다. -->
-		<div class="d-flex mb-2 font-weight-bold text-secondary">
-			<div>${accommodation.startDate}</div>
-			<div class="mx-1">-</div>
-			<div class="mx-1">${accommodation.endDate}</div>
+		<div class="d-flex text-secondary mb-3">
+			<small class="font-weight-bold ">${accommodation.startDate}</small>
+			<small class="font-weight-bold mx-1">-</small>
+			<small class="font-weight-bold mx-1">${accommodation.endDate}</small>
 		</div>
 		<div>
-			<span>${accommodation.location}</span>
+			<span class="font-weight-bold mb-2">위치: ${accommodation.location}</span>
 		</div>
 		<!-- TODO: 다시 해야함!! -->
-		<div class="mb-3 font-weight-bold text-dark">
+		<div class="font-weight-bold text-dark mt-1 mb-2">
 			<c:set var="memo" value="${accommodation.memo}" />
 			<c:choose>
 				<c:when test="${memo == null}">
@@ -47,12 +51,69 @@
 	</c:forEach>
 </div>
 
+<script>
+$(document).ready(function() {
+	
+	$('.deleteImg').on('click', function(e) {
+		$('.deleteBtn').click();
+		
+		var accommodationId = $('.deleteBtn').data('accommodation-id');
+		var travelId = ${travel.id};
+		alert(accommodationId + " 삭제");
+		
+		  $.ajax({
+			type: "DELETE"
+			, url: "/reservation/delete_accommodation"
+			, data: { "accommodationId": accommodationId, "travelId": travelId}
+			, success: function(data) {
+				if (data.result == "success") {
+					// 성공시 reload
+					alert(travelId + accommodationId + " 성공");
+					document.location.reload();
+				} else {
+					alert(errorMessage);
+				}
+			}
+			, error: function(e) {
+				alert("삭제 실패");
+			}
+		});  
+	});
+});
+</script>
 
-
-
+<%-- $(document).ready(function() {
+	
+	$('.deleteImg').on('click', function() {
+		$('.deleteBtn').click();
+		
+		var travelId = ${travel.id};
+		var trafficId = $('.deleteBtn').data('traffic-id');
+		console.log(trafficId + " 삭제");
+		
+		 $.ajax({
+			type: "DELETE"
+			, url: "/reservation/delete_traffic"
+			, data: { "travelId": travelId, "trafficId": trafficId}
+			, success: function(data) {
+				if (data.result == "success") {
+					// 성공시 reload
+					alert( trafficId + " 성공");
+					document.location.reload();
+				} else {
+					alert(errorMessage);
+				}
+			}
+			, error: function(e) {
+				alert("삭제 실패");
+			}
+		}); 
+		
+	});
+});
+ --%>
 
     
     <!-- 해야할것
     1. 체크인 체크아웃시간 넣기
-    2. 날짜 마지막날 이후 안나오게 하기
-     -->
+    2. 날짜 마지막날 이후 안나오게 하기 -->

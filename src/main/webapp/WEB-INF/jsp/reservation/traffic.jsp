@@ -209,9 +209,9 @@ $(document).ready(function(e) {
 			, success: function(data) {
 				if (data.result == 'success') {
 					 alert(start + " → " + arrive +" 저장");
-					location.replace("/reservation/traffic_create_view?travelId=${travel.id}");
+					 location.reload();
 				} else {
-					alert("저장에 실패했습니다.");
+					alert(errorMessage);
 				}
 			}
 			, error : function(e) {

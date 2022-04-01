@@ -4,7 +4,7 @@
 
 	<div class="d-flex justify-content-center mr-2 mb-4">
 		<div class="ml-5 mt-3 font-weight-bold">
-			예약정보 등록하기
+			예약정보 수정하기
 		</div>
 	</div>
 	
@@ -14,24 +14,24 @@
 				<div class="airplansInput">
 					<div class="font-weight-bold ml-1 mb-1">제목</div>
 					<input type="text" id="title" class="form-control mb-2" 
-						maxlength="17" placeholder="제목">
+						maxlength="17" placeholder="제목" value="${reservation.title}">
 
 					<div class="font-weight-bold ml-1 mb-1">예약자</div>
 					<input type="text" id="booker" class="form-control mb-2" 
-						maxlength="17" placeholder="예약자">
+						maxlength="17" placeholder="예약자"  value="${reservation.booker}">
 
 					<div class="font-weight-bold ml-1 mb-1">날짜</div>
-					<input type="text" id="date" class="form-control mb-2" placeholder="날짜" value="${travel.startDate}">
+					<input type="text" id="date" class="form-control mb-2" placeholder="날짜" value="${reservation.date}">
 
 					<div class="font-weight-bold ml-1 mb-1">위치</div>
-					<input type="text" id="location" class="form-control mb-2" placeholder="위치">
+					<input type="text" id="location" class="form-control mb-2" placeholder="위치" value="${reservation.location}">
 
 					<div class="font-weight-bold ml-1 mb-1">가격</div>
-					<input type="text" id="price" class="form-control mb-2" placeholder="가격">
+					<input type="text" id="price" class="form-control mb-2" placeholder="가격" value="${reservation.price}">
 
 					<div class="font-weight-bold ml-1 mb-1">메모</div>
 					<textarea rows="5" id="memo" class="form-control mb-2" maxlength="49"
-						placeholder="메모(50자 이내)"></textarea>
+						placeholder="메모(50자 이내)">${reservation.memo}</textarea>
 
 					<button type="button" id="reservationBtn" class="btn w-100 mt-2" data-travel-id=${travel.id}>
 					S A V E</button>
@@ -89,15 +89,15 @@ $(document).ready(function() {
 		let memo = $('#memo').val().trim();
 		let travelId = $(this).data('travel-id');
 		
-		alert(travelId + title + booker + date + location + price + memo);
+		alert( ${reservation.id} + travelId + title + booker + date + location + price + memo);
 		
-		$.ajax({
-			type: "POST"
-			, url: "/reservation/reservation_add"
-			, data: {"travelId":travelId, "title":title, "booker":booker, "date":date, "location":location,"price":price,"memo":memo}
+		 $.ajax({
+			type: "PUT"
+			, url: "/reservation/reservation_update"
+			, data: {"reservationId": ${reservation.id},"travelId":travelId, "title":title, "booker":booker, "date":date, "location":location,"price":price,"memo":memo}
 			, success: function(data) {
 				if (data.result == 'success') {
-					alert(title +" 성공");
+					alert(title +" 수정");
 					document.location.reload();
 				} else {
 					alert(errorMessage);
@@ -106,7 +106,7 @@ $(document).ready(function() {
 			, error : function(e){
 				alert("실패했습니다.");
 			}
-		});
+		}); 
 	});
 });
 </script>

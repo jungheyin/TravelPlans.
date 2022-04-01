@@ -110,7 +110,7 @@ INSERT INTO `reservation`
 	LIMIT 1
 </select>
 
- <select id="selectTravelById" resultType="com.travelplans.new_travel.model.Travel">
+<select id="selectTravelById" resultType="com.travelplans.new_travel.model.Travel">
 	SELECT 
 		`id`
 		,`userId`
@@ -149,7 +149,42 @@ INSERT INTO `reservation`
  		`id` = #{trafficId}
 </select>
 
- <select id="selectTrafficList" resultType="com.travelplans.reservation.model.Traffic">
+<select id="selectAccommodationById" resultType="com.travelplans.reservation.model.Accommodation">
+	SELECT
+	 	`id`
+		,`travelId`
+		,`name`
+		,`startDate`
+		,`endDate`
+		,`location`
+		,`price`
+		,`memo`
+		,`createdAt`
+		,`updatedAt`
+	FROM
+		`accommodation`
+	WHERE
+		`id` = #{accommodationId}
+</select>
+
+<select id="selectReservationById" resultType="com.travelplans.reservation.model.Reservation">
+ 	SELECT
+ 		`id`
+		,`travelId`
+		,`title`
+		,`booker`
+		,`date`
+		,`location`
+		,`price`
+		,`memo`
+		,`createdAt`
+		,`updatedAt`
+	FROM
+		`reservation`
+	WHERE
+		`id` = #{reservationId}
+</select>
+<select id="selectTrafficList" resultType="com.travelplans.reservation.model.Traffic">
  	SELECT
 		 `id`
 		,`travelId`
@@ -169,7 +204,7 @@ INSERT INTO `reservation`
  		`traffic`
  	WHERE
  		`travelId` = #{travelId}
- </select>
+</select>
  
 <select id="selectAccommodationList" resultType="com.travelplans.reservation.model.Accommodation">
  	SELECT
@@ -187,9 +222,9 @@ INSERT INTO `reservation`
 		`accommodation`
 	WHERE
 		`travelId` = #{travelId}
- </select>
+</select>
  
- <select id="selectReservationList" resultType="com.travelplans.reservation.model.Reservation">
+<select id="selectReservationList" resultType="com.travelplans.reservation.model.Reservation">
  	SELECT
  		`id`
 		,`travelId`
@@ -205,9 +240,9 @@ INSERT INTO `reservation`
 		`reservation`
 	WHERE
 		`travelId` = #{travelId}
- </select>
+</select>
 
- <update id="updateTrafficByIdTravelId" parameterType="map">
+<update id="updateTrafficByIdTravelId" parameterType="map">
  UPDATE `traffic`
 SET
 	`traffic` = #{traffic}
@@ -224,17 +259,54 @@ SET
 WHERE 
 	`id` = #{trafficId}
 	AND `travelId` = #{travelId}
- </update>
+</update>
  
+<update id="updateAccommodation" parameterType="map" >
+UPDATE `accommodation`
+SET
+	`name` = #{name}
+	,`startDate` = #{startDate}
+	,`endDate` = #{endDate}
+	,`location` = #{location}
+	,`price` = #{price}
+	,`memo` = #{memo}
+	,`updatedAt` = NOW()
+WHERE 
+	`id` = #{accommodationId}
+	AND `travelId` = #{travelId}
+</update>
  
- <delete id="deleteTrafficByIdTravelId" parameterType="map">
+<update id="updateReservation" parameterType="map" >
+UPDATE `reservation`
+SET
+	`title` = #{title}
+	,`booker` = #{booker}
+	,`date` = #{date}
+	,`location` = #{location}
+	,`price` = #{price}
+	,`memo` = #{memo}
+	,`updatedAt` = NOW()
+WHERE 
+	`id` = #{reservationId}
+	AND `travelId` = #{travelId}
+</update>
+
+<delete id="deleteTrafficByIdTravelId" parameterType="map">
  	DELETE
  	FROM
  		`traffic`
  	WHERE
  		`id` = #{trafficId}
  		AND travelId = #{travelId}
- </delete>
+</delete>
  
+ <delete id="deleteAccommodation" parameterType="map">
+  	DELETE
+ 	FROM
+ 		`accommodation`
+ 	WHERE
+ 		`id` = #{accommodationId}
+ 		AND travelId = #{travelId}
+ </delete>
  
  </mapper>

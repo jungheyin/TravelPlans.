@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.travelplans.new_travel.model.Travel;
 import com.travelplans.reservation.bo.ReservationBO;
@@ -25,11 +26,10 @@ public class ItineraryController {
 	// /itinerary/traffic_info_view
 	@RequestMapping("/traffic_info_view")
 	public String trafficInfoView(
+			@RequestParam("travelId") int travelId,
 			Model model) {
 		
-		Travel travel = reservationBO.getLastTravel();
-		int travelId = travel.getId();
-		
+		Travel travel = reservationBO.getTravelById(travelId);
 		List<Traffic> trafficList = reservationBO.getTrafficList(travelId);
 		
 		Traffic traffic = reservationBO.getTrafficById(travelId);
@@ -46,14 +46,16 @@ public class ItineraryController {
 	// /itinerary/accommodation_info_view
 	@RequestMapping("/accommodation_info_view")
 	public String accommodationInfoView(
+			@RequestParam("travelId") int travelId,
 			Model model) {
 		
-		Travel travel = reservationBO.getLastTravel();
-		int travelId = travel.getId();
-		
+		Travel travel = reservationBO.getTravelById(travelId);
 		List<Accommodation> accommodationList = reservationBO.getAccommodationList(travelId);
 		
+		Accommodation accommodation = reservationBO.getAccommodationById(travelId);
+		
 		model.addAttribute("travel", travel);
+		model.addAttribute("accommodation", accommodation);
 		model.addAttribute("accommodationList", accommodationList);
 		model.addAttribute("itineraryViewName", "accommodationInfo");
 		

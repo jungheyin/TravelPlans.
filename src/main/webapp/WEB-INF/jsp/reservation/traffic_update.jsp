@@ -212,7 +212,7 @@ $(document).ready(function(e) {
 			, success: function(data) {
 				if (data.result == 'success') {
 					 alert(start + " → " + arrive +" 수정");
-					location.replace("/itinerary/traffic_info_view?travelId=${travel.id}");
+					 location.reload();
 				} else {
 					alert("수정에 실패했습니다.");
 				}

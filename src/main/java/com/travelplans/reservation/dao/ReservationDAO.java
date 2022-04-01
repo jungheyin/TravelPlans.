@@ -50,11 +50,15 @@ public interface ReservationDAO {
 	
 	public Traffic selectTrafficById(int trafficId);
 	
+	public Accommodation selectAccommodationById (int accommodationId);
+	
 	public List<Traffic> selectTrafficList(int travelId);
 	
 	public List<Accommodation> selectAccommodationList(int travelId);
 	
 	public List<Reservation> selectReservationList(int travelId);
+	
+	public Reservation selectReservationById(int reservationId);
 	
 	public int updateTrafficByIdTravelId(
 			@Param("trafficId") int trafficId,
@@ -70,13 +74,37 @@ public interface ReservationDAO {
 			@Param("price") Integer price,
 			@Param("memo") String memo);
 	
+	public int updateAccommodation(
+			@Param("accommodationId") int accommodationId, 
+			@Param("travelId") int travelId, 
+			@Param("name") String name, 
+			@Param("startDate") String startDate, 
+			@Param("endDate") String endDate, 
+			@Param("location") String location, 
+			@Param("price") Integer price, 
+			@Param("memo") String memo);
+	
+	// reservation update
+	public int updateReservation(
+			@Param("reservationId") int reservationId,
+			@Param("travelId") int tripId,
+			@Param("title") String title, 
+			@Param("booker") String booker, 
+			@Param("date") String date, 
+			@Param("location") String location, 
+			@Param("price") Integer price, 
+			@Param("memo") String memo);
 	
 	
+	public int deleteTrafficByIdTravelId(
+			@Param("trafficId") int trafficId, 
+			@Param("travelId") int travelId);
 	
-	
-	public int deleteTrafficByIdTravelId (int trafficid, int travelId);
-	
-	
+	// accommodation delete
+	public int deleteAccommodation(
+			@Param("accommodationId") int accommodationId, 
+			@Param("travelId") int travelId);
+	// reservation delete
 	
 }
 

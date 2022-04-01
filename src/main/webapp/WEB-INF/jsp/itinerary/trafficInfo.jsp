@@ -17,9 +17,10 @@
 				<img src="/static/icons/delete.png" alt="삭제" width="25px" class="deleteImg">
 				<button type="button" class="deleteBtn btn d-none" data-traffic-id="${traffic.id}"></button>
 			</div>
+			
 			<a href="/reservation/traffic_update_view?travelId=${travel.id}&trafficId=${traffic.id}" 
 				class="title text-dark">
-			<div class="d-flex justify-content-between mr-5">
+			<div class="d-flex justify-content-between mr-5 mb-3">
 				<div class="d-flex">
 					<c:set var="trafficVal" value="${traffic.traffic}" />
 					<c:choose>
@@ -59,7 +60,7 @@
 			</div>
 				
 			<!-- TODO: 다시 해야함!! -->
-			<div class="mb-3 font-weight-bold text-dark">
+			<div class="mb-2 font-weight-bold text-dark">
 				<c:set var="memo" value="${traffic.memo}" />
 				<c:choose>
 					<c:when test="${memo == null}">
@@ -71,7 +72,7 @@
 				</c:choose>
 			</div>
 		</div>
-	</c:forEach>
+		</c:forEach>
 </div>
 
 <script>
@@ -80,19 +81,19 @@ $(document).ready(function() {
 	$('.deleteImg').on('click', function() {
 		$('.deleteBtn').click();
 		
-		let travelId = ${travel.id};
-		let trafficId = ${traffic.id};
+		var travelId = ${travel.id};
+		var trafficId = $('.deleteBtn').data('traffic-id');
 		console.log(trafficId + " 삭제");
 		
-		$.ajax({
+		 $.ajax({
 			type: "DELETE"
 			, url: "/reservation/delete_traffic"
-			, data: {"travelId":${travel.id}}
+			, data: { "travelId": travelId, "trafficId": trafficId}
 			, success: function(data) {
 				if (data.result == "success") {
 					// 성공시 reload
-					alert(${traffic.traffic} + ":" + ${traffic.trafficInfo} + " 성공");
-					location.reload("/itinerary/traffic_info_veiw?travelId=${travel.id}");
+					alert( trafficId + " 성공");
+					document.location.reload();
 				} else {
 					alert(errorMessage);
 				}
@@ -100,7 +101,7 @@ $(document).ready(function() {
 			, error: function(e) {
 				alert("삭제 실패");
 			}
-		});
+		}); 
 		
 	});
 });

@@ -18,16 +18,20 @@
 			<button type="button" class="deleteBtn btn d-none" data-reservation-id=${reservation.id}></button>
 		</div>
 		<!-- name과 price : font-size조절하기 -->
-		<div class="d-flex justify-content-between mr-5">
-			<h5 class="font-weight-bold">${reservation.title}</h5>
+		<div class="d-flex justify-content-between mr-5 mb-3">
+			<div class="d-flex">
+				<a href="/reservation/reservation_update_view?travelId=${travel.id}&reservationId=${reservation.id}">
+					<h5 class="font-weight-bold">${reservation.title}</h5>
+				</a>
+				<small class="font-weight-bold text-secondary mt-1 ml-1">(${reservation.date})</small>
+			</div>
 				<!-- TODO: 콤마찍어야한다. -->
 				<h5>${reservation.price}</h5>
 		</div>	
 		<!-- 시간설정해야한다. -->
 			<span class="font-weight-bold ml-1">예약자: ${reservation.booker}</span>
-			<small class="font-weight-bold text-secondary">(${reservation.date})</small>
 		<!-- TODO: 다시 해야함!! -->
-		<div class="mb-3 font-weight-bold text-dark">
+		<div class="mb-2 font-weight-bold text-dark">
 			<c:set var="memo" value="${reservation.memo}" />
 			<c:choose>
 				<c:when test="${memo == null}">
