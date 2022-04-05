@@ -84,7 +84,6 @@ public interface ReservationDAO {
 			@Param("price") Integer price, 
 			@Param("memo") String memo);
 	
-	// reservation update
 	public int updateReservation(
 			@Param("reservationId") int reservationId,
 			@Param("travelId") int tripId,
@@ -100,12 +99,13 @@ public interface ReservationDAO {
 			@Param("trafficId") int trafficId, 
 			@Param("travelId") int travelId);
 	
-	// accommodation delete
-	public int deleteAccommodation(
+	public int deleteAccommodationByIdTravelId(
 			@Param("accommodationId") int accommodationId, 
 			@Param("travelId") int travelId);
-	// reservation delete
-	
+
+	public int deleteReservationByIdTravelId(
+			@Param("reservationId") int reservationId, 
+			@Param("travelId") int travelId);
 }
 
 

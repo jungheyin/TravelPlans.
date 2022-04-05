@@ -1,5 +1,7 @@
 package com.travelplans.new_travel.bo;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,16 +24,19 @@ public class NewTravelBO {
 		newTravelDAO.insertTravel(userId, title, color, startDate, endDate);
 	}
 	
-	public Travel getTravel(int id) {
+	public Travel getTravelById(int id) {
 		return newTravelDAO.selectTravelById(id);
 	}
 	
+	public List<Travel> getTravelListById(int id) {
+		return newTravelDAO.selectTravelListById(id);
+	}
 	
 	// 수정
 	public int updateTravel(int travelId, int userId, String title, String color, String startDate, String endDate) {
 		
 		// travelId에 해당 여행이 있는지 db에서 가져온다.
-		Travel travel = getTravel(travelId);
+		Travel travel = getTravelById(travelId);
 		// 여행이 없는경우 logger로 남기기
 		if (travel == null) {
 			logger.error("[update_travel] 여행정보 없음!!!" + travelId);

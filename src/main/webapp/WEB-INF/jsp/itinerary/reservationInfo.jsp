@@ -14,14 +14,14 @@
 	<c:forEach var="reservation" items="${reservationList}">
 	<div class="border p-3 mb-3">
 		<div class="d-flex justify-content-end mb-2 mr-2">
-			<img src="/static/icons/delete.png" alt="삭제" width="25px">
-			<button type="button" class="deleteBtn btn d-none" data-reservation-id=${reservation.id}></button>
+			<img src="/static/icons/delete.png" alt="삭제" width="25px" class="deleteImg">
+			<button type="button" class="deleteBtn btn d-none" data-reservation-id="${reservation.id}"></button>
 		</div>
 		<!-- name과 price : font-size조절하기 -->
 		<div class="d-flex justify-content-between mr-5 mb-3">
 			<div class="d-flex">
 				<a href="/reservation/reservation_update_view?travelId=${travel.id}&reservationId=${reservation.id}">
-					<h5 class="font-weight-bold">${reservation.title}</h5>
+					<h5 class="font-weight-bold text-dark">${reservation.title}</h5>
 				</a>
 				<small class="font-weight-bold text-secondary mt-1 ml-1">(${reservation.date})</small>
 			</div>
@@ -45,12 +45,36 @@
 	</div>
 	</c:forEach>
 </div>
-
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
 
 <script>
 $(document).ready(function() {
 	
-	
+	$('.deleteImg').on('click', function() {
+		$('.deleteBtn').click();
+		
+		var reservationId = $('.deleteBtn').data('reservation-id');
+		var travelId = ${travel.id};
+		
+		alert(travelId + " , " + reservationId + "삭제");
+		
+		$.ajax({
+			type: "DELETE"
+			, url: "/reservation/delete_reservation"
+			, data: {"reservationId": reservationId, "travelId": travelId}
+			, success: function(data) {
+				if (data.result == 'success') {
+					alert(travelId + reservationId + "성공");
+					location.reload();
+				} else {
+					alert(errorMessage);
+				}
+			}
+			, error: function(e) {
+				alert("예약정보 삭제 실패");
+			}
+		});
+		
+	});
 });
-
 </script>

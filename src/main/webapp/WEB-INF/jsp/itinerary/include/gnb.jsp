@@ -2,8 +2,8 @@
     pageEncoding="UTF-8"%>
 
 <div class="mypage">
-	<a href="/mypage/mypage_view" class="d-flex justify-content-end"> <span
-		class="text-white font-weight-bold mr-2">mypage</span>
+	<a href="/mypage/mypage_view" class="d-flex justify-content-end"> 
+		<span class="text-white font-weight-bold mr-2">mypage</span>
 	</a>
 </div>
 <div class="d-flex justify-content-between">

@@ -1,0 +1,47 @@
+@charset "UTF-8";
+
+#wrap {
+	width: 800px;
+}
+
+header {
+	height: 100px;
+}
+header .itinerary{
+	height: 30px;
+	background-color: #7BB0DB;
+}
+.article {
+	height: 150px;
+}
+.contents {
+	min-height: 1000px;
+	
+}
+nav {
+	width:200px;
+}
+
+nav .nav-title {
+	background-color:#7BB0DB;
+	height: 38px;
+}
+
+nav .nav-link {
+	font-weight: bold;
+	font-size: 18px;
+	color: #7BB0DB;
+}
+
+nav .nav-link:hover {
+	color: #000000; 
+}
+
+.contents .content {
+	width: 770px;
+}
+
+.contents .content #subject {
+	font-weight: bold;
+	color:#7BB0DB;
+}

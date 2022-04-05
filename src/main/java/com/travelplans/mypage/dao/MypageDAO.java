@@ -10,5 +10,16 @@ import com.travelplans.mypage.model.Travel;
 @Repository
 public interface MypageDAO {
 
-	public List<Travel> selsectTravelList();
+	public List<Travel> selsectTravelList(int userId);
+	
+	public Travel selectTravelById(int userId);
+	
+	public int updateNicknameById(
+			@Param("userId") int userId, 
+			@Param("nickname") String nickname);
+	
+	public int deleteTravelByIdUserId(
+			@Param("travelId") int travelId, 
+			@Param("userId") int userId);
+	
 }

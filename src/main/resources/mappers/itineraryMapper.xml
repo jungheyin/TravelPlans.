@@ -4,6 +4,34 @@
  
 
 <mapper namespace="com.travelplans.itinerary.dao.ItineraryDAO">
-
+	
+		<select id="selectItineraryById" resultType="com.travelplans.itinerary.model.Itinerary">
+		SELECT
+			,`id`
+			,`travelId`
+	 		,`color`
+			,`title`
+		 	,`createdAt`
+			,`updatedAt`
+		FROM
+			`itinerary`
+		WHERE
+			`id` = #{itineraryId}
+	</select>
+	
+	<select id="selectItineraryListById" resultType="com.travelplans.itinerary.model.Itinerary">
+		SELECT
+			,`id`
+			,`travelId`
+	 		,`color`
+			,`title`
+		 	,`createdAt`
+			,`updatedAt`
+		FROM
+			`itinerary`
+		WHERE
+			`id` = #{id}
+			AND `travelId` = #{travelId}
+	</select>
 
 </mapper>

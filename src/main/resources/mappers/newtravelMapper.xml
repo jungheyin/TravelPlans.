@@ -44,6 +44,22 @@
 		`id` = #{id}
 </select>
 
+<select id="selectTravelListById" resultType="com.travelplans.new_travel.model.Travel">
+	SELECT 
+		`id`
+		,`userId`
+		,`title`
+		,`color`
+		,`startDate`
+		,`endDate`
+		,`price`
+		,`createdAt`
+		,`updatedAt`
+	FROM
+		`travel`
+	WHERE
+		`id` = #{id}
+</select>
 
 <update id="updateTravelByIdUserId" parameterType="map">
 UPDATE `travel`

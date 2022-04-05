@@ -105,13 +105,12 @@ public class ReservationBO {
 		return reservationDAO.updateAccommodation(accommodationId, travelId, name, startDate, endDate, location, price, memo);
 	}
 	
-	// update- reservation
 	public int updateReservation(int reservationId,int travelId, String title, String booker, String date, String location, Integer price, String memo) {
 		
 		Reservation reservation = getReservationById(reservationId);
 		
 		if (reservation == null) {
-			logger.error("[update reservation] 수정 할 숙소 정보가 없습니다. {},{}" + reservationId, travelId);
+			logger.error("[update reservation] 수정 할 예약 정보가 없습니다. {},{}" + reservationId, travelId);
 			return 0;
 		}
 		
@@ -140,10 +139,20 @@ public class ReservationBO {
 			logger.error("[delete accommodation] 삭제할 숙소 정보가 없습니다. {},{}" + accommodationId, travelId);
 			return 0;
 		}
-		return reservationDAO.deleteAccommodation(accommodationId, travelId);
+		
+		return reservationDAO.deleteAccommodationByIdTravelId(accommodationId, travelId);
 	}
 	
 	
-	// delete - reservation
-	
+	public int deleteReservation(int reservationId, int travelId) {
+		
+		Reservation reservation = getReservationById(reservationId);
+		
+		if (reservation == null) {
+			logger.error("[delete reservation] 삭제할 예약 정보가 없습니다. {}, {}" + reservationId, travelId);
+			return 0;
+		}
+		
+		return reservationDAO.deleteReservationByIdTravelId(reservationId, travelId);
+	}
 }

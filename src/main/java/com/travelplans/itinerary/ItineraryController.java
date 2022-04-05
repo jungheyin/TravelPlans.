@@ -1,5 +1,6 @@
 package com.travelplans.itinerary;
 
+import java.text.ParseException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.travelplans.itinerary.bo.ItineraryBO;
+import com.travelplans.itinerary.model.Itinerary;
 import com.travelplans.new_travel.model.Travel;
 import com.travelplans.reservation.bo.ReservationBO;
 import com.travelplans.reservation.model.Accommodation;
@@ -22,8 +25,15 @@ public class ItineraryController {
 	@Autowired
 	private ReservationBO reservationBO;
 	
-	// 스케줄:예약정보-교통수단
-	// /itinerary/traffic_info_view
+	@Autowired
+	private ItineraryBO itineraryBO;
+	
+	/**
+	 * 교통수단 정보 화면
+	 * @param travelId
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("/traffic_info_view")
 	public String trafficInfoView(
 			@RequestParam("travelId") int travelId,
@@ -42,8 +52,12 @@ public class ItineraryController {
 		return "itinerary/template/layout";
 	}
 	
-	// 스케줄:예약정보-숙소
-	// /itinerary/accommodation_info_view
+	/**
+	 * 숙소 정보 화면
+	 * @param travelId
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("/accommodation_info_view")
 	public String accommodationInfoView(
 			@RequestParam("travelId") int travelId,
@@ -62,35 +76,50 @@ public class ItineraryController {
 		return "itinerary/template/layout";
 	}
 	
-	// 스케줄:예약정보-예약정보
-	// /itinerary/reservaion_info_view
+	/**
+	 * 예약정보 화면
+	 * @param travelId
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("/reservation_info_view")
 	public String reservationInfoView(
+			@RequestParam("travelId") int travelId,
 			Model model) {
 		
-		Travel travel = reservationBO.getLastTravel();
-		int travelId = travel.getId();
-		
+		Travel travel = reservationBO.getTravelById(travelId);
 		List<Reservation> reservationList = reservationBO.getReservationList(travelId);
 		
+		Reservation reservation = reservationBO.getReservationById(travelId);
+		
 		model.addAttribute("travel", travel);
+		model.addAttribute("reservation", reservation);
 		model.addAttribute("reservationList", reservationList);
 		model.addAttribute("itineraryViewName", "reservationInfo");
 		
 		return "itinerary/template/layout";
 	}
 	
-	// 여행계획 만드는 페이지
+	/**
+	 * 여행일정 화면
+	 * @param travelId
+	 * @param model
+	 * @return
+	 * @throws ParseException
+	 */
 	@RequestMapping("/create_view")
-	public String itinerary(
-			Model model) {
-		Travel travel = reservationBO.getLastTravel();
+	public String createView(
+			@RequestParam("travelId") int travelId,
+			Model model) throws ParseException {
 		
+		Travel travel = reservationBO.getTravelById(travelId);
+		List<String> travelDateList = itineraryBO.generateTravelDateListById(travelId);
 		
-		
+		model.addAttribute("travelDateList", travelDateList);
 		model.addAttribute("travel", travel);
 		model.addAttribute("itineraryViewName", "itinerary");
 
 		return "itinerary/template/layout";
 	}
+	
 }

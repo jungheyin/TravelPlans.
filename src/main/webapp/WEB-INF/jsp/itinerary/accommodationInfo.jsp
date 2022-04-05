@@ -59,6 +59,7 @@ $(document).ready(function() {
 		
 		var accommodationId = $('.deleteBtn').data('accommodation-id');
 		var travelId = ${travel.id};
+		
 		alert(accommodationId + " 삭제");
 		
 		  $.ajax({
@@ -75,43 +76,13 @@ $(document).ready(function() {
 				}
 			}
 			, error: function(e) {
-				alert("삭제 실패");
+				alert("숙소 정보 삭제 실패");
 			}
 		});  
 	});
 });
 </script>
 
-<%-- $(document).ready(function() {
-	
-	$('.deleteImg').on('click', function() {
-		$('.deleteBtn').click();
-		
-		var travelId = ${travel.id};
-		var trafficId = $('.deleteBtn').data('traffic-id');
-		console.log(trafficId + " 삭제");
-		
-		 $.ajax({
-			type: "DELETE"
-			, url: "/reservation/delete_traffic"
-			, data: { "travelId": travelId, "trafficId": trafficId}
-			, success: function(data) {
-				if (data.result == "success") {
-					// 성공시 reload
-					alert( trafficId + " 성공");
-					document.location.reload();
-				} else {
-					alert(errorMessage);
-				}
-			}
-			, error: function(e) {
-				alert("삭제 실패");
-			}
-		}); 
-		
-	});
-});
- --%>
 
     
     <!-- 해야할것

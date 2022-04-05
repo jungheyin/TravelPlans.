@@ -11,6 +11,11 @@
 		
 			<div class="font-weight-bold ml-3 mb-2 mt-3">travel name</div>
 			
+			<div class="mt-2">
+				<a href="/new_travel/update_view?travelId=${travel.id}" class="mr-3">
+					<img src="/static/icons/setting.png" alt="수정" width="20px">
+				</a>
+			</div>
 		</div>
 			<h5 class="font-weight-bold ml-3 mb-3">${travel.title}</h5>
 			

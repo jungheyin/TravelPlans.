@@ -33,12 +33,14 @@ nav .nav-link:hover {
 	color:#7BB0DB;
 }
 
-/* accommodation */
-
-
-/* reservation */
 
 /* itinerary */
+
+#planSub {
+	font-weight: bold;
+	color:#7BB0DB;
+}
+
 article {
 	width:600px;
 }

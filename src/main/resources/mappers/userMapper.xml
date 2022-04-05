@@ -3,30 +3,6 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 <mapper namespace="com.travelplans.user.dao.UserDAO">
-
-	<select id="selectLoginId" parameterType="String" resultType="boolean">
-		SELECT 
-			COUNT(*)
-		FROM
-			`user`
-		WHERE `loginId` = #{loginId}
-	</select>
-	
-	<select id="getUserByLoginIdPassword" parameterType="map" resultType="com.travelplans.user.model.User">
-		SELECT
-			`id`
-			,`loginId`
-			,`password`
-			,`nickname`
-			,`email`
-			,`createdAt`
- 			,`updatedAt`
- 		FROM
- 			`user`
- 		WHERE `loginId` = #{loginId}
- 			AND `password` = #{password}
-	</select>
-	
 	<insert id="insertUser" parameterType="map">
 		INSERT INTO `user`
 		(
@@ -47,4 +23,41 @@
 			,NOW()
 		)
 	</insert>
+	
+	<select id="selectLoginId" parameterType="String" resultType="boolean">
+		SELECT 
+			COUNT(*)
+		FROM
+			`user`
+		WHERE `loginId` = #{loginId}
+	</select>
+	
+	<select id="selectUserByLoginIdPassword" parameterType="map" resultType="com.travelplans.user.model.User">
+		SELECT
+			`id`
+			,`loginId`
+			,`password`
+			,`nickname`
+			,`email`
+			,`createdAt`
+ 			,`updatedAt`
+ 		FROM
+ 			`user`
+ 		WHERE `loginId` = #{loginId}
+ 			AND `password` = #{password}
+	</select>
+	
+	<select id="selectUserById"  parameterType="int" resultType="com.travelplans.user.model.User">
+	SELECT
+			`id`
+			,`loginId`
+			,`password`
+			,`nickname`
+			,`email`
+			,`createdAt`
+ 			,`updatedAt`
+ 		FROM
+ 			`user`
+ 		WHERE `id` = #{id}
+	</select>
 </mapper>

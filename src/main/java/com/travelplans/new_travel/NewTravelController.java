@@ -45,7 +45,7 @@ public class NewTravelController {
 			@RequestParam("travelId") int travelId,
 			Model model) {
 		
-		Travel travel = newTravelBO.getTravel(travelId);
+		Travel travel = newTravelBO.getTravelById(travelId);
 		if (travel == null) {
 			logger.error("[new_tarvel/update_view] travel 정보없음" + travel.getId());
 		}

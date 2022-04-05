@@ -1,5 +1,7 @@
 package com.travelplans.new_travel.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -16,6 +18,8 @@ public interface NewTravelDAO {
 			@Param("endDate") String endDate);
 	
 	public Travel selectTravelById(int id);
+	
+	public List<Travel> selectTravelListById(int id);
 	
 	public int updateTravelByIdUserId(
 			@Param("travelId") int travelId, 

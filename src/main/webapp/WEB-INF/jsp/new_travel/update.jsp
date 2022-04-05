@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<span class="font-weight-bold ml-3">PLAN</span>
+<span class="font-weight-bold ml-3">TRAVEL</span>
 	
 	<div id="bgBox" class="border mt-3 ml-3">
 			<div class="d-flex justify-content-between">

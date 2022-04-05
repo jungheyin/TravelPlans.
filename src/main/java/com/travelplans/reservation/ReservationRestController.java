@@ -260,7 +260,20 @@ public class ReservationRestController {
 		}
 		return result;
 	}
-	// reservation 수정
+	
+	/**
+	 * 예약정보 수정하기
+	 * @param reservationId
+	 * @param travelId
+	 * @param title
+	 * @param booker
+	 * @param date
+	 * @param location
+	 * @param price
+	 * @param memo
+	 * @param request
+	 * @return
+	 */
 	@PutMapping("/reservation_update")
 	public Map<String, Object> updateReservation(
 			@RequestParam("reservationId") int reservationId,
@@ -298,7 +311,7 @@ public class ReservationRestController {
 	
 	/**
 	 *  교통수단 삭제하기
-	 * @param trafficId
+	 * @param trafficId	
 	 * @param travelId
 	 * @param request
 	 * @return
@@ -326,7 +339,7 @@ public class ReservationRestController {
 		int delCount = reservationBO.deleteTraffic(trafficId, travelId);
 		
 		if (delCount < 0) {
-			logger.error("[reservation/delete_traffic] 삭제 안됨!! {},{}" + trafficId, travelId);
+			logger.error("[reservation/delete_traffic] 삭제 실패!! {},{}" + trafficId, travelId);
 			result.put("result", "error");
 			result.put("errorMessage", "교통수단 정보 삭제 실패했습니다.");
 		}
@@ -363,7 +376,7 @@ public class ReservationRestController {
 		int delCount = reservationBO.deleteAccommodation(accommodationId, travelId);
 					
 		if (delCount < 0) {
-			logger.error("[reservation/delete_traffic] 삭제 안됨!! {},{}" + accommodationId, travelId);
+			logger.error("[reservation/delete_traffic] 삭제 실패!! {},{}" + accommodationId, travelId);
 			result.put("result", "error");
 			result.put("errorMessage", "교통수단 정보 삭제 실패했습니다.");
 		}
@@ -374,4 +387,35 @@ public class ReservationRestController {
 	
 	
 	// reservation 삭제
+	@DeleteMapping("/delete_reservation")
+	public Map<String, Object> deleteReservation(
+			@RequestParam("reservationId") int reservationId,
+			@RequestParam("travelId") int travelId,
+			HttpServletRequest request) {
+		
+		Map<String, Object> result = new HashMap<>();
+		result.put("result", "success");
+			
+		HttpSession session = request.getSession();
+		Integer userId = (Integer)session.getAttribute("userId");
+			
+		if(userId == null) {
+			logger.error("[reservation/delete_traffic] 로그인 풀림");
+			result.put("result", "error");
+			result.put("errorMessage", "로그인 후 이용해 주세요.");
+		}
+			
+			
+		int delCount = reservationBO.deleteReservation(reservationId, travelId);
+					
+		if (delCount < 0) {
+			logger.error("[reservation/delete_traffic] 삭제 실패!! {},{}" + reservationId, travelId);
+			result.put("result", "error");
+			result.put("errorMessage", "예약 정보 삭제 실패했습니다.");
+		}
+			
+		return result;
+	}
+	
+	
 }
