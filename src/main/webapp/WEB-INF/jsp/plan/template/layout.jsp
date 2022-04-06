@@ -22,6 +22,9 @@
 	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 	crossorigin="anonymous"></script>
 
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 <link rel="stylesheet" type="text/css" href="/static/css/my_travel/plan.css">
 </head>
 <body>
@@ -37,6 +40,7 @@
 				<jsp:include page="../include/nav.jsp" />
 			</nav>
 			<article class="content mr-4">
+				<div class="border-left mb-5"><div>
 				<jsp:include page="../${planViewName}.jsp" />
 			</article>
 		</section>

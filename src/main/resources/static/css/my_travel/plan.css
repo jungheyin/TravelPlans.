@@ -45,3 +45,8 @@ nav .nav-link:hover {
 	font-weight: bold;
 	color:#7BB0DB;
 }
+
+.contents .content #preview {
+	max-width: 500px;
+	max-height: 400px;
+}

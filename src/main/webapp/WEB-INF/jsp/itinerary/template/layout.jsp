@@ -34,6 +34,7 @@
 				<jsp:include page="../include/nav.jsp" />
 			</nav>
 			<article class="mr-4">
+				<div class="border-left mb-5"><div>
 				<jsp:include page="../${itineraryViewName}.jsp" />
 			</article>
 		</section>

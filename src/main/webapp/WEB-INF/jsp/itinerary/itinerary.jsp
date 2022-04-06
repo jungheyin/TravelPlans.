@@ -34,16 +34,9 @@
 				<a href="/plan/create_view?travelId=${travel.id}&date=${date}">
 					<input type="text" class="title form-control ml-2" placeholder="제목">
 				</a>
-				<!--  <div>
-				 	<img src="/static/icons/done.png" alt="추가" width="20px" class="saveImg">
-				 	<img src="/static/icons/update.png" alt="변경" width="20px" class="updateBtn">
-				 	
-				 	<button class="saveImg btn d-none">추가</button>
-				 	<button class="updateBtn btn d-none">변경</button>
-				 </div>  -->
 			</div>
 			
-			<div>
+			<div><!-- 리스트가져오기 -->
 			
 			
 			</div>
