@@ -31,7 +31,8 @@
 				<!-- TODO: 날짜 형식 바꾸기!! -->
 				<div class="font-weight-bold  mt-1 ml-2">${date}</div>
 				
-				<a href="/plan/create_view?travelId=${travel.id}&date=${date}">
+				<a href="#" data-toggle="modal" class="moreBtn" data-target="#MoreModal"
+					data-date="${date}">
 					<input type="text" class="title form-control ml-2" placeholder="제목">
 				</a>
 			</div>
@@ -51,18 +52,60 @@
 				<div class="mt-2 mr-4 font-weight-bold">￦500,000</div>
 			</div>
 		</c:forEach>
-		<div class="mb-5"></div>
-	</div>
-	
-	
-	
-	
-	
-	
+	</div>	
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="MoreModal">
+	<div class="modal-dialog  modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="d-flex justify-content-end mt-3 mr-3">
+				<a href="#" class="cancel d-bolok" data-dismiss="modal">
+					<img alt="삭제" src="/static/icons/x.png" width="20px" height="20px"> 
+				</a>				
+			</div>
+			
+			<div class="modalInput d-flex justify-content-center mt-5">
+				<input type="text" id="modalTitle" name="modalTitile" class="form-control col-10" placeholder="제목">
+			</div>
+			<div class="d-flex justify-content-end mr-5 my-4">
+				<button id="modalSaveBtn" class="btn btn-info">저장</button>
+			</div>
+		</div>
+	</div>
+</div>
+
  <script>
  $(document).ready(function() {
 	 
+ 	  $('.moreBtn').on('click', function(e) {
+		 e.preventDefault();
+		 
+		 let date = $(this).data('date');
+		 
+		 console.log(date);
+		 
+		 $('#MoreModal').data('date', date);
+	 }); 
+	 
+	 $('#MoreModal #modalSaveBtn').on('click', function() {
+		 
+		/*  let date = $('#MoreModal').id('date');
+		 console.log(date);
+		 
+		let modalTitle = $('.modal-content #modalTitle').val($('#modalTitle').val());
+		
+		alert(modalTitle); */
+		
+		
+	 }); 
+	 
+ /*  		 부모창의 데이터를 가져오는것!! 
+		$('.moreBtn').on('click', function() {
+		 let title = $('#modalTitle').val($(this).data('date'));
+		 $('#MoreModal').modal('show');
+		 
+	 });  */
 	
  });
  

@@ -50,3 +50,6 @@ nav .nav-link:hover {
 	max-width: 500px;
 	max-height: 400px;
 }
+.modal .modalSaveBtn {
+	background-color:#7BB0DB;
+}
