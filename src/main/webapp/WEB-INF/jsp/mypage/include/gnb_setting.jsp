@@ -37,7 +37,7 @@ $(document).ready(function(){
 		
 	});
 	
-	
+	// 수정하기
 	$('#mypage').on('click', function() {
 		$('#saveBtn').click();
 		

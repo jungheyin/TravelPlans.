@@ -13,18 +13,24 @@
 		<div>
 			<div class="d-flex justify-content-center">
 				<select class="category custom-select mb-2" id="category">
-					<option value="choice">교통수단 선택</option>
+					<c:forEach var="traffic" items="${trafficSelectMap}">
+						<option value="${traffic.key}">
+							${traffic.value}
+						</option>
+					</c:forEach>
+					
+					<!-- <option value="choice">교통수단 선택</option>
 					<option value="airplans">비행기</option>
 					<option value="train">기차</option>
 					<option value="expressBus">고속버스</option>
-					<option value="direct">직접입력</option>
+					<option value="direct">직접입력</option> -->
 				</select>
 			</div>
 			
 			<div class="inputBox">
 				<div id="airplansInput" class="form-group">
 					<div id="trafficInfo" class="font-weight-bold ml-1 mb-1">이름</div>
-					<input type="text" class="trafficInfoInput form-control mb-2" maxlength="20" placeholder="교통수단을 선택해 주세요.">
+					<input type="text" class="trafficInfoInput form-control mb-2" maxlength="20" placeholder="항공사">
 
 					<div class="font-weight-bold ml-1 mb-1">출발</div>
 					<input type="text" class="start form-control mb-2" placeholder="출발">
@@ -98,12 +104,7 @@ $(document).ready(function(e) {
 		var traffic = target.options[target.selectedIndex].value;
 		console.log(traffic);
 		
-		if (traffic == 'choice') {
-			$('#trafficInfo').text("이름");
-			$('.trafficInfoInput').attr("placeholder", "교통수단을 선택해 주세요.");
-			$('.trafficInfoInput').val('');
-			return;
-		} else if (traffic == 'airplans') {
+		if (traffic == 'airplans') {
 			$('#trafficInfo').text("항공사");
 			$('.trafficInfoInput').attr("placeholder", "항공사");
 			$('.trafficInfoInput').val('');
@@ -126,20 +127,6 @@ $(document).ready(function(e) {
 		} 
 	});
 	
-	$('.trafficInfoInput').on('click', function() {
-		let target = document.getElementById('category');
-		var traffic = target.options[target.selectedIndex].value;
-		console.log(traffic);
-		
-		if (traffic == 'choice') {
-			alert("교통수단 선택을 먼저해주세요.");
-			$(this).attr("readonly", true);
-			return;
-		} else if (traffic != 'choice') {
-			$(this).attr("readonly", false);
-			return;
-		}
-	});
 	
 	$('#price').on('keyup', function() {
 		let target = $('#price').val();
@@ -161,16 +148,23 @@ $(document).ready(function(e) {
 	$('#trafficBtn').on('click', function() {
 
 		let target = document.getElementById('category');
-		var traffic = target.options[target.selectedIndex].value;
+		let traffic = target.options[target.selectedIndex].value;
 		
-		if (traffic == 'choice') {
-			alert("교통수단을 선택해 주세요.");
-			return;
-		} 
+		var subject = "비행기";
+		
+		if (traffic == 'airplans') {
+			subject = "항공사";
+		} else if (traffic == 'train') {
+			subject = "기차 종류";
+		} else if (traffic == 'expressBus') {
+			subject = "버스종류";
+		} else if (traffic == 'direct') {
+			subject = "이름";
+		}
 		
 		let trafficInfo = $('.trafficInfoInput').val().trim();
 		if (trafficInfo == '') {
-			alert("이름을 입력해 주세요.");
+			alert( subject + "을 입력해 주세요.");
 			return;
 		}
 		

@@ -4,19 +4,36 @@
 	width: 800px;
 }
 
+a:link {
+	color:black; 
+	text-decoration: none;
+}
+a:visited {
+	color:black; 
+	text-decoration: none;
+}
+a:hover {
+	color:black; 
+	text-decoration: none;
+} 
+
 header {
-	height: 150px;
+	height: 80px;
 }
 header .mypage{
 	height: 30px;
 	background-color: #7BB0DB;
 }
 
+#layoutArticle {
+	width: 750px;
+}
+
 .contents {
 	min-height: 1000px;
 }
 nav {
-	width:200px;
+	width:130px;
 }
 
 nav .nav-link {
@@ -27,6 +44,9 @@ nav .nav-link:hover {
 	color:#7BB0DB;
 }
 
+#layoutBorder {
+	min-height: 900px;
+}
 /* traffic */
 
 #trafficSubject {
@@ -41,30 +61,30 @@ nav .nav-link:hover {
 	color:#7BB0DB;
 }
 
-article {
+#article {
 	width:600px;
 }
 
-article .reservationBg {
+#article .reservationBg {
 	min-height: 900px;
 	background-color: #dededf;
 }
 
 #dateBox {
 	height: 40px;
-	width: 600px;
 	background-color: #7BB0DB;
 }
 
+.dateBlock {
+	height: 40px;
+	background-color: #7BB0DB;
+}
+
+
 .planBox {
-	width:570px;
-	height:35px;
+	height:30px;
 	background-color: #dededf;
 }
 
-.resultBox {
-	width:570px;
-	height:35px;
-	background-color: #7BB0DB;
-}
+
 

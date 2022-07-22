@@ -29,13 +29,18 @@
 		<header>
 			<jsp:include page="../include/gnb.jsp" />
 		</header>
+		<article id="layoutArticle" class="mb-3">
+			<jsp:include page="../include/article.jsp" />
+		</article>
 		<section class="contents d-flex">
 			<nav class="mr-2">
 				<jsp:include page="../include/nav.jsp" />
 			</nav>
-			<article class="mr-4">
-				<div class="border-left mb-5"><div>
-				<jsp:include page="../${itineraryViewName}.jsp" />
+			<article id="article">
+				<div id="layoutBorder" class="border-left mb-5"><div>
+				<div class="ml-3 mt-2">
+					<jsp:include page="../${itineraryViewName}.jsp" />
+				</div>
 			</article>
 		</section>
 	</div>

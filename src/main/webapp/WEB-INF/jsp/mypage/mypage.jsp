@@ -29,15 +29,17 @@
 
 	<!-- user의 my plans 리스트 -->
 	<c:forEach items="${travelList}" var="travel">
-		<div class="d-flex justify-content-center mb-3">
-
+	<div class="border mx-5 mb-3">
+		<a href="/itinerary/traffic_info_view?travelId=${travel.id}" class="mytravelBtn mr-3"> 
+		<div class="d-flex justify-content-center">
+	
 			<div class="itineraryBox d-flex justify-content-between">
-				<c:set var="boxColor" value="${travel.color}" />
+			
 				<div class="ml-3 mt-4">
 
 						<div class="travelTitle">${travel.title}</div> <!-- trip의 startDate ~ endDate (year) : 수정해야한다. -->
 
-					<div class="d-flex mb-2">
+					<div class="d-flex">
 						<div class="travelDate">
 							<fmt:parseDate value="${travel.startDate}" pattern="yyyy-MM-dd"
 								var="date" />
@@ -75,13 +77,12 @@
 						</span>
 					</div>
 					<!-- my travel 페이지로 이동 -->
-					<a href="/itinerary/traffic_info_view?travelId=${travel.id}" class="mytravelBtn mr-3"> 
-						<img src="/static/icons/right.png" alt="들어가기" width="25px"
-						height="25px">
-					</a>
+					
 				</div>
 			</div>
 		</div>
+		</a>
+	</div>
 	</c:forEach>
 </div>
 

@@ -282,7 +282,7 @@ $(document).ready(function() {
 			, data: {"nickname":nickname, "loginId":loginId, "password":password,"email":email}
 			, success: function(data) {
 				if (data.result == 'success') {
-					alert("회원가입 성공 :) \n환영합니다. 여행자님");
+					alert("회원가입 성공 :) \n환영합니다.  " + nickname + " 님");
 					location.href="/travelplans/travelplans_view";
 				} else if (data.result == 'error') {
 					alert("회원가입 실패");

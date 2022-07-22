@@ -271,7 +271,7 @@ public class ReservationRestController {
 	 * @param location
 	 * @param price
 	 * @param memo
-	 * @param request
+	 * @param request 
 	 * @return
 	 */
 	@PutMapping("/reservation_update")

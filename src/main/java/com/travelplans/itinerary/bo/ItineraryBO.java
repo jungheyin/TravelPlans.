@@ -1,67 +1,46 @@
 package com.travelplans.itinerary.bo;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.travelplans.itinerary.dao.ItineraryDAO;
 import com.travelplans.itinerary.model.Itinerary;
 import com.travelplans.new_travel.bo.NewTravelBO;
-import com.travelplans.new_travel.model.Travel;
 
 @Service
 public class ItineraryBO {
 	
-	@Autowired
-	private NewTravelBO newTravelBO;
+	Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	
 	@Autowired
 	private ItineraryDAO itineraryDAO;
 	
-	public List<String> generateTravelDateListById(int travelId) {
+	public int addItinerary(int travelId, String date, String title) {
+		return itineraryDAO.insertItinerary(travelId, date, title);
+	}
+	
+	public Itinerary getItineraryByTravelIdDate(int travelId, String date) {
+		return itineraryDAO.selectItineraryByTravelIdDate(travelId, date);
+	}
+	
+	public Itinerary getItineraryById(int itineraryId) {
+		return itineraryDAO.selectItineraryById(itineraryId);
+	}
+	
+	
+	public int updateItinerary(int itineraryId, int travelId, String date, String title, String color) {
 		
-		Travel travel = newTravelBO.getTravelById(travelId);
+		// itineraryId 가져오기
+		Itinerary itineraryById = getItineraryById(itineraryId);
 		
-		String startDate = travel.getStartDate();
-		String endDate = travel.getEndDate();
-		
-		List<String> travelDateList = new ArrayList<>();
-		
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-		LocalDate startLocal = LocalDate.parse(startDate, formatter);
-		LocalDate endLocal = LocalDate.parse(endDate, formatter);
-		
-		int i = 0;
-		while (true) {
-			
-			LocalDate plusDay = startLocal.plusDays(i);
-			String plusDayStr = plusDay.format(formatter);
-			travelDateList.add(plusDayStr);
-			
-			if (endLocal.isEqual(plusDay)) {
-				break;
-			}
-			
-			i++;
+		if (itineraryById == null) {
+			logger.error("[update Itinerary] null itineraryId " + itineraryId);
+			return 0;
 		}
 		
-		return travelDateList;
-	}
-	
-	
-	public void addItinerary(int travelId, String color, String title) {
-		itineraryDAO.insertItinerary(travelId, color, title);
-	}
-	
-	public Itinerary getItineraryById(int Itinerary) {
-		return itineraryDAO.selectItineraryById(Itinerary);
-	}
-	
-	public List<Itinerary> getItineraryListById(int id, int travelId) {
-		return itineraryDAO.selectItineraryListById(id, travelId);
+		return itineraryDAO.updateItinerary(itineraryId, travelId, date, title, color);
 	}
 }

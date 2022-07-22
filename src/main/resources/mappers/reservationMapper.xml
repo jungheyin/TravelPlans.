@@ -134,7 +134,7 @@ INSERT INTO `reservation`
 		,`traffic`
 		,`trafficInfo`
 		,`start`
-		,`startDate`
+		,`startDate`	
 		,`startTime`
 		,`arrive`
 		,`arriveDate`

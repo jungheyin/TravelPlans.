@@ -6,12 +6,15 @@
 
 <div>
 	<div class="d-flex justify-content-between">
-		<h5 id="trafficSubject" class="font-weight-bold mt-3 mb-4">예약정보</h5>
+		<h5 id="trafficSubject" class="font-weight-bold mb-4">예약정보</h5>
 		<a href="/reservation/reservation_create_view?travelId=${travel.id}" class="mt-1 mr-2" >
 			<img src="/static/icons/plus_skyBlue.png" alt="추가" width="40px">
 		</a> 
 	</div>
+	
 	<c:forEach var="reservation" items="${reservationList}">
+	<a href="/reservation/reservation_update_view?travelId=${travel.id}&reservationId=${reservation.id}">
+	
 	<div class="border p-3 mb-3">
 		<div class="d-flex justify-content-end mb-2 mr-2">
 			<img src="/static/icons/delete.png" alt="삭제" width="25px" class="deleteImg">
@@ -20,9 +23,9 @@
 		<!-- name과 price : font-size조절하기 -->
 		<div class="d-flex justify-content-between mr-5 mb-3">
 			<div class="d-flex">
-				<a href="/reservation/reservation_update_view?travelId=${travel.id}&reservationId=${reservation.id}">
-					<h5 class="font-weight-bold text-dark">${reservation.title}</h5>
-				</a>
+				
+				<h5 class="font-weight-bold text-dark">${reservation.title}</h5>
+				
 				<small class="font-weight-bold text-secondary mt-1 ml-1">(${reservation.date})</small>
 			</div>
 				<!-- TODO: 콤마찍어야한다. -->
@@ -32,17 +35,12 @@
 			<span class="font-weight-bold ml-1">예약자: ${reservation.booker}</span>
 		<!-- TODO: 다시 해야함!! -->
 		<div class="mb-2 font-weight-bold text-dark">
-			<c:set var="memo" value="${reservation.memo}" />
-			<c:choose>
-				<c:when test="${memo == null}">
-				
-				</c:when>
-				<c:when test="${memo != null}">
-				-  ${reservation.memo}
-				</c:when>
-			</c:choose>
+			<span class="ml-2">
+					${reservation.memo}
+				</span>
 		</div>
 	</div>
+	</a>
 	</c:forEach>
 </div>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              

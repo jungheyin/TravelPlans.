@@ -1,5 +1,8 @@
 package com.travelplans.reservation;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,7 +31,9 @@ public class ReservationController {
 	public String trafficView(Model model) {
 		
 		Travel travel = reservationBO.getLastTravel();
+		Map<String, String> trafficSelectMap = reservationBO.generateTrafficSelectMap();
 		
+		model.addAttribute("trafficSelectMap", trafficSelectMap);
 		model.addAttribute("travel", travel);
 		model.addAttribute("reservationSubject", "traffic");
 		model.addAttribute("reservationViewName", "traffic");
@@ -85,7 +90,9 @@ public class ReservationController {
 		
 		Travel travel = reservationBO.getTravelById(travelId);
 		Traffic traffic = reservationBO.getTrafficById(trafficId);
+		Map<String, String> trafficSelectMap = reservationBO.generateTrafficSelectMap();
 		
+		model.addAttribute("trafficSelectMap", trafficSelectMap);
 		model.addAttribute("traffic", traffic);
 		model.addAttribute("travel", travel);
 		model.addAttribute("reservationSubject", "traffic");

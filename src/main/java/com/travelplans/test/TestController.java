@@ -43,4 +43,5 @@ public class TestController {
 	public String colorTestView() {
 		return "test/colorTest";
 	}
+	
 }

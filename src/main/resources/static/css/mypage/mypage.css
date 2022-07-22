@@ -4,6 +4,19 @@
 	width: 800px;
 }
 
+a:link {
+	color:black; 
+	text-decoration: none;
+}
+a:visited {
+	color:black; 
+	text-decoration: none;
+}
+a:hover {
+	color:black; 
+	text-decoration: none;
+} 
+
 header .logoutNav {
 	height:30px;
 	background-color: #7BB0DB;

@@ -5,73 +5,75 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <div>
 	<div class="d-flex justify-content-between">
-		<h5 id="trafficSubject" class="font-weight-bold mt-3 mb-4 ml-2">교통수단</h5>
+		<h5 id="trafficSubject" class="font-weight-bold ml-1">교통수단</h5>
 		<a href="/reservation/traffic_create_view?travelId=${travel.id}" class="mt-1 mr-2" >
 			<img src="/static/icons/plus_skyBlue.png" alt="추가" width="40px">
 		</a>
 	</div>
 	<c:forEach var="traffic" items="${trafficList}">
-	
-		<div class="trafficBox border p-3 mb-3">
-			<div class="d-flex justify-content-end mb-2 mr-2">
+		
+		<a href="/reservation/traffic_update_view?travelId=${travel.id}&trafficId=${traffic.id}" 
+						class="updateLink">
+						
+		<div class="trafficBox border p-3 mb-3" data-traffic-id="${traffic.id}">
+			<div class="d-flex justify-content-end">
 				<img src="/static/icons/delete.png" alt="삭제" width="25px" class="deleteImg">
 				<button type="button" class="deleteBtn btn d-none" data-traffic-id="${traffic.id}"></button>
 			</div>
 			
-			<a href="/reservation/traffic_update_view?travelId=${travel.id}&trafficId=${traffic.id}" 
-				class="title text-dark">
-			<div class="d-flex justify-content-between mr-5 mb-3">
+			<div class="d-flex justify-content-between mt-1">
+				<div>
+						<div class="d-flex text-dark">
+							<h5 class="font-weight-bold">${traffic.start}</h5>
+							<h5 class="font-weight-bold mx-2">→</h5>
+							<h5 class="font-weight-bold">${traffic.arrive}</h5>
+						</div>
+				</div>
+				<div>
+					<!-- TODO: 콤마찍어야한다. -->
+					<span class="font-weight-bold mr-5">${traffic.price}</span>
+				</div>
+			</div>
+			<div>
 				<div class="d-flex">
 					<c:set var="trafficVal" value="${traffic.traffic}" />
 					<c:choose>
 						<c:when test="${trafficVal == 'airplans'}"> 
-							<h5 class="font-weight-bold">비행기:</h5>
+							<span class="font-weight-bold">비행기:</span>
 						</c:when>
 						<c:when test="${trafficVal == 'train'}"> 
-							<h5 class="font-weight-bold">기차:</h5>
+							<span class="font-weight-bold">기차:</span>
 						</c:when>
 						<c:when test="${trafficVal == 'expressBus'}"> 
-							<h5 class="font-weight-bold">고속버스:</h5>
+							<span class="font-weight-bold">고속버스:</span>
 						</c:when>
 						<c:when test="${trafficVal == 'direct'}"> 
-							<h5 class="font-weight-bold"></h5>
+							<span class="font-weight-bold"></span>
 						</c:when>
 					</c:choose>
-					<h5 class="ml-1 font-weight-bold">${traffic.trafficInfo}</h5>
+					<span class="ml-1 font-weight-bold">${traffic.trafficInfo}</span>
 				</div>
-				</a>
-				<div>
-					<!-- TODO: 콤마찍어야한다. -->
-					<h5>${traffic.price}</h5>
-				</div>
+				
+				
 			</div>	
-			<div class="d-flex text-secondary">
-				<h6 class="font-weight-bold ml-1">${traffic.start}</h6>
-				<h6 class="font-weight-bold mx-2">→</h5>
-				<h6 class="font-weight-bold">${traffic.arrive}</h6>
-			</div>
+			
 			<!-- 시간설정해야한다. -->
-			<div class="d-flex mb-2 font-weight-bold text-secondary">
-				<div>${traffic.startDate}</div>
-				<div class="mx-1">${traffic.startTime}</div>
-				<div class="mx-1">-</div>
-				<div class="mx-1">${traffic.arriveDate}</div>
-				<div>${traffic.arriveTime}</div>
+			<div class="d-flex font-weight-bold text-secondary">
+				<small class="font-weight-bold">${traffic.startDate}</small>
+				<small class="font-weight-bold mx-1">${traffic.startTime}</small>
+				<small class="font-weight-bold mx-1">-</small>
+				<small class="font-weight-bold mx-1">${traffic.arriveDate}</small>
+				<small class="font-weight-bold">${traffic.arriveTime}</small>
 			</div>
 				
 			<!-- TODO: 다시 해야함!! -->
-			<div class="mb-2 font-weight-bold text-dark">
-				<c:set var="memo" value="${traffic.memo}" />
-				<c:choose>
-					<c:when test="${memo == null}">
-					
-					</c:when>
-					<c:when test="${memo != null}">
-					-  ${traffic.memo}
-					</c:when>
-				</c:choose>
+			<div class="my-2 font-weight-bold text-dark">
+				<span class="ml-2">
+					${traffic.memo}
+				</span>
 			</div>
 		</div>
+		</a>
 		</c:forEach>
 </div>
 

@@ -5,8 +5,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-<div class="ml-3">
-
+<div>
 	<h5 id="planSub" class="ml-1">여행일정</h5>
 	
 	<div id="dateBox" class="d-flex justify-content-between mb-3">
@@ -24,90 +23,134 @@
 		<div class="mt-2 mr-5 font-weight-bold text-white">￦500,000</div>
 	</div>
 	
-	<div class="mt-4 ml-2">
-		<c:forEach var="date" items="${travelDateList}">
-			<div class="d-flex ">
-			
-				<!-- TODO: 날짜 형식 바꾸기!! -->
-				<div class="font-weight-bold  mt-1 ml-2">${date}</div>
+ 	<div>
+ 		<c:forEach items="${dateListView}" var="date">
+			<div class="d-flex mt-2 ml-4 mb-3">
+				<div class="date font-weight-bold mr-3 mt-1">
+					${date.date}
+				</div>
+				<div>
+					<c:choose>
+						<c:when test="${empty date.itinerary.title}">
+							<div class="d-flex">
+								<input type="text" class="title form-control" id="${date.date}" placeholder="제목 입력하기">
+								<div class="ml-2">
+									<button class="titleAddBtn btn d-none">${date.date}</button>
+									<img src="/static/icons/plus_skyBlue.png" alt="저장하기" data-target="${date.date}"
+										class="titleAddImg" width="35px">
+								</div>								
+							</div>
+						</c:when>
+						<c:when test="${!empty date.itinerary.title}">
+						 	<div class="d-flex">
+						 		<input type="text" class="titleUpdate form-control"  id="${date.date}" value="${date.itinerary.title}">
+						 		<div class="ml-3">
+						 			<button class="titleUpdateBtn btn d-none" >${date.date}</button>
+						 			<img src="/static/icons/change_skyBlue.png" alt="수정하기" data-target="${date.date}"
+										data-itiner-id="${date.itinerary.id}" class="titleUpdateImg mt-2" width="20px">
+						 		</div>
+						 	</div>
+						</c:when>
+					</c:choose>
+				</div>
 				
-				<a href="#" data-toggle="modal" class="moreBtn" data-target="#MoreModal"
-					data-date="${date}">
-					<input type="text" class="title form-control ml-2" placeholder="제목">
-				</a>
 			</div>
-			
-			<div><!-- 리스트가져오기 -->
-			
+			<!-- 일정 박스 --> 	
+			<div>
 			
 			</div>
-			
-			<div class="planBox mt-3 d-flex justify-content-end ml-1">
-				<a href="/plan/create_view?travelId=${travel.id}&date=${date}" class="mr-3 mt-1">
-					<img src="/static/icons/plus_red.png" width="30px">
-				</a>
-			</div>
+			<!-- 일정 추가 박스 -->
+			<a href="/plan/create_view?travelId=${travel.id}&itineraryId=${date.itinerary.id}&date=${date.date}"
+				class="planLink" data-itiner-id="${date.itinerary.id}">
+				<div class="planBox d-flex justify-content-end mx-3 pr-2">
+					<img src="/static/icons/plus_red.png" alt="추가" height="30px"
+						class="p-1">
+				</div>
+			</a>	
+			<div class="mx-3">
 			<hr>
-			<div class="resultBox d-flex justify-content-end mb-4 ml-1">
-				<div class="mt-2 mr-4 font-weight-bold">￦500,000</div>
-			</div>
-		</c:forEach>
-	</div>	
-</div>
-
-<!-- Modal -->
-<div class="modal fade" id="MoreModal">
-	<div class="modal-dialog  modal-dialog-centered" role="document">
-		<div class="modal-content">
-			<div class="d-flex justify-content-end mt-3 mr-3">
-				<a href="#" class="cancel d-bolok" data-dismiss="modal">
-					<img alt="삭제" src="/static/icons/x.png" width="20px" height="20px"> 
-				</a>				
 			</div>
 			
-			<div class="modalInput d-flex justify-content-center mt-5">
-				<input type="text" id="modalTitle" name="modalTitile" class="form-control col-10" placeholder="제목">
+			<!-- 결과 -->
+			<div class="resultBox d-flex justify-content-end mr-5 mb-3">
+				<div class="mr-3 text-dark font-weight-bold"> ￦5,000
+				</div>
 			</div>
-			<div class="d-flex justify-content-end mr-5 my-4">
-				<button id="modalSaveBtn" class="btn btn-info">저장</button>
-			</div>
-		</div>
-	</div>
-</div>
+ 		</c:forEach>
+ 	</div>
+		
+<script>
+$(document).ready(function() {
+	// 저장하기
+	$('.titleAddImg').on('click', function() {
+		$('.titleAddBtn').click();
+		
+		let travelId = ${travel.id};
+		let date = $(this).attr('data-target');
+		let title = $('#' + date).val();
+		
+		if (title == '') {
+			alert("제목을 입력해주세요.");
+			return;
+		}
+		
+		$.ajax({
+			type: "POST"
+			, url: "/itinerary/create"
+			, data: {"travelId": travelId, "date": date, "title": title}
+			, success: function(data) {
+				if (data.result == 'success') {
+					alert(date + "\n" + title + " 저장");
+					document.location.reload();
+				} else if (data.result == 'error'){
+					alert(errorMessage);
+				}
+			}
+			, error : function(e) {
+				alert(date + "\n 저장 실패");
+			}
+		});
+	});
 
- <script>
- $(document).ready(function() {
-	 
- 	  $('.moreBtn').on('click', function(e) {
-		 e.preventDefault();
-		 
-		 let date = $(this).data('date');
-		 
-		 console.log(date);
-		 
-		 $('#MoreModal').data('date', date);
-	 }); 
-	 
-	 $('#MoreModal #modalSaveBtn').on('click', function() {
-		 
-		/*  let date = $('#MoreModal').id('date');
-		 console.log(date);
-		 
-		let modalTitle = $('.modal-content #modalTitle').val($('#modalTitle').val());
+	// 수정하기
+	$('.titleUpdateImg').on('click', function() {
+		$('.titleUpdateBtn').click();
 		
-		alert(modalTitle); */
+		let itineraryId = $('.titleUpdateImg').data('itiner-id');
+		let travelId = ${travel.id};
+		let date = $(this).attr('data-target');
+		let title = $('#' + date).val();
 		
-		
-	 }); 
-	 
- /*  		 부모창의 데이터를 가져오는것!! 
-		$('.moreBtn').on('click', function() {
-		 let title = $('#modalTitle').val($(this).data('date'));
-		 $('#MoreModal').modal('show');
-		 
-	 });  */
+		$.ajax({
+			type: "PUT"
+			, url: "/itinerary/update"
+			, data: {"itineraryId": itineraryId, "travelId": travelId, "date": date, "title": title}
+			, success: function(data) {
+				if (data.result == 'success') {
+					alert(date + "\n" + title + " 수정");
+					document.location.reload();
+				} else if (data.result == 'error'){
+					alert(errorMessage);
+				}
+			}
+			, error : function(e) {
+				alert(date + "\n 수정실패");
+			}
+		});
+	});
 	
- });
- 
- </script>
- 
+	$('.planLink').on('click', function(e) {
+		
+		let itineraryId = $(this).data('itiner-id');
+		
+		if (itineraryId == false) {
+			alert("제목을 입력해 주세요.");
+			e.preventDefault();
+			return;
+		}
+		
+	});
+	
+});
+
+</script>

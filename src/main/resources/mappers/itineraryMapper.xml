@@ -2,36 +2,69 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
-
 <mapper namespace="com.travelplans.itinerary.dao.ItineraryDAO">
-	
-		<select id="selectItineraryById" resultType="com.travelplans.itinerary.model.Itinerary">
-		SELECT
-			,`id`
-			,`travelId`
-	 		,`color`
-			,`title`
-		 	,`createdAt`
-			,`updatedAt`
-		FROM
-			`itinerary`
-		WHERE
-			`id` = #{itineraryId}
-	</select>
-	
-	<select id="selectItineraryListById" resultType="com.travelplans.itinerary.model.Itinerary">
-		SELECT
-			,`id`
-			,`travelId`
-	 		,`color`
-			,`title`
-		 	,`createdAt`
-			,`updatedAt`
-		FROM
-			`itinerary`
-		WHERE
-			`id` = #{id}
-			AND `travelId` = #{travelId}
-	</select>
 
+<insert id="insertItinerary" parameterType="map">
+	INSERT INTO `itinerary`
+	(
+		`travelId`
+		, `date`
+		, `title`
+		,`createdAt`
+		,`updatedAt`
+	)
+	VALUES
+	(
+		#{travelId}
+		,#{date}
+		,#{title}
+		,NOW()
+		,NOW()
+	)
+</insert>
+
+<select id="selectItineraryByTravelIdDate" resultType="com.travelplans.itinerary.model.Itinerary">
+SELECT
+		`id`
+		,`travelId`
+		,`date`
+		,`title`
+		,`color`
+		,`createdAt`
+		,`updatedAt`
+	FROM
+		`itinerary`
+	WHERE
+		`travelId` = #{travelId}
+	AND
+		`date` = #{date}
+</select>
+
+<select id="selectItineraryById" resultType="com.travelplans.itinerary.model.Itinerary">
+SELECT
+		`id`
+		,`travelId`
+		,`date`
+		,`title`
+		,`color`
+		,`createdAt`
+		,`updatedAt`
+	FROM
+		`itinerary`
+	WHERE
+		`id` = #{itineraryId}
+	
+</select>
+
+
+<update id="updateItinerary" parameterType="map">
+UPDATE `itinerary`
+SET
+	 `title` = #{title}
+	, `color` = #{color}
+WHERE
+	`id` = #{itineraryId}
+	AND `travelId` = #{travelId}
+	AND `date` = #{date}
+</update>
 </mapper>

@@ -14,6 +14,8 @@
 		<div>
 			<div class="d-flex justify-content-center">
 				<c:set var="option" value="${traffic.traffic}"/>
+				
+				
 				<select class="category custom-select mb-2" id="category">
 					<option value="choice">교통수단 선택</option>
 					<option value="airplans">비행기</option>

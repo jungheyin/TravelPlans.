@@ -9,8 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.travelplans.itinerary.bo.DateListBO;
 import com.travelplans.itinerary.bo.ItineraryBO;
-import com.travelplans.itinerary.model.Itinerary;
+import com.travelplans.itinerary.model.DateListView;
 import com.travelplans.new_travel.model.Travel;
 import com.travelplans.reservation.bo.ReservationBO;
 import com.travelplans.reservation.model.Accommodation;
@@ -27,6 +28,9 @@ public class ItineraryController {
 	
 	@Autowired
 	private ItineraryBO itineraryBO;
+	
+	@Autowired
+	private DateListBO dateListBO;
 	
 	/**
 	 * 교통수단 정보 화면
@@ -100,26 +104,37 @@ public class ItineraryController {
 		return "itinerary/template/layout";
 	}
 	
-	/**
-	 * 여행일정 화면
-	 * @param travelId
-	 * @param model
-	 * @return
-	 * @throws ParseException
-	 */
-	@RequestMapping("/create_view")
+	// 여행 계획 페이지(뿌려주는 용도)
+	@RequestMapping("/date_list_view")
 	public String createView(
 			@RequestParam("travelId") int travelId,
 			Model model) throws ParseException {
 		
 		Travel travel = reservationBO.getTravelById(travelId);
-		List<String> travelDateList = itineraryBO.generateTravelDateListById(travelId);
+		List<DateListView> dateListView = dateListBO.generateDateListViewList(travelId);
 		
-		model.addAttribute("travelDateList", travelDateList);
+	
+		model.addAttribute("dateListView", dateListView);
 		model.addAttribute("travel", travel);
 		model.addAttribute("itineraryViewName", "itinerary");
 
 		return "itinerary/template/layout";
 	}
 	
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -54,9 +54,6 @@ $(document).ready(function() {
  
 // css에 색상을 넣기 
 
-	
-
-	
 });
 
 </script>

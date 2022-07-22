@@ -3,10 +3,12 @@ package com.travelplans.itinerary.model;
 import java.util.Date;
 
 public class Itinerary {
+
 	private int id;
 	private int travelId;
-	private String color;
+	private String date;
 	private String title;
+	private String color;
 	private Date createdAt;
 	private Date updatedAt;
 	
@@ -22,17 +24,23 @@ public class Itinerary {
 	public void setTravelId(int travelId) {
 		this.travelId = travelId;
 	}
-	public String getColor() {
-		return color;
+	public String getDate() {
+		return date;
 	}
-	public void setColor(String color) {
-		this.color = color;
+	public void setDate(String date) {
+		this.date = date;
 	}
 	public String getTitle() {
 		return title;
 	}
 	public void setTitle(String title) {
 		this.title = title;
+	}
+	public String getColor() {
+		return color;
+	}
+	public void setColor(String color) {
+		this.color = color;
 	}
 	public Date getCreatedAt() {
 		return createdAt;

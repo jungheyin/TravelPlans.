@@ -5,42 +5,59 @@
 }
 
 header {
-	height: 100px;
+	height: 180px;
 }
 header .itinerary{
 	height: 30px;
+	font-size: 20px;
 	background-color: #7BB0DB;
 }
-.article {
-	height: 150px;
-}
-.contents {
-	min-height: 1000px;
-	
-}
-nav {
-	width:200px;
-}
 
-nav .nav-title {
-	background-color:#7BB0DB;
-	height: 38px;
-}
-
-nav .nav-link {
+.gnbDate {
 	font-weight: bold;
-	font-size: 18px;
 	color: #7BB0DB;
 }
 
-nav .nav-link:hover {
-	color: #000000; 
+#contents {
+	min-height: 1000px;
+	
+}
+
+.plan {
+	width:530px;
+	margin-left: 10px;
+}
+
+.plan .schedule {
+	font-weihgt: bold;
+	color:#7BB0DB;
+}
+
+#layoutBorder {
+	min-height: 800px
+}
+
+
+.content #addBtn {
+	background-color: #7BB0DB;
+	font-weight: bold;
+	color: white
+}
+
+.content #addBtn:hover {
+	background-color: white;
+	font-weight: bold;
+	color: #7BB0DB;
 }
 
 .contents .content {
 	width: 770px;
 }
 
+.contents #title_content {
+	
+	width: 450px;
+}
 .contents .content #subject {
 	font-weight: bold;
 	color:#7BB0DB;
@@ -49,7 +66,4 @@ nav .nav-link:hover {
 .contents .content #preview {
 	max-width: 500px;
 	max-height: 400px;
-}
-.modal .modalSaveBtn {
-	background-color:#7BB0DB;
 }

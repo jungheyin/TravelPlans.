@@ -5,13 +5,14 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <div>
 	<div class="d-flex justify-content-between">
-		<h5 id="trafficSubject" class="font-weight-bold mt-3 mb-4 ml-2">숙   소</h5>
+		<h5 id="trafficSubject" class="font-weight-bold mb-4 ml-2">숙 소</h5>
 		<a href="/reservation/accommodation_create_view?travelId=${travel.id}" class="mt-1 mr-2" >
 			<img src="/static/icons/plus_skyBlue.png" alt="추가" width="40px">
 		</a> 
 	</div>
 	<c:forEach var="accommodation" items="${accommodationList}">
-	
+	<a href="/reservation/accommodation_update_view?travelId=${travel.id}&accommodationId=${accommodation.id}"
+				class="text-dark">
 	<div class="border p-3 mb-3">
 		<div class="d-flex justify-content-end mb-2 mr-2">
 			<img src="/static/icons/delete.png" alt="삭제" width="25px" class="deleteImg">
@@ -19,10 +20,9 @@
 		</div>
 		<!-- name과 price : font-size조절하기 -->
 		<div class="d-flex justify-content-between mr-5">
-			<a href="/reservation/accommodation_update_view?travelId=${travel.id}&accommodationId=${accommodation.id}"
-				class="text-dark">
+			
 				<h5 class="font-weight-bold">${accommodation.name}</h5>
-			</a>
+			
 				<!-- TODO: 콤마찍어야한다. -->
 			<h5>${accommodation.price}</h5>
 		</div>	
@@ -37,17 +37,13 @@
 		</div>
 		<!-- TODO: 다시 해야함!! -->
 		<div class="font-weight-bold text-dark mt-1 mb-2">
-			<c:set var="memo" value="${accommodation.memo}" />
-			<c:choose>
-				<c:when test="${memo == null}">
-				
-				</c:when>
-				<c:when test="${memo != null}">
-				-  ${accommodation.memo}
-				</c:when>
-			</c:choose>
+			<span class="ml-2">
+				${accommodation.memo}
+			</span>
+			
 		</div>
 	</div>
+	</a>
 	</c:forEach>
 </div>
 

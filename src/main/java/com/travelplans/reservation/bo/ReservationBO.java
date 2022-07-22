@@ -1,6 +1,8 @@
 package com.travelplans.reservation.bo;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,14 +27,22 @@ public class ReservationBO {
 			String startTime, String arrive, String arriveDate, String arriveTime, Integer price,
 			String memo) {
 		
+		memo = memo.replace("\n", "<br>");
+		
 		reservationDAO.insertTraffic(travelId, traffic, trafficInfo, start, startDate, startTime, arrive, arriveDate, arriveTime, price, memo);
 	}
 	
 	public void addAccommodation(int travelId, String name, String startDate, String endDate, String location, Integer price, String memo) {
+		
+		memo = memo.replace("\n", "<br>");
+		
 		reservationDAO.insertAccommodation(travelId, name, startDate, endDate, location, price, memo);
 	}
 	
 	public void addReservation(int travelId, String title, String booker, String date, String location, Integer price, String memo) {
+		
+		memo = memo.replace("\n", "<br>");
+		
 		reservationDAO.insertReservation(travelId, title, booker, date, location, price, memo);
 	}
 	
@@ -130,7 +140,6 @@ public class ReservationBO {
 		return reservationDAO.deleteTrafficByIdTravelId(trafficId, travelId);
 	}
 	
-	
 	public int deleteAccommodation(int accommodationId, int travelId) {
 		
 		Accommodation accommodation = getAccommodationById(accommodationId);
@@ -143,7 +152,6 @@ public class ReservationBO {
 		return reservationDAO.deleteAccommodationByIdTravelId(accommodationId, travelId);
 	}
 	
-	
 	public int deleteReservation(int reservationId, int travelId) {
 		
 		Reservation reservation = getReservationById(reservationId);
@@ -154,5 +162,17 @@ public class ReservationBO {
 		}
 		
 		return reservationDAO.deleteReservationByIdTravelId(reservationId, travelId);
+	}
+	
+	public Map<String, String> generateTrafficSelectMap() {
+		
+		Map<String, String> traffcSelectMap = new HashMap<>();
+		
+		traffcSelectMap.put("airplans", "비행기");
+		traffcSelectMap.put("train", "기차");
+		traffcSelectMap.put("expressBus", "고속버스");
+		traffcSelectMap.put("direct", "직접입력");
+		
+		return traffcSelectMap;
 	}
 }

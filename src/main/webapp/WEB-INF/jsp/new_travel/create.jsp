@@ -33,7 +33,7 @@
 			      	
 			      	<div id="pupleBox"></div>
 			      	<input type="radio" name="colorRadio" class="pupleRadio d-none" value="#AEADCA">
-			     </div> 
+			     </div>
 			</div>
 			
 			<!-- startDate와 endDate도 db에 넣어야한다. -->
@@ -108,6 +108,7 @@ $(document).ready(function() {
 	}); 
 	
 	
+	
 	$('#checkImg').on('click', function() {
 		$('#travelSaveBtn').click();
 		
@@ -123,7 +124,8 @@ $(document).ready(function() {
 		
 		if (color == null) {
 			color = "#7BB0DB";
-		} 
+		}  
+
 		
 		let startDate = $('#startDate').val();
 		let endDate = $('#endDate').val();

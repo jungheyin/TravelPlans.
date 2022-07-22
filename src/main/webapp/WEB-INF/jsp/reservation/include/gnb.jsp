@@ -15,7 +15,7 @@
 		<!-- new 여행계획2으로 이동 -->
 	<div class="mt-2 mr-3">
 		
-		<c:choose>
+		 <c:choose>
 			<c:when test="${reservationSubject == 'traffic'}">
 				<a href="/itinerary/traffic_info_view?travelId=${travel.id}" class="mt-2">
 					<img src="/static/icons/airplans_black.png" id="airplanImg" 
@@ -34,6 +34,12 @@
 						alt="비행기아이콘" width="30px">
 				</a>
 			</c:when>
-		</c:choose>
+		</c:choose> 
+		
+		<!-- <img src="/static/icons/airplans_black.png" id="airplanImg" 
+						alt="비행기아이콘" width="30px">
+		<button type="button" id="nextBtn" class="btn d-none" data-travel-id=${travel.id}
+			data-></button> -->
 	</div>
 </div>
+

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,15 +33,12 @@
 		<header>
 			<jsp:include page="../include/gnb.jsp" />
 		</header>
-		<article class="article">
-			<jsp:include page="../include/article.jsp" />
-		</article>
-		<section class="contents d-flex">
-			<nav class="mr-2">
-				<jsp:include page="../include/nav.jsp" />
-			</nav>
+		<section class="contents d-flex mt-3">
+			<article class="plan mr-2 pt-3">
+				<jsp:include page="../include/article.jsp" />
+			</article>
+			<div id="layoutBorder" class="border-left ml-1"></div>
 			<article class="content mr-4">
-				<div class="border-left mb-5"><div>
 				<jsp:include page="../${planViewName}.jsp" />
 			</article>
 		</section>
