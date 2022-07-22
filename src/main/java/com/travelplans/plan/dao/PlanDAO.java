@@ -6,18 +6,14 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PlanDAO {
 
-	/*public void insertPlan(
-			@Param("travelId") int travelId, 
+	public void insertPlan(
+			@Param("itineraryId") int itineraryId, 
 			@Param("date") String date, 
-			@Param("placeName") String placeName, 
+			@Param("planName") String planName, 
 			@Param("time") String time,
 			@Param("location") String location, 
 			@Param("memo") String memo, 
-			@Param("price") Integer price, 
-			@Param("testTime") Integer testTime, 
-			@Param("traffic") String traffic,
-			@Param("file") String file);
-	*/
+			@Param("price") int price);
 	
 	
 	

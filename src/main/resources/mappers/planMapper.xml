@@ -3,39 +3,32 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 <mapper namespace="com.travelplans.plan.dao.PlanDAO">
-<!-- 	
+	
 <insert id="insertPlan" parameterType="map">
 	INSERT INTO `plan`
-		,`itineraryId`
+	(
+		`itineraryId`
 		,`date`
-		,`color`
 		,`planName`
 		,`time`
 		,`location`
 		,`memo`
 		,`price`
-		,`testTime`
-		,`traffic`
-		,`trafficMemo`
-		,`images`
 		,`createdAt`
 		,`updatedAt`
-		
+	)	
 	VALUES
-		#{}
-		,#{}
-		,#{}
-		,#{}
-		,#{}
-		,#{}
-		,#{}
-		,#{}
-		,#{}
-		,#{}
-		,#{}
-		,#{}
+	(
+		#{itineraryId}
+		,#{date}
+		,#{planName}
+		,#{time}
+		,#{location}
+		,#{memo}
+		,#{price}
 		,NOW()
 		,NOW()
+	)
 </insert> 
-  -->
+ 
 </mapper>

@@ -11,12 +11,9 @@ public class PlanBO {
 	@Autowired
 	private PlanDAO planDAO;
 	
-	/*
-	public void addPlan(int travelId, String date, String placeName, String time,
-			String location, String memo, Integer price, Integer testTime, String traffic,
-			String file) {
+	public void addPlan (int itineraryId, String date, String planName, String time,
+			String location, String memo, int price) {
 		
-		planDAO
+		planDAO.insertPlan(itineraryId, date, planName, time, location, memo, price);
 	}
-	*/
 }

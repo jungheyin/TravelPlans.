@@ -44,7 +44,7 @@ public class ItineraryRestController {
 		
 		// null
 		if (userId == null) {
-			logger.error("[itinerary/create] user not null" + userId);
+			logger.error("[itinerary/create] user null" + userId);
 			result.put("result", "error");
 			result.put("errorMessage", "로그인 후 이용해 주세요.");
 		}

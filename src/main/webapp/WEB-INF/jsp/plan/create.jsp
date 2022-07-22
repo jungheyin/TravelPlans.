@@ -57,7 +57,8 @@
 			maxlength="49" placeholder="메모(50자 이내)"></textarea>
 	</div>
 	
-	<button id="addBtn" class="btn w-100 mt-4"> A D D </button>
+	<button id="addBtn" class="btn w-100 mt-4"
+		data-date-id="${date}"> A D D </button>
 	
 </div>
 
@@ -87,9 +88,12 @@ $(document).ready(function() {
 		let planName = $('#planName').val().trim();
 		let time = $('#time').val().trim()
 		let location = $('#location').val().trim();
-		let price = $('#price').val().trim();
+		
+		let priceStr = $('#price').val().trim();
+		let price = priceStr.split(',').join("");
 		
 		let memo = $('#memo').val().trim();
+		let date = $(this).data('date-id');
 		
 		if (planName == '') {
 			alert("일정을 입력해 주세요.");
@@ -107,24 +111,26 @@ $(document).ready(function() {
 		
 		alert("일정 : " + planName + "\n시간 : " + time +"\n위치 : " + location
 			 + "\n비용 : " + price + "원\n메모 : " + memo);
+		
+		$.ajax({
+			type: "POST"
+			,url: "/plan/create"
+			,data: {"itineraryId": ${itineraryId}, "date": date, "planName": planName, "time": time, 
+					"location": location, "memo": memo, "price": price}
+			, success: function(data) {
+				if (data.result == 'success') {
+					alert("저장성공");
+					document.location.reload();
+				} else {
+					alert(errorMessage);
+				}
+			}
+			, error : function(e) {
+				alert("실패했습니다.");
+			}
+		});
 	});
 	
-	$.ajax({
-		type: "POST"
-		, url: "/plan/create"
-		,data: {"itineraryId": ${itineraryId}, "date": ${date}, "planName": planName, "time": time,
-			"location": location, "memo": memo, "price": price}
-		,success : function(data) {
-			if (data.result == 'success') {
-				alert("저장");
-				document.location.reload();
-			} else {
-				alert(errorMessage);
-			}
-		}
-		,error: function(e) {
-			alert("저장 실패했습니다.");
-		}
-	});
+	
 });
 </script>
