@@ -10,9 +10,9 @@
 
 	<!-- user의 my plans 리스트 -->
 	<c:forEach items="${travelList}" var="travel">
-		<div class="d-flex justify-content-center mb-3">
+		<div class="border d-flex justify-content-center mb-3 mx-5 ">
 
-			<div class="itineraryBox d-flex justify-content-between">
+			<div class="itineraryBox d-flex justify-content-between mb-3">
 				<c:set var="boxColor" value="${travel.color}" />
 				<div class="ml-3 mt-4 mb-4">
 

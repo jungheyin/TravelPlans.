@@ -2,20 +2,15 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
-	<!-- 
-		planName, time, location, memo, price, testTime
-	
-	 -->
-
 <div class="px-3 ml-5 mt-4">
 	<!-- 일정제목 -->
 `	<div>
 		<label class="font-weight-bold mr-3 mt-2 text-secondary"
-			for="planName">
+			for="planName" >
 			일정
 		</label>
 		<input type="text" id="planName" class="form-control"
-			placeholder="일정">
+			placeholder="일정"maxlength="19">
 	</div>
 	
 	<!-- 시간 -->
@@ -34,7 +29,7 @@
 			위치
 		</label>
 		<input type="text" id="location" class="form-control"
-			placeholder="위치">
+			placeholder="위치" maxlength="499">
 	</div>
 	
 	<!-- 비용 -->

@@ -11,7 +11,6 @@ public class Itinerary {
 	private String color;
 	private Date createdAt;
 	private Date updatedAt;
-	
 	public int getId() {
 		return id;
 	}
@@ -54,6 +53,8 @@ public class Itinerary {
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
+	
+	
 	
 	
 }

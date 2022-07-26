@@ -13,6 +13,7 @@ import com.travelplans.itinerary.bo.DateListBO;
 import com.travelplans.itinerary.bo.ItineraryBO;
 import com.travelplans.itinerary.model.DateListView;
 import com.travelplans.new_travel.model.Travel;
+import com.travelplans.plan.bo.PlanBO;
 import com.travelplans.reservation.bo.ReservationBO;
 import com.travelplans.reservation.model.Accommodation;
 import com.travelplans.reservation.model.Reservation;
@@ -31,6 +32,9 @@ public class ItineraryController {
 	
 	@Autowired
 	private DateListBO dateListBO;
+	
+	@Autowired
+	private PlanBO planBO;
 	
 	/**
 	 * 교통수단 정보 화면
@@ -104,16 +108,15 @@ public class ItineraryController {
 		return "itinerary/template/layout";
 	}
 	
-	// 여행 계획 페이지(뿌려주는 용도)
+
 	@RequestMapping("/date_list_view")
 	public String createView(
 			@RequestParam("travelId") int travelId,
-			Model model) throws ParseException {
+			Model model) {
 		
 		Travel travel = reservationBO.getTravelById(travelId);
 		List<DateListView> dateListView = dateListBO.generateDateListViewList(travelId);
 		
-	
 		model.addAttribute("dateListView", dateListView);
 		model.addAttribute("travel", travel);
 		model.addAttribute("itineraryViewName", "itinerary");

@@ -91,9 +91,9 @@ public class ItineraryRestController {
 		}
 		
 		// update BO
-		int upCount = itineraryBO.updateItinerary(itineraryId, travelId, date, title, color);
+		int updateCount = itineraryBO.updateItinerary(itineraryId, travelId, date, title, color);
 		
-		if (upCount < 0) {
+		if (updateCount < 0) {
 			logger.error("[itinerary/update] not update" + userId + travelId + date);
 			result.put("result", "error");
 			result.put("errorMessage", "수정에 실패했습니다.");

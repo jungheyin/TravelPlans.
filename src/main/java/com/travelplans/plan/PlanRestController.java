@@ -24,15 +24,16 @@ public class PlanRestController {
 	@Autowired
 	private PlanBO planBO;	
 	
+	
 	@RequestMapping("/create")
 	public Map<String, Object> create(
 			@RequestParam("itineraryId") int itineraryId,
 			@RequestParam("date") String date,
 			@RequestParam("planName") String planName,
 			@RequestParam("time") String time,
-			@RequestParam("location") String location,
-			@RequestParam("memo") String memo,
-			@RequestParam("price") int price,
+			@RequestParam(value="location", required=false) String location,
+			@RequestParam(value="memo", required=false) String memo,
+			@RequestParam(value="price", required=false) int price,
 			HttpServletRequest request) {
 		
 		// map 결과
@@ -53,6 +54,40 @@ public class PlanRestController {
 		// insert BO
 		planBO.addPlan(itineraryId, date, planName, time, location, memo, price);
 		
+		return result;
+	}
+	
+	@RequestMapping("/update") 
+ 	public Map<String, Object> update(
+ 			@RequestParam("planId") int planId,
+ 			@RequestParam("itineraryId") int itineraryId,
+			@RequestParam("date") String date,
+			@RequestParam("planName") String planName,
+			@RequestParam("time") String time,
+			@RequestParam("location") String location,
+			@RequestParam("memo") String memo,
+			@RequestParam("price") int price,
+ 			HttpServletRequest request) {
+		
+		Map<String, Object> result = new HashMap<>();
+		result.put("result", "success");
+		
+		HttpSession session = request.getSession();
+		Integer userId = (Integer)session.getAttribute("userId");
+		
+		if (userId == null) {
+			logger.error("[plan/update] userId null" + userId);
+			result.put("result", "error");
+			result.put("errorMessage", "로그인 후 이용해 주세요.");
+		}
+		
+		int updateCount = planBO.updatePlan(planId, itineraryId, date, planName, time, location, memo, price);
+				
+		if (updateCount < 0) {
+			logger.error("[plan/update] updateCount < 0" + userId + planId + itineraryId + date);
+			result.put("result", "error");
+			result.put("errorMessage", "change 실패!");
+		}
 		return result;
 	}
 

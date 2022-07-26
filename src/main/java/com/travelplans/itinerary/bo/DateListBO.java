@@ -12,6 +12,8 @@ import com.travelplans.itinerary.model.DateListView;
 import com.travelplans.itinerary.model.Itinerary;
 import com.travelplans.new_travel.bo.NewTravelBO;
 import com.travelplans.new_travel.model.Travel;
+import com.travelplans.plan.bo.PlanBO;
+import com.travelplans.plan.model.Plan;
 
 @Service
 public class DateListBO {
@@ -21,6 +23,9 @@ public class DateListBO {
 	
 	@Autowired
 	private ItineraryBO itineraryBO;
+	
+	@Autowired
+	private PlanBO planBO;
 	
 	// dateList 만들기
 	public List<String> generateDateListByTravelId(int travelId) {
@@ -56,6 +61,22 @@ public class DateListBO {
 				
 	}
 	
+	public int generatePlanPrice(int itineraryId) {
+		
+		List<Plan> planList = planBO.getPlanListByItineraryId(itineraryId);
+		
+		int planPrice = 0;
+		
+		for (int i = 0; i <planList.size(); i++) {
+			
+			planPrice = planPrice + planList.get(i).getPrice();
+		}
+		
+		return planPrice;
+	}
+	
+
+	
 	// view용 DateListView List
 	public List<DateListView> generateDateListViewList(int travelId) {
 		
@@ -69,8 +90,23 @@ public class DateListBO {
 			// 제목
 			 Itinerary itinerary = itineraryBO.getItineraryByTravelIdDate(travelId, date);
 			content.setItinerary(itinerary);
-			// plan정보 가져오기
+			int itineraryId = 0;
 			
+			if (itinerary != null) {
+				itineraryId = itinerary.getId();
+			}
+			
+			// plan정보 가져오기
+			List<Plan> planList = planBO.getPlanListByItineraryId(itineraryId);
+			content.setPlan(planList);
+			
+			// 날짜의 하루동안의 총 비용
+			
+			  int pricePlan = generatePlanPrice(itineraryId);
+			  content.setPlanPrice(pricePlan);
+			 
+			
+			// 여행 경비
 			
 			dateListView.add(content);
 		}
@@ -79,4 +115,5 @@ public class DateListBO {
 		return dateListView;
 	}
 	
+
 }

@@ -30,10 +30,9 @@ public class ItineraryBO {
 		return itineraryDAO.selectItineraryById(itineraryId);
 	}
 	
-	
 	public int updateItinerary(int itineraryId, int travelId, String date, String title, String color) {
 		
-		// itineraryId 가져오기
+		// itinerary 가져오기
 		Itinerary itineraryById = getItineraryById(itineraryId);
 		
 		if (itineraryById == null) {
@@ -43,4 +42,6 @@ public class ItineraryBO {
 		
 		return itineraryDAO.updateItinerary(itineraryId, travelId, date, title, color);
 	}
+	
+	
 }

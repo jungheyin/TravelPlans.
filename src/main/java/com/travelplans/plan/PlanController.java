@@ -12,6 +12,8 @@ import com.travelplans.itinerary.bo.DateListBO;
 import com.travelplans.itinerary.bo.ItineraryBO;
 import com.travelplans.itinerary.model.DateListView;
 import com.travelplans.new_travel.model.Travel;
+import com.travelplans.plan.bo.PlanBO;
+import com.travelplans.plan.model.Plan;
 import com.travelplans.reservation.bo.ReservationBO;
 
 @Controller
@@ -27,6 +29,9 @@ public class PlanController {
 	@Autowired
 	private DateListBO dateListBO;
 	
+	@Autowired
+	private PlanBO planBO;
+	
 	@RequestMapping("/create_view")
 	public String createView(
 			@RequestParam("travelId") int travelId,
@@ -36,12 +41,13 @@ public class PlanController {
 		
 		Travel travel = reservationBO.getTravelById(travelId);
 		List<DateListView> dateListView = dateListBO.generateDateListViewList(travelId);
+		List<Plan> planList = planBO.getPlanListByItineraryId(itineraryId);
 		
-		
+		model.addAttribute("dateListView", dateListView);
+		model.addAttribute("planList", planList);
 		model.addAttribute("itineraryId", itineraryId);
 		model.addAttribute("date", date);
 		model.addAttribute("travel", travel);
-		model.addAttribute("dateListView", dateListView);
 		model.addAttribute("planViewName", "create");
 		
 		return "plan/template/layout";
@@ -57,12 +63,15 @@ public class PlanController {
 		
 		Travel travel = reservationBO.getTravelById(travelId);
 		List<DateListView> dateListView = dateListBO.generateDateListViewList(travelId);
+		List<Plan> planList = planBO.getPlanListByItineraryId(itineraryId);
+		Plan plan = planBO.getPlanByPlanId(planId);
 		
-		
+		model.addAttribute("dateListView", dateListView);
+		model.addAttribute("plan", plan);
+		model.addAttribute("planList", planList);
 		model.addAttribute("itineraryId", itineraryId);
 		model.addAttribute("date", date);
 		model.addAttribute("travel", travel);
-		model.addAttribute("dateListView", dateListView);
 		model.addAttribute("planViewName", "update");
 				
 		

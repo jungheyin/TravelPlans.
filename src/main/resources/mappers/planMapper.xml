@@ -31,4 +31,54 @@
 	)
 </insert> 
  
+ <select id="selectPlanListByItineraryId" resultType="com.travelplans.plan.model.Plan">
+ 	SELECT 
+ 		`id`
+ 		,`itineraryId`
+		,`date`
+		,`planName`
+		,`time`
+		,`location`
+		,`memo`
+		,`price`
+		,`createdAt`
+		,`updatedAt`
+	FROM
+		`plan`
+	WHERE
+		`itineraryId` = #{itineraryId}
+ </select>
+ 
+ <select id="selectPlanByPlanId" resultType="com.travelplans.plan.model.Plan">
+ 	SELECT 
+ 		`id`
+ 		,`itineraryId`
+		,`date`
+		,`planName`
+		,`time`
+		,`location`
+		,`memo`
+		,`price`
+		,`createdAt`
+		,`updatedAt`
+	FROM
+		`plan`
+	WHERE
+		`id` = #{planId}
+ </select> 
+ 
+ <update id="updatePlan" parameterType="map">
+ UPDATE `plan`
+ SET 
+ 	`planName` = #{planName}
+	,`time` = #{time}
+	,`location` = #{location}
+	,`memo` = #{memo}
+	,`price` = #{price}
+	,`updatedAt` = NOW()
+WHERE
+	`id` = #{planId}
+	AND `itineraryId` = #{itineraryId}
+	AND `date` = #{date}
+ </update>
 </mapper>
