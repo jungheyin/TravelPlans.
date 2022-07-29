@@ -6,9 +6,9 @@
 
 <div>
 	<div class="d-flex justify-content-between">
-		<h5 id="trafficSubject" class="font-weight-bold mb-4">예약정보</h5>
-		<a href="/reservation/reservation_create_view?travelId=${travel.id}" class="mt-1 mr-2" >
-			<img src="/static/icons/plus_skyBlue.png" alt="추가" width="40px">
+		<h5 class="font-weight-bold ml-1 mt-2">예약정보</h5>
+		<a href="/reservation/reservation_create_view?travelId=${travel.id}" class="mr-2" >
+			<img src="/static/icons/plus_skyBlue.png" alt="추가" width="35px">
 		</a> 
 	</div>
 	
@@ -17,7 +17,7 @@
 	
 	<div class="border p-3 mb-3">
 		<div class="d-flex justify-content-end mb-2 mr-2">
-			<img src="/static/icons/delete.png" alt="삭제" width="25px" class="deleteImg">
+			<img src="/static/icons/delete_black.png" alt="삭제" width="25px" class="deleteImg">
 			<button type="button" class="deleteBtn btn d-none" data-reservation-id="${reservation.id}"></button>
 		</div>
 		<!-- name과 price : font-size조절하기 -->
@@ -28,8 +28,9 @@
 				
 				<small class="font-weight-bold text-secondary mt-1 ml-1">(${reservation.date})</small>
 			</div>
-				<!-- TODO: 콤마찍어야한다. -->
-				<h5>${reservation.price}</h5>
+			<div class="font-weight-bold mr-5">
+				<fmt:formatNumber value="${reservation.price}" type="currency"/>
+			</div>
 		</div>	
 		<!-- 시간설정해야한다. -->
 			<span class="font-weight-bold ml-1">예약자: ${reservation.booker}</span>

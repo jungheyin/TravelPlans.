@@ -39,6 +39,9 @@
 		<section class="contents">
 			<jsp:include page="../${reservationUpdateViewName}.jsp" />
 		</section>
+		<footer>
+			<jsp:include page="../include/footer.jsp" />
+		</footer>
 	</div>
 	
 </body>

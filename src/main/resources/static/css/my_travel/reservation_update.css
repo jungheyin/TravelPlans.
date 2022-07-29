@@ -12,6 +12,15 @@ header .mypage{
 	background-color: #7BB0DB;
 }
 
+a:link {
+	text-decoration: none;
+}
+a:visited {
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: none;
+} 
 
 .traffic {
 	min-height: 700px;
@@ -30,6 +39,9 @@ header .mypage{
 	color: #7BB0DB;
 }
 
+section {
+	min-height: 1200px;
+}
 .contents #trafficBtn {
 	font-weight: bold;
 	background-color: #7BB0DB;
@@ -45,4 +57,8 @@ header .mypage{
 	font-weight: bold;
 	background-color: #7BB0DB;
 	color: white;
+}
+
+footer {
+	height:100px;
 }

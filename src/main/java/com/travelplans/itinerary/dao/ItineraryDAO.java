@@ -1,4 +1,4 @@
-package com.travelplans.itinerary.dao;
+	package com.travelplans.itinerary.dao;
 
 import java.util.List;
 import java.util.Map;
@@ -21,13 +21,14 @@ public interface ItineraryDAO {
 			@Param("travelId") int travelId, 
 			@Param("date") String date);
 	
+	public List<Itinerary> selectItineraryByTravelId (int travelId);
+	
 	public Itinerary selectItineraryById(int itineraryId);
 	
 	public int updateItinerary(
 			@Param("itineraryId") int itineraryId, 
 			@Param("travelId") int travelId, 
 			@Param("date") String date, 
-			@Param("title") String title, 
-			@Param("color") String color);
+			@Param("title") String title);
 	
 }

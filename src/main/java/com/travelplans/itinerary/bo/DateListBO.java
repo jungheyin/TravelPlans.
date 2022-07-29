@@ -61,21 +61,6 @@ public class DateListBO {
 				
 	}
 	
-	public int generatePlanPrice(int itineraryId) {
-		
-		List<Plan> planList = planBO.getPlanListByItineraryId(itineraryId);
-		
-		int planPrice = 0;
-		
-		for (int i = 0; i <planList.size(); i++) {
-			
-			planPrice = planPrice + planList.get(i).getPrice();
-		}
-		
-		return planPrice;
-	}
-	
-
 	
 	// view용 DateListView List
 	public List<DateListView> generateDateListViewList(int travelId) {
@@ -101,12 +86,8 @@ public class DateListBO {
 			content.setPlan(planList);
 			
 			// 날짜의 하루동안의 총 비용
-			
-			  int pricePlan = generatePlanPrice(itineraryId);
+			  int pricePlan = planBO.generatePlanPrice(itineraryId);
 			  content.setPlanPrice(pricePlan);
-			 
-			
-			// 여행 경비
 			
 			dateListView.add(content);
 		}

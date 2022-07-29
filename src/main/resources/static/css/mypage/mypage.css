@@ -20,12 +20,23 @@ a:hover {
 header .logoutNav {
 	height:30px;
 	background-color: #7BB0DB;
+	font-weight: bold;
+	color: white;
 }
 
+header .mypageNav {
+	height:30px;
+	background-color: #AEADCA;
+	font-weight: bold;
+	color: white;
+}
 header .mypageBox {
 	height: 100px;
 }
 
+section {
+	min-height: 1000px;
+}
 .addPlans {
 	font-weight: bold;
 	color: #7BB0DB;
@@ -46,7 +57,7 @@ header .mypageBox {
 
 .travelTitle {
 	font-weight: bold;
-	font-size: 17px;
+	font-size: 20px;
 }
 .travelDate {
 	font-weight: bold;
@@ -57,3 +68,6 @@ header .mypageBox {
 	font-size: 15px;
 
 } 	
+footer {
+	height:100px;
+}

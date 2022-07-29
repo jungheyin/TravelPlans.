@@ -30,27 +30,26 @@ header .mypage{
 }
 
 .contents {
-	min-height: 1000px;
+	min-height: 1200px;
 }
 nav {
-	width:130px;
+	width:200px;
 }
 
-nav .nav-link {
+nav .nav-Text {
+	font-size: 18px;
 	color: #000000;
 }
 
-nav .nav-link:hover {
+nav .nav-Text:hover {
 	color:#7BB0DB;
 }
 
+nav .nav-smText {
+	color:#7BB0DB;
+} 
 #layoutBorder {
 	min-height: 900px;
-}
-/* traffic */
-
-#trafficSubject {
-	color:#7BB0DB;
 }
 
 
@@ -86,5 +85,7 @@ nav .nav-link:hover {
 	background-color: #dededf;
 }
 
-
+footer {
+	height:100px;
+}
 

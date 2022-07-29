@@ -89,7 +89,8 @@ $(document).ready(function() {
 		let memo = $('#memo').val().trim();
 		let travelId = $(this).data('travel-id');
 		
-		alert(travelId + title + booker + date + location + price + memo);
+		alert("제목:" + title + "\n 예약자: " +  booker + "\n 날짜: " + date + "\n 위치: " + location 
+				+ "\n가격: " + price + "\n 메모:" +  memo);
 		
 		$.ajax({
 			type: "POST"

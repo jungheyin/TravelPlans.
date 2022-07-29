@@ -13,7 +13,6 @@ public interface NewTravelDAO {
 	public void insertTravel(
 			@Param("userId") int userId, 
 			@Param("title") String title, 
-			@Param("color") String color, 
 			@Param("startDate") String startDate, 
 			@Param("endDate") String endDate);
 	
@@ -25,7 +24,6 @@ public interface NewTravelDAO {
 			@Param("travelId") int travelId, 
 			@Param("userId") int userId, 
 			@Param("title") String title, 
-			@Param("color") String color, 
 			@Param("startDate") String startDate, 
 			@Param("endDate") String endDate);
 	

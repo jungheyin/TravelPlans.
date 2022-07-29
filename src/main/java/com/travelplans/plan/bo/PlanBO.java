@@ -38,13 +38,39 @@ public class PlanBO {
 	public int updatePlan(int planId, int itineraryId, String date, String planName, String time,
 			String location, String memo, int price) {
 		
-		Plan planById = getPlanByPlanId(planId);
+		Plan plan = getPlanByPlanId(planId);
 		
-		if (planById == null) {
+		if (plan == null) {
 			logger.error("[update Plan] null planId" + planId);
 			return 0;
 		}
 		return planDAO.updatePlan(planId, itineraryId, date, planName, time, location, memo, price);
+	}
+	
+	public int deletePlan(int planId, int itineraryId) {
+		
+		Plan plan = getPlanByPlanId(planId);
+		
+		if (plan == null) {
+			logger.error("[delete plan] 삭제할 일정이 없습니다." + planId);
+			return 0;
+		}
+		
+		return planDAO.deletePlan(planId, itineraryId);
+	}
+	
+	// planPrice
+	public int generatePlanPrice(int itineraryId) {
+		
+		List<Plan> planList = getPlanListByItineraryId(itineraryId);
+		
+		int planPrice = 0;
+		for (int i = 0; i < planList.size(); i++) {
+			
+			planPrice = planPrice + planList.get(i).getPrice();
+		}
+		
+		return planPrice;
 	}
 	
 }

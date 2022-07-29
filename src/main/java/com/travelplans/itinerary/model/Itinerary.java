@@ -8,7 +8,6 @@ public class Itinerary {
 	private int travelId;
 	private String date;
 	private String title;
-	private String color;
 	private Date createdAt;
 	private Date updatedAt;
 	public int getId() {
@@ -34,12 +33,6 @@ public class Itinerary {
 	}
 	public void setTitle(String title) {
 		this.title = title;
-	}
-	public String getColor() {
-		return color;
-	}
-	public void setColor(String color) {
-		this.color = color;
 	}
 	public Date getCreatedAt() {
 		return createdAt;

@@ -13,7 +13,7 @@
 			
 			<div class="mt-2">
 				<a href="/new_travel/update_view?travelId=${travel.id}" class="mr-3">
-					<img src="/static/icons/setting.png" alt="수정" width="20px">
+					<img src="/static/icons/setting_skyBlue.png" alt="수정" width="20px">
 				</a>
 			</div>
 		</div>

@@ -6,6 +6,12 @@
 
 
 <div class="travelBox border mt-3 ml-3">
+	<div class="d-flex justify-content-between mx-3 mt-3">
+		<div class="font-weight-bold text-secondary">travel name</div>
+		<a href="/new_travel/update_view?travelId=${travel.id}">
+			<img alt="수정" src="/static/icons/setting_skyBlue.png" width="20px">
+		</a>
+	</div>
 	<h5 class="font-weight-bold text-secondary ml-3 mt-3">${travel.title}</h5>
 
 	<div class="d-flex ml-3 mb-3">

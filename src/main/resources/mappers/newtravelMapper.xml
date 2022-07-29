@@ -9,7 +9,6 @@
 	(
 		`userId`
 		,`title`
-		,`color`
 		,`startDate`
 		,`endDate`
 		,`createdAt`
@@ -19,7 +18,6 @@
 	(
 		#{userId}
 		,#{title}
-		,#{color}
 		,#{startDate}
 		,#{endDate}
 		,NOW()
@@ -32,7 +30,6 @@
 		`id`
 		,`userId`
 		,`title`
-		,`color`
 		,`startDate`
 		,`endDate`
 		,`price`
@@ -49,7 +46,6 @@
 		`id`
 		,`userId`
 		,`title`
-		,`color`
 		,`startDate`
 		,`endDate`
 		,`price`
@@ -65,7 +61,6 @@
 UPDATE `travel`
 SET
 	`title` = #{title}
-	, `color` = #{color}
 	, `startDate` = #{startDate}
 	, `endDate` = #{endDate}
 	, `updatedAt` = NOW()

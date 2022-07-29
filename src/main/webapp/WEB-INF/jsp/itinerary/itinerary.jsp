@@ -19,12 +19,14 @@
 				<div>${travel.endDate}</div>
 			</div>
 		</div>
+ 		<c:forEach items="${dateListView}" var="date">
 		<!-- 일정 총합의 비용을 넣어준다. -->
-		<div class="mt-2 mr-5 font-weight-bold text-white">￦500,000</div>
+		<div class="mt-2 mr-5 pr-5 font-weight-bold text-white">
+			 <fmt:formatNumber value="${itineraryPrice}" type="currency"/>
+		</div>
 	</div>
 	
  	<div>
- 		<c:forEach items="${dateListView}" var="date">
 			<div class="d-flex mt-2 ml-4 mb-3">
 				<div class="date font-weight-bold mr-3 mt-1">
 					${date.date}
@@ -90,24 +92,8 @@
 								<div>
 									<button class="planDelBtn btn d-none">${plan.id}</button>
 									<img alt="삭제" src="/static/icons/delete_red.png" width="20px"
-										class="planDelImg" data-plan-id="${plan.id}">
+										class="planDelImg" data-plan-id="${plan.id}" data-target="${date.itinerary.id}">
 								</div>
-							</div>
-						</div>
-						<div class="hideBox ml-5 pl-4 mt-1 mb-1 d-none">
-							<div class="d-flex">
-								<c:if test="${!empty plan.location}">
-									<img alt="위치아이콘" src="/static/icons/location_gray.png" height="20px"
-										class="mr-2">
-									<div>${plan.location}</div>
-								</c:if>
-							</div>
-							<div>
-								<c:if test="${!empty plan.memo}">
-									<img alt="메모이미지" src="/static/icons/memo_gray.png" width="20px"
-										class="mr-1">
-									${plan.memo}
-								</c:if>
 							</div>
 						</div>
 					</div>
@@ -126,7 +112,9 @@
 			
 			<!-- 결과 -->
 			<div class="resultBox d-flex justify-content-end mr-5 mb-3">
-				<div class="mr-5 text-dark font-weight-bold pr-2"> ${date.planPrice}</div>
+				<div class="mr-5 text-dark font-weight-bold pr-2"> 
+				<fmt:formatNumber value="${date.planPrice}" type="currency"/>
+				</div>
 			</div>
  		</c:forEach>
  	</div>
@@ -206,14 +194,33 @@ $(document).ready(function() {
 		}
 	});
 	
+	// 삭제하기
 	$('.planDelImg').on('click', function() {
 		$('.planDelBtn').click();
-	
+		
+		let itineraryId = $(this).attr('data-target');
 		let planId = $(this).data('plan-id');
 		
-		alert(planId);
+		alert(itineraryId + planId + "삭제");
+		
+		$.ajax({
+			type:"DELETE"
+			,url: "/plan/delete"
+			,data: {"planId": planId, "itineraryId": itineraryId}
+			,success: function(data) {
+				if (data.result == "success") {
+					alert("삭제");
+					document.location.reload();
+				} else {
+					alert(errorMessage);
+				}
+			}
+			, error: function(e) {
+				alert("삭제 실패");
+			}
+		});
 	});
-	
+		
 
 });
 

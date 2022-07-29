@@ -39,7 +39,6 @@ public class NewTravelRestController {
 	@PostMapping("/create")
 	public Map<String, Object> addTravel(
 			@RequestParam("title") String title,
-			@RequestParam("color") String color,
 			@RequestParam("startDate") String startDate,
 			@RequestParam("endDate") String endDate,
 			HttpServletRequest request
@@ -58,7 +57,7 @@ public class NewTravelRestController {
 			return result;
 		}
 		
-		newTravelBO.addTravel(userId, title, color, startDate, endDate);
+		newTravelBO.addTravel(userId, title, startDate, endDate);
 		
 		return result;
 		
@@ -72,7 +71,6 @@ public class NewTravelRestController {
 	public Map<String, Object> updateTravel(
 			@RequestParam("travelId") int travelId,
 			@RequestParam("title") String title,
-			@RequestParam("color") String color,
 			@RequestParam("startDate") String startDate,
 			@RequestParam("endDate") String endDate,
 			HttpServletRequest request
@@ -94,7 +92,7 @@ public class NewTravelRestController {
 		}
 		
 		// update bo 가져온다.
-		int count = newTravelBO.updateTravel(travelId, userId, title, color, startDate, endDate);
+		int count = newTravelBO.updateTravel(travelId, userId, title, startDate, endDate);
 		
 		if (count < 0) {
 			logger.error("[new_travel/update] travel 정보 없음" + travelId);

@@ -29,7 +29,7 @@
 		<header class="d-flex align-items-end justify-content-center">
 			<div class="d-flex">
 				<h1 class="font-weight-bold mt-2 mr-1">travel</h1>
-				<img src="/static/icons/airplan.png" alt="로고" width="45px" height="45px" class="mt-2 ml-2">
+				<img src="/static/icons/airplan_skyBlue.png" alt="로고" width="45px" height="45px" class="mt-2 ml-2">
 				<h1 class="font-weight-bold mt-2 mr-1">plans.</h1>
 			</div>
 		</header>

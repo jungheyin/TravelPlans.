@@ -106,7 +106,8 @@ $(document).ready(function() {
 		let memo = $('#memo').val().trim();
 		let travelId = $(this).data('travel-id');
 		
-		 alert(travelId + name + startDate + endDate + location + price + memo);
+		 alert("숙소이름: " + name + "\n 날짜: " + startDate + " ~ " + endDate + "\n 위치: " +
+				 location + "\n 가격: " + price + "\n 메모: " +memo );
 		
 		 $.ajax({
 			type: "POST"

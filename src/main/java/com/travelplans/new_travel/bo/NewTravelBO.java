@@ -20,8 +20,8 @@ public class NewTravelBO {
 	private NewTravelDAO newTravelDAO;
 
 	// 저장
-	public void addTravel(int userId, String title, String color, String startDate, String endDate) {
-		newTravelDAO.insertTravel(userId, title, color, startDate, endDate);
+	public void addTravel(int userId, String title, String startDate, String endDate) {
+		newTravelDAO.insertTravel(userId, title, startDate, endDate);
 	}
 	
 	public Travel getTravelById(int id) {
@@ -33,7 +33,7 @@ public class NewTravelBO {
 	}
 	
 	// 수정
-	public int updateTravel(int travelId, int userId, String title, String color, String startDate, String endDate) {
+	public int updateTravel(int travelId, int userId, String title, String startDate, String endDate) {
 		
 		// travelId에 해당 여행이 있는지 db에서 가져온다.
 		Travel travel = getTravelById(travelId);
@@ -43,7 +43,7 @@ public class NewTravelBO {
 			return 0;
 		} else {
 			// 여행정보가 있을경우 수정하고, 없을경우 업데이트 안하기
-			return newTravelDAO.updateTravelByIdUserId(travelId, userId, title, color, startDate, endDate);
+			return newTravelDAO.updateTravelByIdUserId(travelId, userId, title, startDate, endDate);
 		}
 		
 	}

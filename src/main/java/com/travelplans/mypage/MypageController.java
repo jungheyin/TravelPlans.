@@ -50,11 +50,13 @@ public class MypageController {
 		
 		// list 글쓰기 목록 가져오기
 		// db에서 가져오기
+
 		List<Travel> travelList = mypageBO.getTravelList(userId);
 		User user = userBO.getUserById(userId);
 		
+		
 		model.addAttribute("user", user);
-		model.addAttribute("travelList",travelList);
+		model.addAttribute("travelList", travelList);
 		model.addAttribute("mypageViewName", "mypage");
 		
 		return "mypage/template/layout";
@@ -83,7 +85,7 @@ public class MypageController {
 			@RequestParam("travelId") int travelId,
 			Model model) {
 		
-		Travel travel = mypageBO.getTravel(travelId);
+		Travel travel = mypageBO.getTravelById(travelId);
 		
 		List<Traffic> trafficList = reservationBO.getTrafficList(travelId);
 		List<Accommodation> accommodationList = reservationBO.getAccommodationList(travelId);

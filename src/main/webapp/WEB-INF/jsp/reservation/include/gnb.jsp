@@ -8,7 +8,7 @@
 	</div>
 	<div class="d-flex justify-content-between">
 		<div class="d-flex">
-			<img src="/static/icons/airplan.png" alt="로고" width="25px"
+			<img src="/static/icons/airplan_skyBlue.png" alt="로고" width="25px"
 				height="25px" class="mt-2 ml-2">
 			<h4 class="font-weight-bold mt-2 mr-1">travel plans.</h4>
 		</div>
@@ -36,10 +36,6 @@
 			</c:when>
 		</c:choose> 
 		
-		<!-- <img src="/static/icons/airplans_black.png" id="airplanImg" 
-						alt="비행기아이콘" width="30px">
-		<button type="button" id="nextBtn" class="btn d-none" data-travel-id=${travel.id}
-			data-></button> -->
 	</div>
 </div>
 

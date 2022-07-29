@@ -35,6 +35,9 @@
 		<section>
 			<jsp:include page="../${newTravelViewName}.jsp" />
 		</section>
+		<footer>
+			<jsp:include page="../include/footer.jsp" />
+		</footer>
 	</div>
 </body>
 </html>

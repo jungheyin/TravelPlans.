@@ -38,13 +38,13 @@
 					<jsp:include page="../include/gnb_setting.jsp" />	
 				</c:when>
 			</c:choose>
-		
-		
 		</header> 
-		
 		<section>
 			<jsp:include page="../${mypageViewName}.jsp" />		
 		</section>
+		<footer>
+			<jsp:include page="../include/footer.jsp" />
+		</footer>
 		
 	</div>
 </body>

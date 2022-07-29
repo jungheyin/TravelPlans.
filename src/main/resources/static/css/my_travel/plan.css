@@ -18,9 +18,8 @@ header .itinerary{
 	color: #7BB0DB;
 }
 
-#contents {
-	min-height: 1000px;
-	
+.contents {
+	min-height: 1200px;
 }
 
 .plan {
@@ -66,4 +65,8 @@ header .itinerary{
 .contents .content #preview {
 	max-width: 500px;
 	max-height: 400px;
+}
+
+footer {
+	height:100px;
 }

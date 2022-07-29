@@ -7,7 +7,6 @@ public class Travel {
 	private int id;
 	private int userId;
 	private String title;
-	private String color;
 	private String startDate;
 	private String endDate;
 	private int price;
@@ -32,12 +31,6 @@ public class Travel {
 	}
 	public void setTitle(String title) {
 		this.title = title;
-	}
-	public String getColor() {
-		return color;
-	}
-	public void setColor(String color) {
-		this.color = color;
 	}
 	public String getStartDate() {
 		return startDate;

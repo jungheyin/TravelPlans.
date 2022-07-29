@@ -189,9 +189,8 @@ $(document).ready(function(e) {
 		
 		let travelId = $(this).data('travel-id');
 		
-		alert(travelId +"traffic:" +traffic+ ",trafficInfo:" + trafficInfo + ",start:" + start + ",startDate:" + startDate +
-				",startTime:" + startTime + ",arrive:" + arrive + ",arriveDate:" + arriveDate + ",arriveTime:" + arriveTime +
-				",price:" + price + ",memo:" + memo);
+		alert("교통수단 \n 이름: " + trafficInfo + "\n 출발: " + start + "(" +startDate + " " + startTime + ") \n 도착: " 
+				+ arrive + " (" + arriveDate + " " + arriveTime +  ") \n 가격: " +  price + "\n 메모: " + memo);
 		
 		  $.ajax({
 			type: "POST"

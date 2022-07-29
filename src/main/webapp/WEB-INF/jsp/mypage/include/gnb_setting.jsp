@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<div class="logoutNav d-flex justify-content-end">
+<div class="mypageNav d-flex justify-content-end">
 
 	<div class="d-flex">
 		<div id="mypage" class="font-weight-bold text-white mr-2">mypage</div>
@@ -10,7 +10,7 @@
 </div>
 <div class="mypageBox d-flex justify-content-between mt-1 mx-2">
 	<div class="d-flex">
-		<img src="/static/icons/airplan.png" alt="로고" width="25px"
+		<img src="/static/icons/airplan_skyBlue.png" alt="로고" width="25px"
 			height="25px" class="mt-2 ml-2">
 		<h4 class="font-weight-bold mt-2 mr-1">travel plans.</h4>
 	</div>
@@ -49,15 +49,13 @@ $(document).ready(function(){
 			return;
 		}
 		
-		alert(nickname + userId);
-		
 	 	$.ajax({
 	 		type: "PUT"
 			, url: "/mypage/update_nickname"
 			, data: {"userId":userId, "nickname": nickname}
 	 		, success: function(data) {
 	 			if (data.result == 'success') {
-	 				alert("수정");
+	 				alert(nickname + " 수정");
 	 				location.href="/mypage/mypage_view";
 	 			} else {
 	 				alert(errorMessage);

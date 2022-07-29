@@ -6,17 +6,25 @@
     
   
 <div class="">
-	<div class="d-flex ml-5 mb-2">
-		<div>
-			<img alt="달력아이콘" src="/static/icons/planner_skyBlue.png" width="35px" height="32px">
+	<div class="d-flex justify-content-around mb-2">
+		<div class="d-flex">
+			<div>
+				<img alt="달력아이콘" src="/static/icons/planner_skyBlue.png" width="35px" height="32px">
+			</div>
+			<div>
+			<h4 class="schedule ml-2 mt-1">SCHEDULE</h4>
+			</div>
 		</div>
 		<div>
-		<h4 class="schedule ml-3 mt-1">SCHEDULE</h4></div>
+			<a href="/plan/create_view?travelId=${travel.id}&itineraryId=${itineraryId}&date=${date}">
+				<img alt="추가아이콘" src="/static/icons/plus_skyBlue.png" width="35px">
+			</a>
+		</div>
 	</div>
 	
 	<!-- planList -->
 	
-	<div class="">
+	<div>
 		<c:forEach items="${planList}" var="plan">
 			<div class="border rounded p-3 mb-2">
 				<div class="d-flex justify-content-between">
@@ -86,7 +94,26 @@ $(document).ready(function() {
 		$('.delBtn').click();
 		
 		let planId = $(this).data('plan-id');
-		alert(planId);
+		let itineraryId = ${itineraryId};
+		
+		alert("planId:" + planId + " itinerayId:"  + itineraryId + " 삭제");
+		
+		$.ajax({
+			type:"DELETE"
+			,url: "/plan/delete"
+			,data: {"planId": planId, "itineraryId": itineraryId}
+			,success: function(data) {
+				if (data.result == "success") {
+					alert("삭제");
+					document.location.reload();
+				} else {
+					alert(errorMessage);
+				}
+			}
+			, error: function(e) {
+				alert("삭제 실패");
+			}
+		});
 	});
 	
 });

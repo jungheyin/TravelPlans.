@@ -1,53 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<span class="font-weight-bold ml-2">NEW PLAN</span>
+<span class="font-weight-bold ml-4">NEW PLAN</span>
 	
-	<div id="bgBox" class="bgBox border mt-3 ml-3">
+	<div id="bgBox" class="bgBox border rounded mt-2 ml-3">
 			<div class="d-flex justify-content-between">
-				<div class="font-weight-bold ml-3 mb-2 mt-3">travel name</div>
-				<div>
-					<img src="/static/icons/check.png" id="checkImg" width="20px" 
+				<div class="font-weight-bold ml-3 mb-2 mt-3">TRAVEL NAME</div>
+				<div class="mr-2">
+					<img src="/static/icons/airplan_skyBlue.png" id="checkImg" width="35px" 
 						class="mr-3 mt-3">
 					<button type="button" id="travelSaveBtn" class="btn d-none"></button>
 				</div>
 			</div>
 			
-			<div class="d-flex justify-content-between">
-			
-				<input type="text" id="travelTitle" name="travelTitle" class="form-control col-6 ml-3 mb-4"
-					maxlength="20" placeholder="여행 제목">
-					
-				 <div id="colorBox" class="d-flex">
-				 
-			      	<div id="redBox"></div>
-			      	<input type="radio" name="colorRadio" class="redRadio d-none" value="#ed5d47">
-			      	
-			      	<label><div id="yellowBox"></div>
-			      		<input type="radio" name="colorRadio" class="yellowRadio d-none" value="#ffcc85">
-			      	</label>
-			      	<div id="greenBox"></div>
-			      	<input type="radio" name="colorRadio" class="greenRadio d-none" value="#ffcc85">
-			      	
-			      	<div id="skyBlueBox"></div>
-			      	<input type="radio" name="colorRadio" class="skyBlueRadio d-none" value="#7BB0DB">
-			      	
-			      	<div id="pupleBox"></div>
-			      	<input type="radio" name="colorRadio" class="pupleRadio d-none" value="#AEADCA">
-			     </div>
-			</div>
+			<input type="text" id="travelTitle" name="travelTitle" class="form-control col-6 ml-3 mb-4"
+				maxlength="20" placeholder="여행 제목">
 			
 			<!-- startDate와 endDate도 db에 넣어야한다. -->
-			<div class="mx-3 mb-5">
-				<div class="d-flex justify-content-around">
-					<small id="star" class="m-1 font-weight-bold">Start Date</small>
-					<small id="end" class="m-1 font-weight-bold">End Date</small>
+				<div class="d-flex ml-3">
+					<div id="star" class="m-1 font-weight-bold mr-5 pr-5">START DATE</div>
+					<div class="mr-5 pr-5"></div>
+					<div id="end" class="m-1 font-weight-bold ml-5 pl-5">END DATE</div>
 				</div>
-				<div class="d-flex">
-					<input type="text" id="startDate" name="startDate" class="form-control mr-4">
-					<input type="text" id="endDate" name="endDate" class="form-control">
+				
+				<div class="d-flex mb-5">
+					<input type="text" id="startDate" name="startDate" class="form-control mx-3">
+					<input type="text" id="endDate" name="endDate" class="form-control mx-3">
 				</div>
-			</div>
-			
 	</div>
 <script>
 
@@ -75,40 +53,6 @@ $(document).ready(function() {
 	$("#endDate").datepicker("setDate", new Date());
 	
 	
-	$('#redBox').on('click', function() { // redBox 클깃시 redBtn이 클릭된다.
-		$('.redRadio').click();
-		// bgBox을 target으로 잡아 배경색으로 넣어준다.
-		let target = document.getElementById("bgBox"); 
-		var bgBox = target.style.backgroundColor = "#ed5d47";
-	}); 
-	
-	$('#yellowBox').on('click', function() { // redBox 클깃시 redBtn이 클릭된다.
-		$('.yellowRadio').click();
-		// bgBox을 target으로 잡아 배경색으로 넣어준다.
-		let target = document.getElementById("bgBox"); 
-		var bgBox = target.style.backgroundColor = "#ffcc85";
-	}); 
-	$('#greenBox').on('click', function() { // redBox 클깃시 redBtn이 클릭된다.
-		$('.greenRadio').click();
-		// bgBox을 target으로 잡아 배경색으로 넣어준다.
-		let target = document.getElementById("bgBox"); 
-		var bgBox = target.style.backgroundColor = "#76af7b";
-	}); 
-	$('#skyBlueBox').on('click', function() { // redBox 클깃시 redBtn이 클릭된다.
-		$('.skyBlueRadio').click();
-		// bgBox을 target으로 잡아 배경색으로 넣어준다.
-		let target = document.getElementById("bgBox"); 
-		var bgBox = target.style.backgroundColor = "#7BB0DB";
-	}); 
-	$('#pupleBox').on('click', function() { // redBox 클깃시 redBtn이 클릭된다.
-		$('.pupleRadio').click();
-		// bgBox을 target으로 잡아 배경색으로 넣어준다.
-		let target = document.getElementById("bgBox"); 
-		var bgBox = target.style.backgroundColor = "#AEADCA";
-	}); 
-	
-	
-	
 	$('#checkImg').on('click', function() {
 		$('#travelSaveBtn').click();
 		
@@ -119,14 +63,7 @@ $(document).ready(function() {
 			alert("여행 제목을 입력해 주세요.");
 			return;
 		}
-		
-		let color = $("input[name='colorRadio']:checked").val();
-		
-		if (color == null) {
-			color = "#7BB0DB";
-		}  
-
-		
+	
 		let startDate = $('#startDate').val();
 		let endDate = $('#endDate').val();
 		
@@ -135,7 +72,7 @@ $(document).ready(function() {
 		$.ajax({
 			type: "POST"
 			,url: "/new_travel/create"
-			, data: {"title":title, "color":color, "startDate":startDate, "endDate":endDate}
+			, data: {"title":title, "startDate":startDate, "endDate":endDate}
 			, success: function(data) {
 				if (data.result == 'success') {
 					location.href="/reservation/traffic_create_view";

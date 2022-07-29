@@ -32,4 +32,8 @@ public interface PlanDAO {
 			@Param("location") String location, 
 			@Param("memo") String memo, 
 			@Param("price") int price);
+	
+	public int deletePlan(
+			@Param("planId") int planId, 
+			@Param("itineraryId") int itineraryId);
 }

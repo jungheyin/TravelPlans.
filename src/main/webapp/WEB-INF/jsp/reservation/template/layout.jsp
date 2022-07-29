@@ -42,6 +42,9 @@
 		<section class="contents">
 			<jsp:include page="../${reservationViewName}.jsp" />
 		</section>
+		<footer>
+			<jsp:include page="../include/footer.jsp" />
+		</footer>
 	</div>
 	
 </body>

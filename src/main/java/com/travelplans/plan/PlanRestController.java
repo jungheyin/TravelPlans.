@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -90,5 +91,33 @@ public class PlanRestController {
 		}
 		return result;
 	}
-
+	
+	@DeleteMapping("/delete")
+	public Map<String, Object> deletePlan(
+			@RequestParam("planId") int planId,
+			@RequestParam("itineraryId") int itineraryId,
+			HttpServletRequest request) {
+		
+		Map<String, Object> result = new HashMap<>();
+		result.put("result", "success");
+		
+		HttpSession session = request.getSession();
+		Integer userId = (Integer)session.getAttribute("userId");
+		
+		if (userId == null) {
+			logger.error("[plan/delete] userId null" + userId);
+			result.put("result", "error");
+			result.put("errorMessage", "로그인 후 이용해 주세요.");
+		}
+		
+		int delCount = planBO.deletePlan(planId, itineraryId);
+		
+		if (delCount < 0) {
+			logger.error("[plan/delete] 삭제 실패" + planId + itineraryId);
+			result.put("result", "error");
+			result.put("errorMessage", "삭제 실패했습니다.");
+		}
+		
+		return result;
+	}
 }

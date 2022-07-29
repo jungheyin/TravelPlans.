@@ -9,7 +9,6 @@
  		`id`
  		,`userId`
 		,`title`
-		,`color`
 		,`startDate`
 		,`endDate`
 		,`price`
@@ -23,11 +22,10 @@
 </select>
 
 <select id="selectTravelById" resultType="com.travelplans.mypage.model.Travel">
-  SELECT 
+ 	SELECT 
  		`id`
  		,`userId`
 		,`title`
-		,`color`
 		,`startDate`
 		,`endDate`
 		,`price`
@@ -36,7 +34,7 @@
  	FROM
  		`travel`
  	WHERE
- 		`userId` = #{userId}
+ 		`id` = #{travelId}
 </select>
 
 <update id="updateNicknameById" parameterType="map">

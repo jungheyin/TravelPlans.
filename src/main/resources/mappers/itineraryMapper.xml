@@ -29,7 +29,6 @@ SELECT
 		,`travelId`
 		,`date`
 		,`title`
-		,`color`
 		,`createdAt`
 		,`updatedAt`
 	FROM
@@ -40,13 +39,26 @@ SELECT
 		`date` = #{date}
 </select>
 
+<select id="selectItineraryByTravelId" resultType="com.travelplans.itinerary.model.Itinerary">
+SELECT
+		`id`
+		,`travelId`
+		,`date`
+		,`title`
+		,`createdAt`
+		,`updatedAt`
+	FROM
+		`itinerary`
+	WHERE
+		`travelId` = #{travelId}
+</select>
+
 <select id="selectItineraryById" resultType="com.travelplans.itinerary.model.Itinerary">
 SELECT
 		`id`
 		,`travelId`
 		,`date`
 		,`title`
-		,`color`
 		,`createdAt`
 		,`updatedAt`
 	FROM
@@ -61,7 +73,6 @@ SELECT
 UPDATE `itinerary`
 SET
 	 `title` = #{title}
-	, `color` = #{color}
 WHERE
 	`id` = #{itineraryId}
 	AND `travelId` = #{travelId}

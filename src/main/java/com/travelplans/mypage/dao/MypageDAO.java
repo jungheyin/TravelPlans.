@@ -12,7 +12,7 @@ public interface MypageDAO {
 
 	public List<Travel> selsectTravelList(int userId);
 	
-	public Travel selectTravelById(int userId);
+	public Travel selectTravelById (int travelId);
 	
 	public int updateNicknameById(
 			@Param("userId") int userId, 

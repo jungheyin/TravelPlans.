@@ -38,11 +38,14 @@
 			</nav>
 			<article id="article">
 				<div id="layoutBorder" class="border-left mb-5"><div>
-				<div class="ml-3 mt-2">
+				<div class="ml-3 mt-2 mr-4 pr-2">
 					<jsp:include page="../${itineraryViewName}.jsp" />
 				</div>
 			</article>
 		</section>
+		<footer>
+			<jsp:include page="../include/footer.jsp" />
+		</footer>
 	</div>
 </body>
 </html>

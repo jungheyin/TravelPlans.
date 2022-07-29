@@ -175,4 +175,53 @@ public class ReservationBO {
 		
 		return traffcSelectMap;
 	}
+	
+	// traffic 총 경비
+		public int generateTrafficPrice(int travelId) {
+				
+			List<Traffic> trafficList = getTrafficList(travelId);
+				
+			int trafficPrice = 0;	
+			for (int i = 0; i < trafficList.size(); i++) {
+					
+				trafficPrice = trafficPrice + trafficList.get(i).getPrice();
+				
+			}
+				
+			return trafficPrice;
+				
+		}
+		// accommodation 총 경비
+		public int generateAccommodationPrice(int travelId) {
+				
+			List<Accommodation> accommodationList = getAccommodationList(travelId);
+				
+			int accommodationPrice = 0;
+			for (int i = 0; i < accommodationList.size(); i++) {
+					
+				accommodationPrice = accommodationPrice + accommodationList.get(i).getPrice();
+					
+			}
+				
+			return accommodationPrice;
+		}
+			
+		// reservation 총 비용
+		public int generateReservationPrice(int travelId) {
+				
+			List<Reservation> reservationList = getReservationList(travelId);
+			
+			int reservationPrice = 0;
+			for (int i = 0; i < reservationList.size(); i++) {
+					
+				reservationPrice = reservationPrice + reservationList.get(i).getPrice();
+				
+			}
+				
+			return reservationPrice;
+		}
+	
+	
+	
+	
 }

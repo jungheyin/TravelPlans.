@@ -98,7 +98,6 @@ INSERT INTO `reservation`
 		`id`
 		,`userId`
 		,`title`
-		,`color`
 		,`startDate`
 		,`endDate`
 		,`price`
@@ -115,7 +114,6 @@ INSERT INTO `reservation`
 		`id`
 		,`userId`
 		,`title`
-		,`color`
 		,`startDate`
 		,`endDate`
 		,`price`

@@ -81,4 +81,13 @@ WHERE
 	AND `itineraryId` = #{itineraryId}
 	AND `date` = #{date}
  </update>
+ 
+ <delete id="deletePlan" parameterType="map">
+ DELETE
+ FROM
+ 	`plan`
+ WHERE
+ 	`id` = #{planId}
+ 	AND `itineraryId` = #{itineraryId}
+ </delete>
 </mapper>

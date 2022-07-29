@@ -16,10 +16,10 @@ public class MypageBO {
 
 	public List<Travel> getTravelList(int userId) {
 		return mypageDAO.selsectTravelList(userId);
-	}
+	}	
 	
-	public Travel getTravel(int userId) {
-		return mypageDAO.selectTravelById(userId);
+	public Travel getTravelById (int travelId) {
+		return mypageDAO.selectTravelById(travelId);
 	}
 	
 	public int updateNicknameById(int userId, String nickname) {

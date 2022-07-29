@@ -5,11 +5,12 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <div>
 	<div class="d-flex justify-content-between">
-		<h5 id="trafficSubject" class="font-weight-bold ml-1">교통수단</h5>
-		<a href="/reservation/traffic_create_view?travelId=${travel.id}" class="mt-1 mr-2" >
-			<img src="/static/icons/plus_skyBlue.png" alt="추가" width="40px">
+		<h5 class="font-weight-bold ml-1 mt-2">교통수단</h5>
+		<a href="/reservation/traffic_create_view?travelId=${travel.id}" class="mr-2">
+			<img src="/static/icons/plus_skyBlue.png" alt="추가" width="35px">
 		</a>
 	</div>
+	
 	<c:forEach var="traffic" items="${trafficList}">
 		
 		<a href="/reservation/traffic_update_view?travelId=${travel.id}&trafficId=${traffic.id}" 
@@ -17,7 +18,7 @@
 						
 		<div class="trafficBox border p-3 mb-3" data-traffic-id="${traffic.id}">
 			<div class="d-flex justify-content-end">
-				<img src="/static/icons/delete.png" alt="삭제" width="25px" class="deleteImg">
+				<img src="/static/icons/delete_black.png" alt="삭제" width="25px" class="deleteImg">
 				<button type="button" class="deleteBtn btn d-none" data-traffic-id="${traffic.id}"></button>
 			</div>
 			
@@ -29,9 +30,8 @@
 							<h5 class="font-weight-bold">${traffic.arrive}</h5>
 						</div>
 				</div>
-				<div>
-					<!-- TODO: 콤마찍어야한다. -->
-					<span class="font-weight-bold mr-5">${traffic.price}</span>
+				<div class="font-weight-bold mr-5">
+					<fmt:formatNumber value="${traffic.price}" type="currency"/>
 				</div>
 			</div>
 			<div>

@@ -13,6 +13,16 @@ header .loginText {
 	color: #7BB0DB;
 }
 
+a:link {
+	 text-decoration: none;
+}
+a:visited{
+	 text-decoration: none;
+}
+a:hover{
+	text-decoration: none;
+}
+
 .content {height:400px;}
 
 .content #loginBtn {

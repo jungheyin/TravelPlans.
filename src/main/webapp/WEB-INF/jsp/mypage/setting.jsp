@@ -7,16 +7,14 @@
 
 	<h5 class="font-weight-bold ml-4">MY PLANS</h5>
 	<hr>
-
 	<!-- user의 my plans 리스트 -->
 	<c:forEach items="${travelList}" var="travel">
 		<div class="border d-flex justify-content-center mb-3 mx-5 ">
 
 			<div class="itineraryBox d-flex justify-content-between mb-3">
-				<c:set var="boxColor" value="${travel.color}" />
-				<div class="ml-3 mt-4 mb-4">
+				<div class="ml-3 mt-4">
 
-				<div class="travelTitle">${travel.title}</div> <!-- trip의 startDate ~ endDate (year) : 수정해야한다. -->
+				<div class="travelTitle mt-2">${travel.title}</div> <!-- trip의 startDate ~ endDate (year) : 수정해야한다. -->
 
 					<div class="d-flex">
 						<div class="travelDate">
@@ -49,13 +47,6 @@
 				</div>
 
 				<div class="d-flex align-items-center mr-2">
-
-					<div class="mr-4">
-						<span class="travelPrice mr-2"> ￦
-							<fmt:formatNumber value="${travel.price}" type="number" />
-						</span>
-					</div>
-					<!-- my travel 페이지로 이동 -->
 					<div>
 						<img src="/static/icons/multiply.png" class="deleteImg" alt="삭제" width="30px"
 							height="30px">

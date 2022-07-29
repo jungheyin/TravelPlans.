@@ -1,3 +1,4 @@
+
 package com.travelplans.itinerary;
 
 import java.util.HashMap;
@@ -72,7 +73,6 @@ public class ItineraryRestController {
 			@RequestParam("travelId") int travelId,
 			@RequestParam("date") String date,
 			@RequestParam("title") String title,
-			@RequestParam(value="color", required=false) String color,
 			HttpServletRequest request) {
 		
 		// map 결과
@@ -91,7 +91,7 @@ public class ItineraryRestController {
 		}
 		
 		// update BO
-		int updateCount = itineraryBO.updateItinerary(itineraryId, travelId, date, title, color);
+		int updateCount = itineraryBO.updateItinerary(itineraryId, travelId, date, title);
 		
 		if (updateCount < 0) {
 			logger.error("[itinerary/update] not update" + userId + travelId + date);

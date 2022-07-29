@@ -1,6 +1,5 @@
 package com.travelplans.itinerary;
 
-import java.text.ParseException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +35,7 @@ public class ItineraryController {
 	@Autowired
 	private PlanBO planBO;
 	
+
 	/**
 	 * 교통수단 정보 화면
 	 * @param travelId
@@ -49,9 +49,17 @@ public class ItineraryController {
 		
 		Travel travel = reservationBO.getTravelById(travelId);
 		List<Traffic> trafficList = reservationBO.getTrafficList(travelId);
-		
 		Traffic traffic = reservationBO.getTrafficById(travelId);
 		
+		int tafficPrice = reservationBO.generateTrafficPrice(travelId);
+		int accommodationPrice = reservationBO.generateAccommodationPrice(travelId);
+		int reservationPrice = reservationBO.generateReservationPrice(travelId);
+		int itineraryPrice = itineraryBO.generateItineraryPrice(travelId);
+		
+		model.addAttribute("itineraryPrice", itineraryPrice);
+		model.addAttribute("tafficPrice", tafficPrice);
+		model.addAttribute("accommodationPrice", accommodationPrice);
+		model.addAttribute("reservationPrice", reservationPrice);
 		model.addAttribute("traffic", traffic);
 		model.addAttribute("travel", travel);
 		model.addAttribute("trafficList", trafficList);
@@ -73,9 +81,16 @@ public class ItineraryController {
 		
 		Travel travel = reservationBO.getTravelById(travelId);
 		List<Accommodation> accommodationList = reservationBO.getAccommodationList(travelId);
-		
 		Accommodation accommodation = reservationBO.getAccommodationById(travelId);
+		int tafficPrice = reservationBO.generateTrafficPrice(travelId);
+		int accommodationPrice = reservationBO.generateAccommodationPrice(travelId);
+		int reservationPrice = reservationBO.generateReservationPrice(travelId);
+		int itineraryPrice = itineraryBO.generateItineraryPrice(travelId);
 		
+		model.addAttribute("itineraryPrice", itineraryPrice);
+		model.addAttribute("tafficPrice", tafficPrice);
+		model.addAttribute("accommodationPrice", accommodationPrice);
+		model.addAttribute("reservationPrice", reservationPrice);
 		model.addAttribute("travel", travel);
 		model.addAttribute("accommodation", accommodation);
 		model.addAttribute("accommodationList", accommodationList);
@@ -97,9 +112,16 @@ public class ItineraryController {
 		
 		Travel travel = reservationBO.getTravelById(travelId);
 		List<Reservation> reservationList = reservationBO.getReservationList(travelId);
-		
 		Reservation reservation = reservationBO.getReservationById(travelId);
+		int tafficPrice = reservationBO.generateTrafficPrice(travelId);
+		int accommodationPrice = reservationBO.generateAccommodationPrice(travelId);
+		int reservationPrice = reservationBO.generateReservationPrice(travelId);
+		int itineraryPrice = itineraryBO.generateItineraryPrice(travelId);
 		
+		model.addAttribute("itineraryPrice", itineraryPrice);
+		model.addAttribute("tafficPrice", tafficPrice);
+		model.addAttribute("accommodationPrice", accommodationPrice);
+		model.addAttribute("reservationPrice", reservationPrice);
 		model.addAttribute("travel", travel);
 		model.addAttribute("reservation", reservation);
 		model.addAttribute("reservationList", reservationList);
@@ -116,7 +138,15 @@ public class ItineraryController {
 		
 		Travel travel = reservationBO.getTravelById(travelId);
 		List<DateListView> dateListView = dateListBO.generateDateListViewList(travelId);
+		int tafficPrice = reservationBO.generateTrafficPrice(travelId);
+		int accommodationPrice = reservationBO.generateAccommodationPrice(travelId);
+		int reservationPrice = reservationBO.generateReservationPrice(travelId);
+		int itineraryPrice = itineraryBO.generateItineraryPrice(travelId);
 		
+		model.addAttribute("itineraryPrice", itineraryPrice);
+		model.addAttribute("tafficPrice", tafficPrice);
+		model.addAttribute("accommodationPrice", accommodationPrice);
+		model.addAttribute("reservationPrice", reservationPrice);
 		model.addAttribute("dateListView", dateListView);
 		model.addAttribute("travel", travel);
 		model.addAttribute("itineraryViewName", "itinerary");

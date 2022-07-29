@@ -12,6 +12,7 @@ public class DateListView {
 	private Itinerary itinerary; // 여행일정 부분
 	private List<Plan> plan; // 일정(plan)가져오기
 	private int planPrice;
+	private int itineraryPrice;
 	
 	public Travel getTravel() {
 		return travel;
@@ -43,6 +44,10 @@ public class DateListView {
 	public void setPlanPrice(int planPrice) {
 		this.planPrice = planPrice;
 	}
-	
-	
+	public int getItineraryPrice() {
+		return itineraryPrice;
+	}
+	public void setItineraryPrice(int itineraryPrice) {
+		this.itineraryPrice = itineraryPrice;
+	}
 }
