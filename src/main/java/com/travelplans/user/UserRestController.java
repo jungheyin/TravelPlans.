@@ -1,5 +1,8 @@
 package com.travelplans.user;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,7 +45,30 @@ public class UserRestController {
 		
 		return result;
 	}
-
+	
+	@RequestMapping("is_find_id")
+	public Map<String, Object> isFindId(
+			@RequestParam("email") String email) throws UnsupportedEncodingException {
+		
+		
+		Map<String, Object> result = new HashMap<>();
+		boolean existId = userBO.existEmail(email);
+		result.put("result", existId);
+		
+		return result;
+	}
+	
+	@RequestMapping("is_find_password")
+	public Map<String, Object> isFindPassword(
+			@RequestParam("loginId") String loginId,
+			@RequestParam("email") String email) {
+		
+		Map<String, Object> result = new HashMap<>();
+		boolean existPassword = userBO.existLoginIdEmail(loginId, email);
+		result.put("result", existPassword);
+		
+		return result; 
+	}
 	/**
 	 * 회원가입 - ajax호출
 	 * @param loginId
@@ -100,5 +127,28 @@ public class UserRestController {
 		  }
 		  
 		  return result;
+	  }
+	  
+	  @PutMapping("/password_update")
+	  public Map<String, Object> passwordUpdate(
+			  @RequestParam("userId") int userId,
+			  @RequestParam("password") String password,
+			  HttpServletRequest request) {
+		
+		  // map 결과
+		  Map<String,Object> result = new HashMap<>();
+		  result.put("result", "success");
+		  
+		  // update BO
+		  int updateCount = userBO.updateUser(userId, password);
+		  
+		  if (updateCount < 0) {
+			  logger.error("[password/update] not update" + userId);
+			  result.put("result", "error");
+			  result.put("errorMessage", "비밀번호 변경 실패");
+		  }
+		  
+		  return result;
+		  
 	  }
 }

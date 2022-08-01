@@ -13,38 +13,38 @@
 	<c:forEach var="accommodation" items="${accommodationList}">
 	<a href="/reservation/accommodation_update_view?travelId=${travel.id}&accommodationId=${accommodation.id}"
 				class="text-dark">
-	<div class="border p-3 mb-3">
-		<div class="d-flex justify-content-end mb-2 mr-2">
-			<img src="/static/icons/delete_black.png" alt="삭제" width="25px" class="deleteImg">
-			<button type="button" class="deleteBtn btn d-none" data-accommodation-id="${accommodation.id}"></button>
-		</div>
-		<!-- name과 price : font-size조절하기 -->
-		<div class="d-flex justify-content-between mr-5">
-			
-			<h5 class="font-weight-bold">${accommodation.name}</h5>
-			
-				<!-- TODO: 콤마찍어야한다. -->
-			<div class="font-weight-bold mr-5">
-				<fmt:formatNumber value="${accommodation.price}" type="currency"/>
+		<div class="border p-3 mb-3">
+			<div class="d-flex justify-content-end mb-2 mr-2">
+				<img src="/static/icons/delete_black.png" alt="삭제" width="25px" class="deleteImg">
+				<button type="button" class="deleteBtn btn d-none" data-accommodation-id="${accommodation.id}"></button>
 			</div>
-		</div>	
-		<!-- 시간설정해야한다. -->
-		<div class="d-flex text-secondary mb-3">
-			<small class="font-weight-bold ">${accommodation.startDate}</small>
-			<small class="font-weight-bold mx-1">-</small>
-			<small class="font-weight-bold mx-1">${accommodation.endDate}</small>
+			<!-- name과 price : font-size조절하기 -->
+			<div class="d-flex justify-content-between mr-5">
+				
+				<h5 class="font-weight-bold">${accommodation.name}</h5>
+				
+					<!-- TODO: 콤마찍어야한다. -->
+				<div class="font-weight-bold mr-5">
+					<fmt:formatNumber value="${accommodation.price}" type="currency"/>
+				</div>
+			</div>	
+			<!-- 시간설정해야한다. -->
+			<div class="d-flex text-secondary mb-3">
+				<small class="font-weight-bold ">${accommodation.startDate}</small>
+				<small class="font-weight-bold mx-1">-</small>
+				<small class="font-weight-bold mx-1">${accommodation.endDate}</small>
+			</div>
+			<div>
+				<span class="font-weight-bold mb-2">위치: ${accommodation.location}</span>
+			</div>
+			<!-- TODO: 다시 해야함!! -->
+			<div class="font-weight-bold text-dark mt-1 mb-2">
+				<span class="ml-2">
+					${accommodation.memo}
+				</span>
+				
+			</div>
 		</div>
-		<div>
-			<span class="font-weight-bold mb-2">위치: ${accommodation.location}</span>
-		</div>
-		<!-- TODO: 다시 해야함!! -->
-		<div class="font-weight-bold text-dark mt-1 mb-2">
-			<span class="ml-2">
-				${accommodation.memo}
-			</span>
-			
-		</div>
-	</div>
 	</a>
 	</c:forEach>
 </div>
@@ -55,10 +55,8 @@ $(document).ready(function() {
 	$('.deleteImg').on('click', function(e) {
 		$('.deleteBtn').click();
 		
-		var accommodationId = $('.deleteBtn').data('accommodation-id');
-		var travelId = ${travel.id};
-		
-		alert(accommodationId + " 삭제");
+		let accommodationId = $('.deleteBtn').data('accommodation-id');
+		let travelId = ${travel.id};
 		
 		  $.ajax({
 			type: "DELETE"
@@ -67,7 +65,7 @@ $(document).ready(function() {
 			, success: function(data) {
 				if (data.result == "success") {
 					// 성공시 reload
-					alert(travelId + accommodationId + " 성공");
+					alert("삭제 성공");
 					document.location.reload();
 				} else {
 					alert(errorMessage);

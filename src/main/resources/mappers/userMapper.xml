@@ -3,7 +3,7 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 <mapper namespace="com.travelplans.user.dao.UserDAO">
-	<insert id="insertUser" parameterType="map">
+<insert id="insertUser" parameterType="map">
 		INSERT INTO `user`
 		(
 			`loginId`
@@ -22,17 +22,34 @@
 			,NOW()
 			,NOW()
 		)
-	</insert>
+</insert>
 	
-	<select id="selectLoginId" parameterType="String" resultType="boolean">
+<select id="selectLoginId" parameterType="String" resultType="boolean">
 		SELECT 
 			COUNT(*)
 		FROM
 			`user`
 		WHERE `loginId` = #{loginId}
-	</select>
+</select>
 	
-	<select id="selectUserByLoginIdPassword" parameterType="map" resultType="com.travelplans.user.model.User">
+<select id="selectEmail" parameterType="String" resultType="boolean">
+		SELECT 
+			COUNT(*)
+		FROM
+			`user`
+		WHERE `email` = #{email}
+</select>
+
+<select id="selectLoginIdEmail" parameterType="map" resultType="boolean">
+		SELECT 
+			COUNT(*)
+		FROM
+			`user`
+		WHERE `loginId` = #{loginId} 
+		AND `email` = #{email}
+</select>
+	
+<select id="selectUserByLoginIdPassword" parameterType="map" resultType="com.travelplans.user.model.User">
 		SELECT
 			`id`
 			,`loginId`
@@ -45,9 +62,9 @@
  			`user`
  		WHERE `loginId` = #{loginId}
  			AND `password` = #{password}
-	</select>
+</select>
 	
-	<select id="selectUserById"  parameterType="int" resultType="com.travelplans.user.model.User">
+<select id="selectUserById"  parameterType="int" resultType="com.travelplans.user.model.User">
 	SELECT
 			`id`
 			,`loginId`
@@ -59,5 +76,41 @@
  		FROM
  			`user`
  		WHERE `id` = #{id}
-	</select>
+</select>
+
+<select id="selectUserByLoginIdEmail"  parameterType="map" resultType="com.travelplans.user.model.User">
+	SELECT
+			`id`
+			,`loginId`
+			,`password`
+			,`nickname`
+			,`email`
+			,`createdAt`
+ 			,`updatedAt`
+ 		FROM
+ 			`user`
+ 		WHERE `loginId` = #{loginId}
+ 		AND `email` = #{email}
+</select>
+
+<select id="selectUserByEmail"  parameterType="List" resultType="com.travelplans.user.model.User">
+	SELECT
+			`id`
+			,`loginId`
+			,`password`
+			,`nickname`
+			,`email`
+			,`createdAt`
+ 			,`updatedAt`
+ 		FROM
+ 			`user`
+ 		WHERE `email` = #{email}
+</select>
+<update id="updateUser" parameterType="map">
+UPDATE `user`
+SET
+	 `password` = #{password}
+WHERE
+	`id` = #{userId}
+</update>
 </mapper>

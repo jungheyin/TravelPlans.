@@ -1,22 +1,9 @@
 @charset "UTF-8";
 
-#travelplans {
+#wrap {
 	width: 800px;
-	height:30px;
-	background-color:  #AEADCA;
+	
 }
-#wrap{
-	width:500px;
-}
-
-header{
-	height:120px;
-}
-
-
-header .logoText {
-	color: #7BB0DB;
-	}
 
 a:link {
 	 text-decoration: none;
@@ -28,19 +15,44 @@ a:hover{
 	text-decoration: none;
 }
 
-/* infoText */
-#idCheckOk{ 
-	color: #7BB0DB;
-	font-weight:bold;
-	}
-#idCheckNot{ 
+.travelPlansVar {
+	height:30px;
+	background-color: #ffcc85;
+}
+
+header {
+	height: 100px;
+}
+
+.content {
+	height: 500px;
+}
+
+#id {
+	width: 380px;
+}
+#password {
+	width: 380px;
+}
+
+.border {
+	height: 370px;
+}
+
+#idBtn {
+	background-color: #ffcc85;
+}
+#passwordBtn {
+	background-color: #ffcc85;
+}
+
+.loginId {
 	color: #ed5d47;
-	font-weight:bold;
-	}
-#idCheckLength{ 
-	color: #ffcc85;
-	font-weight:bold;
-	}
+}
+
+#findPasswordPage {
+	width: 420px;
+}
 
 #passwordOk{ 
 	color: #7BB0DB;
@@ -73,13 +85,6 @@ a:hover{
 	font-weight:bold;
 	}
 
-
-.content #signUpBtn{
-	background-color: #AEADCA;
-	font-weight: bold;
-	color: white;
-}
-
-footer {
-	height:100px;
+#updateBtn{
+	background-color: #ed5d47;
 }

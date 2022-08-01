@@ -66,16 +66,14 @@ $(document).ready(function() {
 		let startDate = $('#startDate').val();
 		let endDate = $('#endDate').val();
 		
-		// alert(${travel.id} + title + color + startDate + endDate);
-		
 		 $.ajax({
 			type: "PUT"
-			,url: "/new_travel/update"
+			, url: "/new_travel/update"
 			, data: {"travelId":${travel.id},"title":title, "startDate":startDate, "endDate":endDate}
 			, success: function(data) {
 				if (data.result == 'success') {
 					alert(title + " 수정되었습니다.");
-					location.href="/reservation/traffic_create_view?travelId=${travel.id}";
+					location.href="/itinerary/traffic_info_view?travelId=${travel.id}";
 				} else if (data.result == 'error'){
 					alert(errorMessage);
 				}

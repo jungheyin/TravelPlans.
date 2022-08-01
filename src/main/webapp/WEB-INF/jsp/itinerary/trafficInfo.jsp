@@ -94,7 +94,7 @@ $(document).ready(function() {
 			, success: function(data) {
 				if (data.result == "success") {
 					// 성공시 reload
-					alert( trafficId + " 성공");
+					alert( "삭제 성공");
 					document.location.reload();
 				} else {
 					alert(errorMessage);

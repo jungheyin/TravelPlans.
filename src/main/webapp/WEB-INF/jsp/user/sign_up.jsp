@@ -26,7 +26,7 @@
 </head>
 <body>
 	<div id="travelplans" class="container">
-		<div class="travelplansBar ml-2">
+		<div class="travelplansBar">
 			<a href="/travelplans/travelplans_view">
 				<span class="font-weight-bold ml-2 text-white">travel plans.</span>
 			</a>
@@ -67,7 +67,7 @@
 						
 						<div class="mt-2 mr-2">
 							<small id="passwordOk" class="d-none">사용 가능한 비밀번호입니다.</small>
-							<small id="passwordRule" class="d-none">특수문자/문자/숫자 포함해 8~15자리 애내 입력헤 주세요.</small>
+							<small id="passwordRule" class="d-none">특수문자/문자/숫자 포함해 8~15자리</small>
 						</div>
 					</div>
 					<input type="password" id="password" class="form-control" maxlength="15" placeholder="특수문자/문자/숫자 포함해 8~15자리">
@@ -79,7 +79,7 @@
 						<div class="mt-2 mr-2">
 							<small id="passwordSame" class="d-none">비밀번호가 같습니다.</small>
 							<small id="passwordDifferent" class="d-none">비밀번호가 다릅니다.</small>
-							<small id="confirmPasswordRule" class="d-none">특수문자/문자/숫자 포함해 8~15자리 애내 입력헤 주세요.</small>
+							<small id="confirmPasswordRule" class="d-none">특수문자/문자/숫자 포함해 8~15자리</small>
 						</div>
 					</div>
 					<input type="password" id="confirmPassword" class="form-control" placeholder="특수문자/문자/숫자 포함해 8~15자리">
@@ -200,6 +200,7 @@ $(document).ready(function() {
 		} 
 		
 		if (password != confirmPassword) {
+			$('#passwordOk').addClass('d-none');
 			$('#passwordDifferent').removeClass('d-none');
 			$('#password').val('');
 			$('#confirmPassword').val('');
