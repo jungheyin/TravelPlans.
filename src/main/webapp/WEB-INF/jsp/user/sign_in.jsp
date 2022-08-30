@@ -85,11 +85,11 @@ $(document).ready(function() {
 		
 		$.ajax({
 			type: "POST"
-			, url: "/user/sign_in"
+			, url: "/user/user/sign_in"
 			, data: {"loginId":loginId, "password":password}
 			, success: function(data) {
 				if (data.result == 'success') {
-					location.href ="/mypage/mypage_view";
+					location.href ="/travel/mypage_view?loginId=" + loginId;
 				} else {
 					alert(data.errorMessage);
 				}

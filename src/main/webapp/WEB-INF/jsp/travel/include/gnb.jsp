@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <div class="mypage">
-	<a href="/mypage/mypage_view" class="d-flex justify-content-end"> 
+	<a href="/travel/mypage_view" class="d-flex justify-content-end"> 
 	<span class="mypageText text-white font-weight-bold mr-2">mypage</span>
 	</a>
 </div>

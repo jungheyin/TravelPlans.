@@ -93,38 +93,6 @@ INSERT INTO `reservation`
 	)
 </insert>
 
-<select id="selectLastTravel" resultType="com.travelplans.new_travel.model.Travel">
-	SELECT 
-		`id`
-		,`userId`
-		,`title`
-		,`startDate`
-		,`endDate`
-		,`price`
-		,`createdAt`
-		,`updatedAt`
-	FROM
-		`travel`
-	ORDER BY `id` DESC
-	LIMIT 1
-</select>
-
-<select id="selectTravelById" resultType="com.travelplans.new_travel.model.Travel">
-	SELECT 
-		`id`
-		,`userId`
-		,`title`
-		,`startDate`
-		,`endDate`
-		,`price`
-		,`createdAt`
-		,`updatedAt`
-	FROM
-		`travel`
-	WHERE 
-		`id` = #{id}
-</select>
-
 <select id="selectTrafficById" resultType="com.travelplans.reservation.model.Traffic">
 	SELECT
 		 `id`
@@ -202,6 +170,7 @@ INSERT INTO `reservation`
  		`traffic`
  	WHERE
  		`travelId` = #{travelId}
+ 	ORDER BY `startTime` ASC
 </select>
  
 <select id="selectAccommodationList" resultType="com.travelplans.reservation.model.Accommodation">
@@ -289,7 +258,7 @@ WHERE
 	AND `travelId` = #{travelId}
 </update>
 
-<delete id="deleteTrafficByIdTravelId" parameterType="map">
+<delete id="deleteTrafficByTrafficIdTravelId" parameterType="map">
  	DELETE
  	FROM
  		`traffic`
@@ -297,22 +266,45 @@ WHERE
  		`id` = #{trafficId}
  		AND travelId = #{travelId}
 </delete>
+
+<delete id="deleteTrafficByTravelId">
+ 	DELETE
+ 	FROM
+ 		`traffic`
+ 	WHERE
+ 		travelId = #{travelId}
+</delete>
  
- <delete id="deleteAccommodationByIdTravelId" parameterType="map">
+<delete id="deleteAccommodationByAccommodationIdTravelId" parameterType="map">
   	DELETE
  	FROM
  		`accommodation`
  	WHERE
  		`id` = #{accommodationId}
  		AND travelId = #{travelId}
+</delete>
+ 
+<delete id="deleteAccommodationByTravelId" >
+  	DELETE
+ 	FROM
+ 		`accommodation`
+ 	WHERE
+ 		travelId = #{travelId}
  </delete>
  
- <delete id="deleteReservationByIdTravelId" parameterType="map">
+<delete id="deleteReservationByReservationIdTravelId" parameterType="map">
    	DELETE
  	FROM
  		`reservation`
  	WHERE
  		`id` = #{reservationId}
  		AND travelId = #{travelId}
- </delete>
+</delete>
+<delete id="deleteReservationByTravelId" >
+   	DELETE
+ 	FROM
+ 		`reservation`
+ 	WHERE
+ 		travelId = #{travelId}
+</delete>
  </mapper>

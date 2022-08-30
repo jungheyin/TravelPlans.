@@ -39,4 +39,10 @@ public interface UserDAO {
 	public int updateUser (
 			@Param("userId") int userId, 
 			@Param("password") String password);
+	
+	public int updateNickNameByUserId(
+			@Param("userId") int userId, 
+			@Param("nickname") String nickname);
+	
+	public int deleteByUserId(int userId);
 }

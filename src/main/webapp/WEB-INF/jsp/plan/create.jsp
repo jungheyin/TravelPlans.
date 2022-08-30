@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
-<div class="px-3 ml-5 mt-4">
+<div class="px-3 ml-5 mt-4" data-bs-spy="scroll" >
 	<!-- 일정제목 -->
 `	<div>
 		<label class="font-weight-bold mr-3 mt-2 text-secondary"
@@ -110,7 +110,7 @@ $(document).ready(function() {
 		$.ajax({
 			type: "POST"
 			,url: "/plan/create"
-			,data: {"itineraryId": ${itineraryId}, "date": date, "planName": planName, "time": time, 
+			,data: {"travelId": ${travel.id}, "itineraryId": ${itineraryId}, "date": date, "planName": planName, "time": time, 
 					"location": location, "memo": memo, "price": price}
 			, success: function(data) {
 				if (data.result == 'success') {

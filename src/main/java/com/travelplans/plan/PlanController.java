@@ -11,14 +11,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.travelplans.itinerary.bo.DateListBO;
 import com.travelplans.itinerary.bo.ItineraryBO;
 import com.travelplans.itinerary.model.DateListView;
-import com.travelplans.new_travel.model.Travel;
 import com.travelplans.plan.bo.PlanBO;
 import com.travelplans.plan.model.Plan;
 import com.travelplans.reservation.bo.ReservationBO;
+import com.travelplans.travel.bo.TravelBO;
+import com.travelplans.travel.model.Travel;
 
 @Controller
 @RequestMapping("/plan")
 public class PlanController {
+	
+	@Autowired
+	private TravelBO travelBO;
 	
 	@Autowired
 	private ItineraryBO itineraryBO;
@@ -39,7 +43,7 @@ public class PlanController {
 			@RequestParam("date") String date,
 			Model model) {
 		
-		Travel travel = reservationBO.getTravelById(travelId);
+		Travel travel = travelBO.getTravelByTravelId(travelId);
 		List<DateListView> dateListView = dateListBO.generateDateListViewList(travelId);
 		List<Plan> planList = planBO.getPlanListByItineraryId(itineraryId);
 		
@@ -61,7 +65,7 @@ public class PlanController {
 			@RequestParam("planId") int planId,
 			Model model) {
 		
-		Travel travel = reservationBO.getTravelById(travelId);
+		Travel travel = travelBO.getTravelByTravelId(travelId);
 		List<DateListView> dateListView = dateListBO.generateDateListViewList(travelId);
 		List<Plan> planList = planBO.getPlanListByItineraryId(itineraryId);
 		Plan plan = planBO.getPlanByPlanId(planId);

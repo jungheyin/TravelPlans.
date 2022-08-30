@@ -79,13 +79,19 @@ nav .nav-smText {
 	background-color: #7BB0DB;
 }
 
-
+.planName {
+	min-width: 230px;
+}
 .planBox {
 	height:30px;
 	background-color: #dededf;
 }
 
+.time {
+	width: 40px;
+	height: 25px;
+}
+
 footer {
 	height:100px;
 }
-

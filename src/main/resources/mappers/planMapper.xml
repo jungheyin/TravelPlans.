@@ -7,7 +7,8 @@
 <insert id="insertPlan" parameterType="map">
 	INSERT INTO `plan`
 	(
-		`itineraryId`
+		`travelId`
+		,`itineraryId`
 		,`date`
 		,`planName`
 		,`time`
@@ -19,7 +20,8 @@
 	)	
 	VALUES
 	(
-		#{itineraryId}
+		#{travelId}
+		,#{itineraryId}
 		,#{date}
 		,#{planName}
 		,#{time}
@@ -31,9 +33,10 @@
 	)
 </insert> 
  
- <select id="selectPlanListByItineraryId" resultType="com.travelplans.plan.model.Plan">
+<select id="selectPlanListByItineraryId" resultType="com.travelplans.plan.model.Plan">
  	SELECT 
  		`id`
+ 		,`travelId`
  		,`itineraryId`
 		,`date`
 		,`planName`
@@ -47,11 +50,51 @@
 		`plan`
 	WHERE
 		`itineraryId` = #{itineraryId}
- </select>
- 
+	ORDER BY `time` ASC
+</select>
+ <select id="selectPlanListByTravelId" resultType="com.travelplans.plan.model.Plan">
+ 	SELECT 
+ 		`id`
+ 		,`travelId`
+ 		,`itineraryId`
+		,`date`
+		,`planName`
+		,`time`
+		,`location`
+		,`memo`
+		,`price`
+		,`createdAt`
+		,`updatedAt`
+	FROM
+		`plan`
+	WHERE
+		`travelId` = #{travelId}
+	ORDER BY `time` ASC
+</select>
+<select id="selectPlanListByTravelIdItineraryId" resultType="com.travelplans.plan.model.Plan">
+ 	SELECT 
+ 		`id`
+ 		,`travelId`
+ 		,`itineraryId`
+		,`date`
+		,`planName`
+		,`time`
+		,`location`
+		,`memo`
+		,`price`
+		,`createdAt`
+		,`updatedAt`
+	FROM
+		`plan`
+	WHERE
+		`travelId` = #{travelId}
+		AND `itineraryId` = #{itineraryId}
+	ORDER BY `time` ASC
+</select>
  <select id="selectPlanByPlanId" resultType="com.travelplans.plan.model.Plan">
  	SELECT 
  		`id`
+ 		,`travelId`
  		,`itineraryId`
 		,`date`
 		,`planName`
@@ -78,6 +121,7 @@
 	,`updatedAt` = NOW()
 WHERE
 	`id` = #{planId}
+	AND `travelId` = #{travelId}
 	AND `itineraryId` = #{itineraryId}
 	AND `date` = #{date}
  </update>
@@ -88,6 +132,21 @@ WHERE
  	`plan`
  WHERE
  	`id` = #{planId}
- 	AND `itineraryId` = #{itineraryId}
- </delete>
+</delete>
+ 
+<delete id="deletePlanByItineraryId" >
+   	DELETE
+ 	FROM
+ 		`plan`
+ 	WHERE
+ 		`itineraryId` = #{itineraryId}
+</delete>
+
+<delete id="deletePlanByTravelId" >
+   	DELETE
+ 	FROM
+ 		`plan`
+ 	WHERE
+ 		`travelId` = #{travelId}
+</delete>
 </mapper>

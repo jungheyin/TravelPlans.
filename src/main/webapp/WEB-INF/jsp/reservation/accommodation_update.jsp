@@ -104,7 +104,8 @@ $(document).ready(function() {
 		let memo = $('#memo').val().trim();
 		let travelId = $(this).data('travel-id');
 		
-		 alert(travelId + name + startDate + endDate + location + price + memo);
+		 alert("이름: " + name + "\n 날짜: " + startDate + " ~ " + endDate + "\n 위치: " + location + "\n 가격: " + price + 
+				 "\n 메모: " + memo);
 		
 		 $.ajax({
 			 type: "PUT"
@@ -113,8 +114,7 @@ $(document).ready(function() {
 				 "location":location, "price":price, "memo":memo}
 			 , success: function(data) {
 				 if (data.result == "success") {
-					 alert(name + "변경 완료");
-					 document.location.reload();
+					 document.location.href="/itinerary/accommodation_info_view?userId=${userId}&travelId=${travel.id}";
 				 } else {
 					 alert(errorMessage);
 				 }

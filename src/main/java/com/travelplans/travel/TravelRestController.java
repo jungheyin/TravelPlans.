@@ -1,4 +1,4 @@
-package com.travelplans.new_travel;
+package com.travelplans.travel;
 
 
 import java.util.HashMap;
@@ -10,20 +10,22 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import com.travelplans.new_travel.bo.NewTravelBO;
+
+import com.travelplans.travel.bo.TravelBO;
 
 @RestController
-@RequestMapping("/new_travel")
-public class NewTravelRestController {
+@RequestMapping("/travel")
+public class TravelRestController {
 	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
-	private NewTravelBO newTravelBO;
+	private TravelBO travelBO;
 	
 	
 	/**
@@ -51,13 +53,13 @@ public class NewTravelRestController {
 		Integer userId = (Integer)session.getAttribute("userId");
 		
 		if (userId == null) {
-			logger.error("[new_travel/create] 로그인 풀림");
+			logger.error("[create/travel] userId null userId: " + userId );
 			result.put("result", "error");
 			result.put("errorMessage", "로그인 후 이용해 주세요.");
 			return result;
 		}
 		
-		newTravelBO.addTravel(userId, title, startDate, endDate);
+		travelBO.addTravel(userId, title, startDate, endDate);
 		
 		return result;
 		
@@ -86,18 +88,46 @@ public class NewTravelRestController {
 		
 		// 로그아웃시 에러처리
 		if (userId == null) {
-			logger.error("[new_travel/update] 로그인 풀림");
+			logger.error("[update/travel] userId null userId:" + userId);
 			result.put("return", "error");
 			result.put("errorMessage", "로그인 후 이용 가능합니다.");
 		}
 		
 		// update bo 가져온다.
-		int count = newTravelBO.updateTravel(travelId, userId, title, startDate, endDate);
+		int count = travelBO.updateTravel(travelId, userId, title, startDate, endDate);
 		
 		if (count < 0) {
-			logger.error("[new_travel/update] travel 정보 없음" + travelId);
+			logger.error("[travel/update] travel null travelId" + travelId);
 			result.put("return", "error");
 			result.put("errorMessage", "travel정보가 없읍니다. 다시 이용해주세요.");
+		}
+		
+		return result;
+	}
+	
+	@DeleteMapping("/delete")
+	public Map<String, Object> delete(
+			@RequestParam("travelId") int travelId,
+			HttpServletRequest request) {
+		
+		Map<String, Object> result = new HashMap<>();
+		result.put("result", "success");
+		
+		HttpSession session = request.getSession();
+		Integer userId = (Integer) session.getAttribute("userId");
+		
+		if (userId == null) {
+			logger.error("[delete/travel] user null userId: " +  userId);
+			result.put("result", "error");
+			result.put("errorMessage", "로그인 후 이용해 주세요.");
+		}
+		
+		int delCount = travelBO.deleteTravelByTravelIdUserId(travelId, userId);
+		
+		if (delCount < 0) {
+			logger.error("[delete/travel] MY PLANS delete false userId: " + userId + "travelId: " + travelId);
+			result.put("result", "error");
+			result.put("errorMessage", "MY PLANS 삭제가 실패 했습니다.");
 		}
 		
 		return result;

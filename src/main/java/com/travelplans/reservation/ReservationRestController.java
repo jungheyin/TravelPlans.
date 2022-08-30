@@ -66,7 +66,7 @@ public class ReservationRestController {
 		Integer userId = (Integer)session.getAttribute("userId");
 		
 		if (userId == null) {
-			logger.error("[reservation/add_traffic] 로그인 풀림");
+			logger.error("[add_traffic / reservation] traffic userId == null userId: " + userId + "travelId: " + travelId);
 			result.put("result","error");
 			result.put("errorMessage", "로그인 후 이용해 주세에요.");
 		}
@@ -104,7 +104,7 @@ public class ReservationRestController {
 		Integer userId = (Integer)session.getAttribute("userId");
 		
 		if (userId == null) {
-			logger.error("[reservation/add_accommodation] 로그인 풀림");
+			logger.error("[reservation/add_accommodation] accommodation userId null userId: " + userId + "travelId: " + travelId);
 			result.put("result", "error");
 			result.put("errorMessage", "로그인 후 이용해 주세요.");
 		}
@@ -145,7 +145,7 @@ public class ReservationRestController {
 		Integer userId = (Integer)session.getAttribute("userId");
 		
 		if (userId == null) {
-			logger.error("[/reservation/add_reservation] 로그인 풀림");
+			logger.error("[add_reservation / reservation] reservation userId null userId: " + userId + "travelId: " + travelId);
 			result.put("result", "error");
 			result.put("errorMessage", "로그인 후 이용해 주세요.");
 		}
@@ -195,7 +195,7 @@ public class ReservationRestController {
 		Integer userId = (Integer)session.getAttribute("userId");
 		
 		if (userId == null) {
-			logger.error("[reservation/traffic_update] 로그인 풀림");
+			logger.error("traffic_update / reservation] traffic userId == null userId: " + userId + "travelId: " + travelId + "trafficId: " + trafficId);
 			result.put("result", "error");
 			result.put("errorMessage", "로그인 후 이용해 주세요.");
 		}
@@ -205,7 +205,7 @@ public class ReservationRestController {
 				arrive, arriveDate, arriveTime, price, memo);
 		
 		if (upCount < 0 ) {
-			logger.error("[reservation/traffic_update] 수정 실패 {}, {}" + trafficId, travelId);
+			logger.error("[traffic_update / reservation] traffic upCount < 0 travelId: " + travelId + "trafficId: " + trafficId);
 			result.put("result", "error");
 			result.put("errorMassage", "수정에 실패했습니다.");
 		}
@@ -246,7 +246,7 @@ public class ReservationRestController {
 		Integer userId = (Integer)session.getAttribute("userId");
 		
 		if (userId == null) {
-			logger.error("[reservation/update_accommodation] 로그인 풀림");
+			logger.error("[update_accommodation / reservation] accommodation userId null userId: " + userId + "travelId: " + travelId + "accommodationId:" + accommodationId);			
 			result.put("result", "error");
 			result.put("errorMessage", "로그인 후 이용해 주세요.");
 		}
@@ -254,7 +254,7 @@ public class ReservationRestController {
 		int upCount = reservationBO.updateAccommodation(accommodationId, travelId, name, startDate, endDate, location, price, memo);
 		
 		if (upCount < 0 ) {
-			logger.error("[reservation/accommodation_update] 수정 실패 {},{}" + accommodationId, travelId);
+			logger.error("[accommodation_update / reservation] accommodation upCount < 0 travelId" + travelId + "accommodationId: " + accommodationId );
 			result.put("result", "error");
 			result.put("errorMessage", "수정에 실패 했습니다.");
 		}
@@ -293,7 +293,7 @@ public class ReservationRestController {
 		Integer userId = (Integer)session.getAttribute("userId");
 		
 		if (userId == null) {
-			logger.error("[reservation/update_reservation] 로그인 풀림");
+			logger.error("[update_reservation / reservation] reservation userId null userId: " + userId + "travelId: " + travelId + "resrvationId" + reservationId);			
 			result.put("result", "error");
 			result.put("errorMessage", "로그인 후 이용해 주세요.");
 		}
@@ -301,7 +301,7 @@ public class ReservationRestController {
 		int upCount = reservationBO.updateReservation(reservationId, travelId, title, booker, date, location, price, memo);
 		
 		if (upCount < 0 ) {
-			logger.error("[reservation/accommodation_update] 수정 실패 {},{}" + reservationId, travelId);
+			logger.error("[reservation_update / reservation] reservation upCount < 0 travelId" + travelId + "reservationId: " + reservationId);
 			result.put("result", "error");
 			result.put("errorMessage", "수정에 실패 했습니다.");
 		}
@@ -330,16 +330,16 @@ public class ReservationRestController {
 		Integer userId = (Integer)session.getAttribute("userId");
 		
 		if(userId == null) {
-			logger.error("[reservation/delete_traffic] 로그인 풀림");
+			logger.error("[delete_traffic / reservation] traffic userId null userId: " + userId + "travelId: " + travelId + "trafficId: " + trafficId);
 			result.put("result", "error");
 			result.put("errorMessage", "로그인 후 이용해 주세요.");
 		}
 		
 		
-		int delCount = reservationBO.deleteTraffic(trafficId, travelId);
+		int delCount = reservationBO.deleteTrafficByTrafficIdTravelId(trafficId, travelId);
 		
 		if (delCount < 0) {
-			logger.error("[reservation/delete_traffic] 삭제 실패!! {},{}" + trafficId, travelId);
+			logger.error("[delete_traffic / reservation] traffic delCount < 0 travalId: " + "trafficId: " + trafficId );
 			result.put("result", "error");
 			result.put("errorMessage", "교통수단 정보 삭제 실패했습니다.");
 		}
@@ -367,18 +367,18 @@ public class ReservationRestController {
 		Integer userId = (Integer)session.getAttribute("userId");
 			
 		if(userId == null) {
-			logger.error("[reservation/delete_traffic] 로그인 풀림");
+			logger.error("[delete_accommodation / reservation]accommodation userId null userId: " + userId + "travelId: " + travelId + "accommodation: " + accommodationId);
 			result.put("result", "error");
 			result.put("errorMessage", "로그인 후 이용해 주세요.");
 		}
 			
 			
-		int delCount = reservationBO.deleteAccommodation(accommodationId, travelId);
+		int delCount = reservationBO.deleteAccommodationByAccommodationIdTravelId(accommodationId, travelId);
 					
 		if (delCount < 0) {
-			logger.error("[reservation/delete_traffic] 삭제 실패!! {},{}" + accommodationId, travelId);
+			logger.error("[delete_accommodation / reservation] accommodation delCount < 0 travelId: " + travelId + "accommodationId: " + accommodationId);
 			result.put("result", "error");
-			result.put("errorMessage", "교통수단 정보 삭제 실패했습니다.");
+			result.put("errorMessage", "숙소 예약 정보 삭제 실패했습니다.");
 		}
 			
 		return result;
@@ -400,16 +400,16 @@ public class ReservationRestController {
 		Integer userId = (Integer)session.getAttribute("userId");
 			
 		if(userId == null) {
-			logger.error("[reservation/delete_traffic] 로그인 풀림");
+			logger.error("[delete_reservation / reservation] reservation userId null userId: " + userId + "travelId: " + travelId + "reservationId" + reservationId );
 			result.put("result", "error");
 			result.put("errorMessage", "로그인 후 이용해 주세요.");
 		}
 			
 			
-		int delCount = reservationBO.deleteReservation(reservationId, travelId);
+		int delCount = reservationBO.deleteReservationByReservationIdTravelId(reservationId, travelId);
 					
 		if (delCount < 0) {
-			logger.error("[reservation/delete_traffic] 삭제 실패!! {},{}" + reservationId, travelId);
+			logger.error("[delete_reservation / reservation] resrvation delCount < 0 travelId: " + travelId + "reservationId: " + reservationId);
 			result.put("result", "error");
 			result.put("errorMessage", "예약 정보 삭제 실패했습니다.");
 		}

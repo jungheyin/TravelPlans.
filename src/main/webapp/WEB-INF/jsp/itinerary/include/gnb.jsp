@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <div class="mypage">
-	<a href="/mypage/mypage_view" class="d-flex justify-content-end"> 
+	<a href="/travel/mypage_view" class="d-flex justify-content-end"> 
 		<span class="text-white font-weight-bold mr-2">mypage</span>
 	</a>
 </div>
@@ -13,7 +13,7 @@
 		<h4 class="font-weight-bold mt-2 mr-1">travel plans.</h4>
 	</div>
 	<!-- mypage로 이동 -->
-	<a href="/mypage/mypage_view" class="mt-2 mr-3">
+	<a href="/travel/mypage_view" class="mt-2 mr-3">
 		<img src="/static/icons/airplans_black.png" alt="비행기아이콘" width="30px">
 	</a>
 </div>

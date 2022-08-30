@@ -28,7 +28,7 @@ a:hover {
 }
 
 .contents {
-	min-height: 1200px;
+	min-height: 1000px;
 }
 
 .plan {
@@ -41,8 +41,14 @@ a:hover {
 	color:#7BB0DB;
 }
 
+.planList {
+	overflow-y: scroll;
+	min-height: 650px;
+	max-height: 650px;
+}
+
 #layoutBorder {
-	min-height: 800px
+	min-height: 500px
 }
 
 

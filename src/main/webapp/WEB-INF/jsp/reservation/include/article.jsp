@@ -12,7 +12,7 @@
 			<div class="font-weight-bold ml-3 mb-2 mt-3">travel name</div>
 			
 			<div class="mt-2">
-				<a href="/new_travel/update_view?travelId=${travel.id}" class="mr-3">
+				<a href="/travel/update_view?userId=${userId}&travelId=${travel.id}" class="mr-3">
 					<img src="/static/icons/setting_skyBlue.png" alt="수정" width="20px">
 				</a>
 			</div>

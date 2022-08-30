@@ -6,14 +6,14 @@
 <div>
 	<div class="d-flex justify-content-between">
 		<h5 class="font-weight-bold ml-1 mt-2">교통수단</h5>
-		<a href="/reservation/traffic_create_view?travelId=${travel.id}" class="mr-2">
+		<a href="/reservation/traffic_create_view?userId=${userId}&travelId=${travel.id}" class="mr-2">
 			<img src="/static/icons/plus_skyBlue.png" alt="추가" width="35px">
 		</a>
 	</div>
 	
 	<c:forEach var="traffic" items="${trafficList}">
 		
-		<a href="/reservation/traffic_update_view?travelId=${travel.id}&trafficId=${traffic.id}" 
+		<a href="/reservation/traffic_update_view?userId=${userId}&travelId=${travel.id}&trafficId=${traffic.id}" 
 						class="updateLink">
 						
 		<div class="trafficBox border p-3 mb-3" data-traffic-id="${traffic.id}">

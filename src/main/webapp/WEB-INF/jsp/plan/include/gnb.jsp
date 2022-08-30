@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
  
 <div class="itinerary">
-	<a href="/itinerary/date_list_view?travelId=${travel.id}" class="d-flex justify-content-end mr-2">
+	<a href="/itinerary/date_list_view?userId=${userId}&travelId=${travel.id}" class="d-flex justify-content-end mr-2">
 		<h6 class="font-weight-bold text-white mt-1">itinerary</h6>
 	</a>
 </div>

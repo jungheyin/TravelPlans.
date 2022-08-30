@@ -10,7 +10,11 @@
 <div class="d-flex justify-content-center w-100 mt-5">
 	<div class="font-weight-bold loginId">
 		<c:forEach items="${userList}" var="user">
-			<h6 class="font-weight-bold">${user.loginId}</h6>
+			<h6 class="font-weight-bold">
+				<c:set value="${fn:length(user.loginId)}" var="idLength"/>
+				<c:set value="${fn:substring(user.loginId, idLength-3 , idLength)}" var="end" />
+				${fn:replace(user.loginId, end, '***')}
+			</h6>
 		</c:forEach>
 	</div>
 </div>

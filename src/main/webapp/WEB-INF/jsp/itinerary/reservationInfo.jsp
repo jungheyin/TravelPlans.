@@ -7,13 +7,13 @@
 <div>
 	<div class="d-flex justify-content-between">
 		<h5 class="font-weight-bold ml-1 mt-2">예약정보</h5>
-		<a href="/reservation/reservation_create_view?travelId=${travel.id}" class="mr-2" >
+		<a href="/reservation/reservation_create_view?userId=${userId}&travelId=${travel.id}" class="mr-2" >
 			<img src="/static/icons/plus_skyBlue.png" alt="추가" width="35px">
 		</a> 
 	</div>
 	
 	<c:forEach var="reservation" items="${reservationList}">
-		<a href="/reservation/reservation_update_view?travelId=${travel.id}&reservationId=${reservation.id}">
+		<a href="/reservation/reservation_update_view?userId=${userId}&travelId=${travel.id}&reservationId=${reservation.id}">
 		
 			<div class="border p-3 mb-3">
 				<div class="d-flex justify-content-end mb-2 mr-2">

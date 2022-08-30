@@ -44,19 +44,25 @@ $(document).ready(function(){
 		let nickname = $('#nickname').val().trim();
 		var userId = $('#saveBtn').data('user-id');
 		
+		if (nickname === '${user.nickname}') {
+			location.href="/travel/mypage_view";
+			return;
+		}
+		
 		if (nickname == '') {
 			alert("닉네임을 입력해 주세요.");
 			return;
 		}
 		
+		
+		
 	 	$.ajax({
 	 		type: "PUT"
-			, url: "/mypage/update_nickname"
+			, url: "/user/update_nickname"
 			, data: {"userId":userId, "nickname": nickname}
 	 		, success: function(data) {
 	 			if (data.result == 'success') {
-	 				alert(nickname + " 수정");
-	 				location.href="/mypage/mypage_view";
+	 				location.href="/travel/mypage_view";
 	 			} else {
 	 				alert(errorMessage);
 	 			}

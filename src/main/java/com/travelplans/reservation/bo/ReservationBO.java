@@ -9,11 +9,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.travelplans.new_travel.model.Travel;
 import com.travelplans.reservation.dao.ReservationDAO;
 import com.travelplans.reservation.model.Accommodation;
 import com.travelplans.reservation.model.Reservation;
 import com.travelplans.reservation.model.Traffic;
+import com.travelplans.travel.model.Travel;
 
 @Service
 public class ReservationBO {
@@ -44,14 +44,6 @@ public class ReservationBO {
 		memo = memo.replace("\n", "<br>");
 		
 		reservationDAO.insertReservation(travelId, title, booker, date, location, price, memo);
-	}
-	
-	public Travel getLastTravel() {
-		return reservationDAO.selectLastTravel();
-	}
-	
-	public Travel getTravelById(int id) {
-		return reservationDAO.selectTravelById(id);
 	}
 	
 	public Traffic getTrafficById(int trafficId) {
@@ -94,7 +86,7 @@ public class ReservationBO {
 		Traffic trafficById = getTrafficById(trafficId);
 		
 		if (trafficById == null) {
-			logger.error("[update traffic] 수정 할 교통수단 정보가 없습니다. {},{}" + trafficId, travelId );
+			logger.error("[update_traffic / reservation] reservationBO trafficById null trafficId: " + trafficId + "travelId: " +  travelId );
 			return 0;
 		}
 		
@@ -105,10 +97,10 @@ public class ReservationBO {
 	
 	public int updateAccommodation(int accommodationId, int travelId, String name, String startDate, String endDate, String location, Integer price, String memo) {
 		
-		Accommodation accommodation = getAccommodationById(accommodationId);
+		Accommodation accommodationById = getAccommodationById(accommodationId);
 		
-		if (accommodation == null) {
-			logger.error("[update accommodation] 수정 할 숙소 정보가 없습니다. {},{}" + accommodationId, travelId);
+		if (accommodationById == null) {
+			logger.error("[update_accommodation / reservation] reservationBO accommodationById null accommodationId: " + accommodationId + "travelId: " +  travelId);
 			return 0;
 		}
 		
@@ -117,10 +109,10 @@ public class ReservationBO {
 	
 	public int updateReservation(int reservationId,int travelId, String title, String booker, String date, String location, Integer price, String memo) {
 		
-		Reservation reservation = getReservationById(reservationId);
+		Reservation reservationById = getReservationById(reservationId);
 		
-		if (reservation == null) {
-			logger.error("[update reservation] 수정 할 예약 정보가 없습니다. {},{}" + reservationId, travelId);
+		if (reservationById == null) {
+			logger.error("[update_reservation / reservation] reservationBO reservationById null reservationId: " + reservationId + "travelId: " +  travelId);
 			return 0;
 		}
 		
@@ -128,42 +120,76 @@ public class ReservationBO {
 	}
 	
 	
-	public int deleteTraffic (int trafficId, int travelId) {
+	public int deleteTrafficByTrafficIdTravelId(int trafficId, int travelId) {
 
-		Traffic traffic = getTrafficById(trafficId);
+		Traffic trafficById = getTrafficById(trafficId);
 		
-		if (traffic == null) {
-			logger.error("[delete traffic] 삭제할 교통수단 정보가 없습니다. {},{}" + traffic.getId(), traffic.getTravelId());
+		if (trafficById == null) {
+			logger.error("[delete_traffic / reservation] reservationBO trafficById null trafficId: " + trafficById.getId() + "travelId: " + trafficById.getTravelId());
 			return 0;
 		}
 		
-		return reservationDAO.deleteTrafficByIdTravelId(trafficId, travelId);
+		return reservationDAO.deleteTrafficByTrafficIdTravelId(trafficId, travelId);
 	}
 	
-	public int deleteAccommodation(int accommodationId, int travelId) {
+	public void deleteTrafficByTravelId(int travelId) {
 		
-		Accommodation accommodation = getAccommodationById(accommodationId);
+		List<Traffic> trafficList = getTrafficList(travelId);
 		
-		if (accommodation == null) {
-			logger.error("[delete accommodation] 삭제할 숙소 정보가 없습니다. {},{}" + accommodationId, travelId);
+		if (trafficList.size() < 0) {
+			logger.error("[delete_traffic / reservation] reservationBO trafficList.size() < 0 travelId: " + travelId);
+		}
+		
+		reservationDAO.deleteTrafficByTravelId(travelId);
+	}
+	
+	public int deleteAccommodationByAccommodationIdTravelId(int accommodationId, int travelId) {
+		
+		Accommodation accommodationById = getAccommodationById(accommodationId);
+		
+		if (accommodationById == null) {
+			logger.error("[delete_accommodation / reservation] reservationBO accommodationById null accommodationId: " + accommodationId + "travelId: " + travelId);
 			return 0;
 		}
 		
-		return reservationDAO.deleteAccommodationByIdTravelId(accommodationId, travelId);
+		return reservationDAO.deleteAccommodationByAccommodationIdTravelId(accommodationId, travelId);
 	}
 	
-	public int deleteReservation(int reservationId, int travelId) {
+	public void deleteAccommodationByTravelId(int travelId) {
 		
-		Reservation reservation = getReservationById(reservationId);
+		List<Accommodation> accommodationList = getAccommodationList(travelId);
 		
-		if (reservation == null) {
-			logger.error("[delete reservation] 삭제할 예약 정보가 없습니다. {}, {}" + reservationId, travelId);
+		if (accommodationList.size() < 0) {
+			logger.error("[delete/accommodation / reservation] reservationBO accommodationList.size() < 0 travelId: " + travelId);
+			
+		}
+		
+		reservationDAO.deleteAccommodationByTravelId(travelId);
+	}
+	
+	public int deleteReservationByReservationIdTravelId(int reservationId, int travelId) {
+		
+		Reservation reservationById = getReservationById(reservationId);
+		
+		if (reservationById == null) {
+			logger.error("[delete_reservation / reservation] reservationBO reservationById null reservationId: " + reservationId + "travelId: " + travelId);
 			return 0;
 		}
 		
-		return reservationDAO.deleteReservationByIdTravelId(reservationId, travelId);
+		return reservationDAO.deleteReservationByReservationIdTravelId(reservationId, travelId);
 	}
 	
+	public void deleteReservationByTravelId(int travelId) {
+		
+		List<Reservation> reservationList = getReservationList(travelId);
+		
+		if (reservationList.size() < 0) {
+			logger.error("[delete/reservation] reservationBO reservationList.size() < 0 travelId: " + travelId);
+			
+		}
+		
+		reservationDAO.deleteReservationByTravelId(travelId);
+	}
 	public Map<String, String> generateTrafficSelectMap() {
 		
 		Map<String, String> traffcSelectMap = new HashMap<>();
@@ -177,49 +203,50 @@ public class ReservationBO {
 	}
 	
 	// traffic 총 경비
-		public int generateTrafficPrice(int travelId) {
+	public int generateTrafficPrice(int travelId) {
 				
-			List<Traffic> trafficList = getTrafficList(travelId);
+		List<Traffic> trafficList = getTrafficList(travelId);
 				
-			int trafficPrice = 0;	
-			for (int i = 0; i < trafficList.size(); i++) {
+		int trafficPrice = 0;	
+		for (int i = 0; i < trafficList.size(); i++) {
 					
-				trafficPrice = trafficPrice + trafficList.get(i).getPrice();
-				
-			}
-				
-			return trafficPrice;
+			trafficPrice = trafficPrice + trafficList.get(i).getPrice();
 				
 		}
-		// accommodation 총 경비
-		public int generateAccommodationPrice(int travelId) {
 				
-			List<Accommodation> accommodationList = getAccommodationList(travelId);
+		return trafficPrice;
 				
-			int accommodationPrice = 0;
-			for (int i = 0; i < accommodationList.size(); i++) {
+	}
+		
+	// accommodation 총 경비
+	public int generateAccommodationPrice(int travelId) {
+				
+		List<Accommodation> accommodationList = getAccommodationList(travelId);
+				
+		int accommodationPrice = 0;
+		for (int i = 0; i < accommodationList.size(); i++) {
 					
-				accommodationPrice = accommodationPrice + accommodationList.get(i).getPrice();
+			accommodationPrice = accommodationPrice + accommodationList.get(i).getPrice();
 					
-			}
-				
-			return accommodationPrice;
 		}
+				
+		return accommodationPrice;
+	}
 			
-		// reservation 총 비용
-		public int generateReservationPrice(int travelId) {
-				
-			List<Reservation> reservationList = getReservationList(travelId);
+	// reservation 총 비용
+	public int generateReservationPrice(int travelId) {
 			
-			int reservationPrice = 0;
-			for (int i = 0; i < reservationList.size(); i++) {
+		List<Reservation> reservationList = getReservationList(travelId);
+			
+		int reservationPrice = 0;
+		for (int i = 0; i < reservationList.size(); i++) {
 					
-				reservationPrice = reservationPrice + reservationList.get(i).getPrice();
+			reservationPrice = reservationPrice + reservationList.get(i).getPrice();
 				
-			}
-				
-			return reservationPrice;
 		}
+				
+		return reservationPrice;
+	}
 	
 	
 	

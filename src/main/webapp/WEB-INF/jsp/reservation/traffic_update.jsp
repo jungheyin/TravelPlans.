@@ -13,8 +13,6 @@
 	<div class="traffic d-flex justify-content-center">
 		<div>
 			<div class="d-flex justify-content-center">
-				<c:set var="option" value="${traffic.traffic}"/>
-				
 				
 				<select class="category custom-select mb-2" id="category">
 					<option value="choice">교통수단 선택</option>
@@ -106,27 +104,22 @@ $(document).ready(function(e) {
 		if (traffic == 'choice') {
 			$('#trafficInfo').text("이름");
 			$('.trafficInfoInput').attr("placeholder", "교통수단을 선택해 주세요.");
-			$('.trafficInfoInput').val('');
 			return;
 		} else if (traffic == 'airplans') {
 			$('#trafficInfo').text("항공사");
 			$('.trafficInfoInput').attr("placeholder", "항공사");
-			$('.trafficInfoInput').val('');
 			return;
 		} else if (traffic == 'train') {
 			$('#trafficInfo').text("기차 종류");
 			$('.trafficInfoInput').attr("placeholder", "기차 종류");
-			$('.trafficInfoInput').val('');
 			return;
 		} else if (traffic == 'expressBus') {
 			$('#trafficInfo').text("버스 종류");
 			$('.trafficInfoInput').attr("placeholder", "버스 종류");
-			$('.trafficInfoInput').val('');
 			return;
 		} else if (traffic == 'direct') {
 			$('#trafficInfo').text("이름");
 			$('.trafficInfoInput').attr("placeholder", "이름");
-			$('.trafficInfoInput').val('');
 			return;
 		} 
 	});
@@ -200,7 +193,7 @@ $(document).ready(function(e) {
 		
 		let travelId = $(this).data('travel-id');
 		
-		alert("교통수단 \n 이름: " + trafficInfo + "\n 출발: " + start + "(" +startDate + " " + startTime + ") \n 도착: " 
+		alert( traffic + "\n 이름: " + trafficInfo + "\n 출발: " + start + "(" +startDate + " " + startTime + ") \n 도착: " 
 				+ arrive + " (" + arriveDate + " " + arriveTime +  ") \n 가격: " +  price + "\n 메모: " + memo);
 		
 		   $.ajax({
@@ -213,7 +206,7 @@ $(document).ready(function(e) {
 			, success: function(data) {
 				if (data.result == 'success') {
 					 alert(start + " → " + arrive +" 수정");
-					 location.reload();
+					 location.href="/itinerary/traffic_info_view?userId=${userId}&travelId=${travel.id}";
 				} else {
 					alert("수정에 실패했습니다.");
 				}

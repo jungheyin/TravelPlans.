@@ -100,7 +100,7 @@ $(document).ready(function() {
 		
 		   $.ajax({
 			type:"PUT"
-			, url: "/user/password_update"
+			, url: "/user/user/password_update"
 			, data: {"userId": ${user.id}, "password": password}
 			, success: function(data) {
 				if (data.result == 'success') {

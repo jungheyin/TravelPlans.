@@ -65,7 +65,7 @@ $(document).ready(function() {
 	
 		$.ajax({
 			type: "POST"
-			, url: "/user/is_find_id"
+			, url: "/user/user/is_find_id"
 			, data: {"email" : email}
 			, success : function(data) {
 				if (data.result) {
@@ -112,10 +112,11 @@ $(document).ready(function() {
 		
 		$.ajax({
 			type:"POST"
-			, url: "/user/is_find_password"
+			, url: "/user/user/is_find_password"
 			, data: {"loginId": loginId, "email": email}
 			, success : function(data) {
 				if (data.result) {
+					alert("비밀변호를 변경해 주세요.");
 					location.href="/travelplans/find_password_view?loginId="+ btLoginId + "&email=" + btEmail;
 				} else if (data.result == false) {
 					alert("travel plans 이용자가 아닙니다. \n회원가입 후 이용해주세요.");

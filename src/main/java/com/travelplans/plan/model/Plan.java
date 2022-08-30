@@ -1,6 +1,9 @@
 package com.travelplans.plan.model;
 
-public class Plan {
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
+public class Plan{
 
 	private int id;
 	private int itineraryId;
@@ -67,7 +70,5 @@ public class Plan {
 		this.price = price;
 	}
 	
-	
-
 	
 }

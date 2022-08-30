@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="com.travelplans.plan.dao.TimeDAO">
+ 
+<select id="selectTimeCountByTravelIdItineraryIdPlanId" resultType="int">
+ 	SELECT
+ 		count(1)
+ 	FROM
+ 		`time`
+ 	WHERE
+ 		`travelId` = #{travelId}
+ 		AND `itineraryId` = #{itineraryId}
+ 		AND `planId` = #{planId}
+</select>
+
+<select id="selectTimeByTravelIdItineraryId" resultType="com.travelplans.plan.model.Time">
+ 	SELECT
+ 		`travelId`
+	 	,`itineraryId`
+	 	,`planId`
+	 	,`createdAt`
+ 	FROM
+ 		`time`
+ 	WHERE
+ 		`travelId` = #{travelId}
+ 		AND `itineraryId` = #{itineraryId}
+</select>
+
+<select id="selectTimeByTravelIdItineraryIdPlanId" resultType="com.travelplans.plan.model.Time">
+ 	SELECT
+ 		`travelId`
+	 	,`itineraryId`
+	 	,`planId`
+	 	,`createdAt`
+ 	FROM
+ 		`time`
+ 	WHERE
+ 		`travelId` = #{travelId}
+ 		AND `itineraryId` = #{itineraryId}
+ 		AND `planId` = #{planId}
+</select>
+
+ <insert id="insertTime" parameterType="map">
+ 	INSERT INTO `time`
+ 	(
+	 	`travelId`
+	 	,`itineraryId`
+	 	,`planId`
+	 	,`createdAt`
+ 	)
+ 	VALUES
+ 	(
+ 		#{travelId}
+ 		,#{itineraryId}
+ 		,#{planId}
+ 		,NOW()
+ 	)
+ </insert>
+ 
+ <delete id="deleteTimeByTravelIdItineraryIdPlanId" parameterType="map">
+ 	DELETE
+ 	FROM
+ 		`time`
+ 	WHERE
+ 		`travelId` = #{travelId}
+ 		AND `itineraryId` = #{itineraryId}
+ 		AND `planId` = #{planId}
+ </delete>
+ </mapper>

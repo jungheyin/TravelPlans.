@@ -42,7 +42,7 @@
 				<jsp:include page="../${planViewName}.jsp" />
 			</article>
 		</section>
-		<footer>
+		<footer class="mt-3">
 			<jsp:include page="../include/footer.jsp" />
 		</footer>
 	</div>

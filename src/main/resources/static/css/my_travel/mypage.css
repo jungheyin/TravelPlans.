@@ -52,7 +52,6 @@ section {
 .contents .itineraryBox {
 	width: 600px;
 	height: 80px;
-	/* background-color: #ffcc85; 임시 */
 }
 
 .travelTitle {
@@ -66,8 +65,20 @@ section {
 .travelPrice {
 	font-weight: bold;
 	font-size: 15px;
+}
 
-} 	
+.modalCancBtn {
+	font-weight: bold;
+	background-color: #AEADCA;
+	color: white;
+}
+
+.modalDelBtn {
+	font-weight: bold;
+	background-color: #ed5d47;
+	color: white;
+}
+ 	
 footer {
 	height:100px;
 }

@@ -24,20 +24,20 @@
 	
 	<!-- planList -->
 	
-	<div>
+	<div class="planList">
 		<c:forEach items="${planList}" var="plan">
 			<div class="border rounded p-3 mb-2">
 				<div class="d-flex justify-content-between">
 					<div class="d-flex">
 						<!-- 시간 -->
-						 <div class="ml-1">${plan.time}</div>
+						 <div class="ml-1">${fn:substring(plan.time,0,5)}</div>
 						 <div class="border-left mx-2"></div>
 						 <!-- 제목 -->
 						<div class="fullPlanName font-weight-bold">${plan.planName}</div>
 					 </div>
 					 <div class="d-flex">
 					 	<!-- 수정하기 -->
-						 <a href="/plan/update_view?travelId=${travel.id}&itineraryId=${itineraryId}&date=${date}&planId=${plan.id}" class="mr-2">
+						 <a href="/plan/update_view?userId=${userId}&travelId=${travel.id}&itineraryId=${itineraryId}&date=${date}&planId=${plan.id}" class="mr-2">
 						 	<img alt="수정" src="/static/icons/change_black.png" width="20px"
 						 		class="updateImg">
 						 </a>
@@ -94,18 +94,23 @@ $(document).ready(function() {
 		$('.delBtn').click();
 		
 		let planId = $(this).data('plan-id');
-		let itineraryId = ${itineraryId};
+		let planList = ${planList.size()};
 		
-		alert("planId:" + planId + " itinerayId:"  + itineraryId + " 삭제");
+		
 		
 		$.ajax({
 			type:"DELETE"
 			,url: "/plan/delete"
-			,data: {"planId": planId, "itineraryId": itineraryId}
+			,data: {"planId": planId}
 			,success: function(data) {
 				if (data.result == "success") {
 					alert("삭제");
-					document.location.reload();
+					if (planList == 1) {
+						document.location.href="/itinerary/date_list_view?userId=${userId}&travelId=${travel.id}";
+					} else if (planList > 1) {
+						document.location.reload();
+					}
+					
 				} else {
 					alert(errorMessage);
 				}

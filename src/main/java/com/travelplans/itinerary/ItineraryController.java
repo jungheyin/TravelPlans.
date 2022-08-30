@@ -11,20 +11,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.travelplans.itinerary.bo.DateListBO;
 import com.travelplans.itinerary.bo.ItineraryBO;
 import com.travelplans.itinerary.model.DateListView;
-import com.travelplans.new_travel.model.Travel;
 import com.travelplans.plan.bo.PlanBO;
 import com.travelplans.reservation.bo.ReservationBO;
 import com.travelplans.reservation.model.Accommodation;
 import com.travelplans.reservation.model.Reservation;
 import com.travelplans.reservation.model.Traffic;
+import com.travelplans.travel.bo.TravelBO;
+import com.travelplans.travel.model.Travel;
 
 @Controller
 @RequestMapping("/itinerary")
 public class ItineraryController {
 	
-		
+	
 	@Autowired
 	private ReservationBO reservationBO;
+	
+	@Autowired
+	private TravelBO travelBO;
 	
 	@Autowired
 	private ItineraryBO itineraryBO;
@@ -47,7 +51,7 @@ public class ItineraryController {
 			@RequestParam("travelId") int travelId,
 			Model model) {
 		
-		Travel travel = reservationBO.getTravelById(travelId);
+		Travel travel = travelBO.getTravelByTravelId(travelId);
 		List<Traffic> trafficList = reservationBO.getTrafficList(travelId);
 		Traffic traffic = reservationBO.getTrafficById(travelId);
 		
@@ -79,7 +83,7 @@ public class ItineraryController {
 			@RequestParam("travelId") int travelId,
 			Model model) {
 		
-		Travel travel = reservationBO.getTravelById(travelId);
+		Travel travel = travelBO.getTravelByTravelId(travelId);
 		List<Accommodation> accommodationList = reservationBO.getAccommodationList(travelId);
 		Accommodation accommodation = reservationBO.getAccommodationById(travelId);
 		int tafficPrice = reservationBO.generateTrafficPrice(travelId);
@@ -110,7 +114,7 @@ public class ItineraryController {
 			@RequestParam("travelId") int travelId,
 			Model model) {
 		
-		Travel travel = reservationBO.getTravelById(travelId);
+		Travel travel = travelBO.getTravelByTravelId(travelId);
 		List<Reservation> reservationList = reservationBO.getReservationList(travelId);
 		Reservation reservation = reservationBO.getReservationById(travelId);
 		int tafficPrice = reservationBO.generateTrafficPrice(travelId);
@@ -136,8 +140,10 @@ public class ItineraryController {
 			@RequestParam("travelId") int travelId,
 			Model model) {
 		
-		Travel travel = reservationBO.getTravelById(travelId);
+		Travel travel = travelBO.getTravelByTravelId(travelId);
 		List<DateListView> dateListView = dateListBO.generateDateListViewList(travelId);
+		
+		//  가격정보
 		int tafficPrice = reservationBO.generateTrafficPrice(travelId);
 		int accommodationPrice = reservationBO.generateAccommodationPrice(travelId);
 		int reservationPrice = reservationBO.generateReservationPrice(travelId);
@@ -147,6 +153,7 @@ public class ItineraryController {
 		model.addAttribute("tafficPrice", tafficPrice);
 		model.addAttribute("accommodationPrice", accommodationPrice);
 		model.addAttribute("reservationPrice", reservationPrice);
+		
 		model.addAttribute("dateListView", dateListView);
 		model.addAttribute("travel", travel);
 		model.addAttribute("itineraryViewName", "itinerary");
@@ -156,18 +163,3 @@ public class ItineraryController {
 	
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

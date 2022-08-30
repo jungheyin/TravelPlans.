@@ -14,7 +14,7 @@
 			<div class="itineraryBox d-flex justify-content-between mb-3">
 				<div class="ml-3 mt-4">
 
-				<div class="travelTitle mt-2">${travel.title}</div> <!-- trip의 startDate ~ endDate (year) : 수정해야한다. -->
+					<div class="travelTitle mt-2">${travel.title}</div>
 
 					<div class="d-flex">
 						<div class="travelDate">
@@ -46,46 +46,76 @@
 					</div>
 				</div>
 
-				<div class="d-flex align-items-center mr-2">
+				<div class="d-flex align-items-center mr-2 mt-3">
 					<div>
-						<img src="/static/icons/multiply.png" class="deleteImg" alt="삭제" width="30px"
-							height="30px">
-						<button type="button" class="deleteBtn btn d-none" data-travel-id="${travel.id}"></button>
+						<a href="#" class="delCheckBtn" data-toggle="modal" data-target="#delCheckBtn"
+							data-travel-id="${travel.id}" data-travel-title="${travel.title}">
+							<img src="/static/icons/multiply.png" class="deleteImg" alt="삭제" width="30px"
+								height="30px">
+						</a>
 					</div>
 				</div>
 			</div>
 		</div>
+		
+		<!-- Modal -->
+		<div class="modal fade" id="delCheckBtn" >
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="exampleModalLabel">TRAVEL PLANS.</h5>
+		      </div>
+		      <div class="modal-body">
+		      	<div class="d-flex justify-content-center font-weight-bold p-2 mb-4">
+		        	'${travel.title}' 의 PLAN을 삭제하겠습니까?
+		        </div>
+		        <div class="d-flex justify-content-center m-3">
+			      	<button class="modalCancBtn btn col-4 mr-4 py-2" 
+			      		data-dismiss="modal">뒤로가기</button>
+			       	<button type="button" class="modalDelBtn btn col-4">
+			       		삭제하기</button>
+		        </div>
+		      </div>
+		    </div>
+		  </div>
+		</div>
 	</c:forEach>
 </div>
+
 <script>
 $(document).ready(function() {
 	
-	$('.deleteImg').on('click', function(e) {
-		$('.deleteBtn').click();
-		var title = $('.travelTitle').val().trim();
-		var travelId = $('.deleteBtn').data('travel-id');
-		var userId = ${userId};
+	$('.delCheckBtn').on('click', function(e) {
+		e.preventDefault();
 		
-		alert( travelId + " 삭제");
+		let travelId = $(this).data('travel-id');
+		$('#delCheckBtn').data('travel-id', travelId);
 		
-		   $.ajax({
-			type: "DELETE"
-			, url: "/mypage/delete"
-			, data: { "userId": userId, "travelId": travelId}
-			, success: function(data) {
-				if (data.result == "success") {
-					// 성공시 reload
-					alert( "삭제");
-					document.location.reload();
-				} else {
-					alert(errorMessage);
-				}
-			}
-			, error: function(e) {
-				alert("MY PLANS 삭제 실패");
-			}
-		});    
 	});
 	
+ 	$('#delCheckBtn .modalDelBtn').on('click', function(e) {
+		
+ 		let travelId = $('#delCheckBtn').data('travel-id');
+ 		
+ 		console.log("삭제 travelId: " + travelId);
+ 		
+ 		 $.ajax({
+ 			type: "DELETE"
+ 			, url: "/travel/delete"
+ 			, data: {"travelId": travelId}
+ 			, success: function(data) {
+ 				if (data.result == "success") {
+ 					// 성공시 reload
+ 					alert( "삭제");
+ 					document.location.reload();
+ 				} else {
+ 					alert(errorMessage);
+ 				}
+ 			}
+ 			, error: function(e) {
+ 				alert("MY PLANS 삭제 실패");
+ 			}
+ 		});    
+	});	
 });
 </script>

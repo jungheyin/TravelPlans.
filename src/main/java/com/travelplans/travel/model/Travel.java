@@ -1,9 +1,8 @@
-package com.travelplans.mypage.model;
+package com.travelplans.travel.model;
 
 import java.util.Date;
 
 public class Travel {
-	
 	private int id;
 	private int userId;
 	private String title;
@@ -12,7 +11,6 @@ public class Travel {
 	private int price;
 	private Date createdAt;
 	private Date updatedAt;
-	
 	
 	public int getId() {
 		return id;
@@ -62,8 +60,6 @@ public class Travel {
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
-	
-	
 	
 	
 }

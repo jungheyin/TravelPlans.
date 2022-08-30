@@ -23,7 +23,7 @@
 	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 	crossorigin="anonymous"></script>
 	
-<link rel="stylesheet" type="text/css" href="/static/css/mypage/mypage.css">
+<link rel="stylesheet" type="text/css" href="/static/css/my_travel/mypage.css">
 </head>
 <body>
 

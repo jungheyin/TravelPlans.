@@ -10,16 +10,18 @@ import org.springframework.stereotype.Service;
 
 import com.travelplans.itinerary.model.DateListView;
 import com.travelplans.itinerary.model.Itinerary;
-import com.travelplans.new_travel.bo.NewTravelBO;
-import com.travelplans.new_travel.model.Travel;
 import com.travelplans.plan.bo.PlanBO;
+import com.travelplans.plan.bo.PlanTimeViewBO;
 import com.travelplans.plan.model.Plan;
+import com.travelplans.plan.model.PlanTimeView;
+import com.travelplans.travel.bo.TravelBO;
+import com.travelplans.travel.model.Travel;
 
 @Service
 public class DateListBO {
 
 	@Autowired
-	private NewTravelBO newTravelBO;
+	private TravelBO travelBO;
 	
 	@Autowired
 	private ItineraryBO itineraryBO;
@@ -27,12 +29,15 @@ public class DateListBO {
 	@Autowired
 	private PlanBO planBO;
 	
+	@Autowired
+	private PlanTimeViewBO planTimeViewBO;
+	
 	// dateList 만들기
 	public List<String> generateDateListByTravelId(int travelId) {
 		
 		List<String> dateList = new ArrayList<>();
 		
-		Travel travel = newTravelBO.getTravelById(travelId);
+		Travel travel = travelBO.getTravelByTravelId(travelId);
 		
 		String startDate = travel.getStartDate();
 		String endDate = travel.getEndDate();
@@ -70,9 +75,12 @@ public class DateListBO {
 		List<String> dateList = generateDateListByTravelId(travelId);
 		for (String date : dateList) {
 			DateListView content = new DateListView();
+			// 여행 정보
+			Travel travel = travelBO.getTravelByTravelId(travelId);
+			content.setTravel(travel);
 			// 날짜
 			content.setDate(date);
-			// 제목
+			// 여행일정 부분: 제목
 			 Itinerary itinerary = itineraryBO.getItineraryByTravelIdDate(travelId, date);
 			content.setItinerary(itinerary);
 			int itineraryId = 0;
@@ -80,10 +88,13 @@ public class DateListBO {
 			if (itinerary != null) {
 				itineraryId = itinerary.getId();
 			}
-			
-			// plan정보 가져오기
+			// 일정 plan정보 가져오기
 			List<Plan> planList = planBO.getPlanListByItineraryId(itineraryId);
 			content.setPlan(planList);
+			
+			// 일정 타임 체크 부분 
+			List<PlanTimeView> planTimeList = planTimeViewBO.generatePlanTimeView(travelId, itineraryId);
+			content.setPlanTimeList(planTimeList);
 			
 			// 날짜의 하루동안의 총 비용
 			  int pricePlan = planBO.generatePlanPrice(itineraryId);

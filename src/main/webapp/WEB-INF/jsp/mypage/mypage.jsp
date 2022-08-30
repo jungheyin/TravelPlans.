@@ -11,13 +11,13 @@
 		</div>
 		<div class="d-flex">
 			<label> 
-			<a href="/new_travel/create_view?userId=${userId}" class="mr-3"> 
+			<a href="/travel/create_view?userId=${userId}" class="mr-3"> 
 				<img src="/static/icons/plusWhiteAndSkyBlue.png" alt="추가" width="20px"> 
 				 <small class="addPlans">추가</small>
 			</a>
 			</label> 
 			<label> 
-			<a href="/mypage/setting_view?userId=${userId}"> 
+			<a href="/travel/mypage_setting_view?userId=${userId}"> 
 				<img src="/static/icons/setting_skyBlue.png" alt="설정" width="20px"> 
 				<small class="SettingText">설정</small>
 			</a>
@@ -30,7 +30,7 @@
 	<!-- user의 my plans 리스트 -->
 	<c:forEach items="${travelList}" var="travel">
 	<div class="border mx-5 mb-3">
-		<a href="/itinerary/traffic_info_view?travelId=${travel.id}" class="mytravelBtn mr-3"> 
+		<a href="/itinerary/traffic_info_view?userId=${userId}&travelId=${travel.id}" class="mytravelBtn mr-3"> 
 		<div class="d-flex justify-content-center">
 	
 			<div class="itineraryBox d-flex justify-content-between">
@@ -67,7 +67,7 @@
 					</div>
 				</div>
 				
-				<div class="d-flex align-items-center mt-3">
+				<div class="d-flex align-items-center mt-4 mr-3">
 					<img alt="비행기아이콘" src="/static/icons/airplan_skyBlue.png" width="30px">
 				</div>
 			</div>
@@ -76,10 +76,3 @@
 	</div>
 	</c:forEach>
 </div>
-
-<script>
-
-
-</script>
-
-

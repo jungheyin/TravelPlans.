@@ -113,4 +113,20 @@ SET
 WHERE
 	`id` = #{userId}
 </update>
+
+<update id="updateNickNameByUserId" parameterType="map">
+UPDATE `user`
+SET
+	`nickname` = #{nickname}
+	,`updatedAt` = NOW()
+WHERE 
+	`id` = #{userId}
+</update>
+<delete id="deleteByUserId" parameterType="int">
+ 	DELETE
+ 	FROM
+ 		`user`
+ 	WHERE
+ 		`id` = #{userId}
+</delete>
 </mapper>

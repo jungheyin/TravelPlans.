@@ -78,4 +78,12 @@ WHERE
 	AND `travelId` = #{travelId}
 	AND `date` = #{date}
 </update>
+
+<delete id="deleteItineraryByTravelId" >
+   	DELETE
+ 	FROM
+ 		`itinerary`
+ 	WHERE
+ 		travelId = #{travelId}
+</delete>
 </mapper>

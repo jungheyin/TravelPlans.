@@ -45,7 +45,7 @@ public class ItineraryRestController {
 		
 		// null
 		if (userId == null) {
-			logger.error("[itinerary/create] user null" + userId);
+			logger.error("[create / itinerary] user null travelId: " + travelId);
 			result.put("result", "error");
 			result.put("errorMessage", "로그인 후 이용해 주세요.");
 		}
@@ -54,13 +54,13 @@ public class ItineraryRestController {
 		int row = itineraryBO.addItinerary(travelId, date, title);
 		
 		if (row < 1) {
-			logger.error("[itinerary/create] itinerary row < 1" + travelId);
+			logger.error("[create / itinerary] itinerary row < 1" + travelId);
 			result.put("result", "error");
 			result.put("errorMessage", "제목을 저장할 수 없습니다.");
 		}
 		
 		if (row > 1) {
-			logger.error("[itinerary/create] itinerary row > 1" + travelId);
+			logger.error("[create / itinerary] itinerary row > 1" + travelId);
 			result.put("result", "error");
 			result.put("errorMessage", "제목을 저장할 수 없습니다.");
 		}
@@ -85,7 +85,7 @@ public class ItineraryRestController {
 		
 		// session null
 		if (userId == null) {
-			logger.error("[itinerary/update] user not null" + userId);
+			logger.error("[update / itinerary] user null " + userId);
 			result.put("return", "error");
 			result.put("errorMessage", "로그인 후 이용 가능합니다");
 		}
@@ -94,7 +94,7 @@ public class ItineraryRestController {
 		int updateCount = itineraryBO.updateItinerary(itineraryId, travelId, date, title);
 		
 		if (updateCount < 0) {
-			logger.error("[itinerary/update] not update" + userId + travelId + date);
+			logger.error("[update/ itinerary] update false userId: " + userId + "travelId: " + travelId + "date: " + date);
 			result.put("result", "error");
 			result.put("errorMessage", "수정에 실패했습니다.");
 		}

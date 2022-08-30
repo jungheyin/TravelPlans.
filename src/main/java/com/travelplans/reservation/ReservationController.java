@@ -1,6 +1,6 @@
 package com.travelplans.reservation;
 
-import java.util.List;
+
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,11 +9,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.travelplans.new_travel.model.Travel;
 import com.travelplans.reservation.bo.ReservationBO;
 import com.travelplans.reservation.model.Accommodation;
 import com.travelplans.reservation.model.Reservation;
 import com.travelplans.reservation.model.Traffic;
+import com.travelplans.travel.bo.TravelBO;
+import com.travelplans.travel.model.Travel;
 
 @Controller
 @RequestMapping("/reservation")
@@ -21,6 +22,9 @@ public class ReservationController {
 	
 	@Autowired
 	private ReservationBO reservationBO;
+	
+	@Autowired
+	private TravelBO travelBO;
 
 	/**
 	 * 교통수단 저장 화면
@@ -28,9 +32,11 @@ public class ReservationController {
 	 * @return
 	 */
 	@RequestMapping("/traffic_create_view")
-	public String trafficView(Model model) {
+	public String trafficView(
+			@RequestParam("userId") int userId, 
+			Model model) {
 		
-		Travel travel = reservationBO.getLastTravel();
+		Travel travel = travelBO.getTravelByUserIdDescLimit1(userId);
 		Map<String, String> trafficSelectMap = reservationBO.generateTrafficSelectMap();
 		
 		model.addAttribute("trafficSelectMap", trafficSelectMap);
@@ -47,9 +53,11 @@ public class ReservationController {
 	 * @return
 	 */
 	@RequestMapping("/accommodation_create_view")
-	public String accommodationView(Model model) {
+	public String accommodationView(
+			@RequestParam("userId") int userId, 
+			Model model) {
 		
-		Travel travel = reservationBO.getLastTravel();
+		Travel travel = travelBO.getTravelByUserIdDescLimit1(userId);
 		
 		model.addAttribute("travel", travel);
 		model.addAttribute("reservationSubject", "accommodation");
@@ -63,9 +71,11 @@ public class ReservationController {
 	 * @return
 	 */
 	@RequestMapping("/reservation_create_view")
-	public String reservationView(Model model) {
+	public String reservationView(
+			@RequestParam("userId") int userId, 
+			Model model) {
 		
-		Travel travel = reservationBO.getLastTravel();
+		Travel travel = travelBO.getTravelByUserIdDescLimit1(userId);
 		
 		model.addAttribute("travel", travel);
 		model.addAttribute("reservationSubject", "reservation");
@@ -88,7 +98,7 @@ public class ReservationController {
 			Model model) {
 		
 		
-		Travel travel = reservationBO.getTravelById(travelId);
+		Travel travel = travelBO.getTravelByTravelId(travelId);
 		Traffic traffic = reservationBO.getTrafficById(trafficId);
 		Map<String, String> trafficSelectMap = reservationBO.generateTrafficSelectMap();
 		
@@ -112,7 +122,7 @@ public class ReservationController {
 			@RequestParam("accommodationId") int accommodationId,
 		Model model) {
 		
-		Travel travel = reservationBO.getTravelById(travelId);
+		Travel travel = travelBO.getTravelByTravelId(travelId);
 		Accommodation accommodation = reservationBO.getAccommodationById(accommodationId);
 		
 		model.addAttribute("accommodation", accommodation);
@@ -131,7 +141,7 @@ public class ReservationController {
 			@RequestParam("reservationId") int reservationId,
 		Model model) {
 		
-		Travel travel = reservationBO.getTravelById(travelId);
+		Travel travel = travelBO.getTravelByTravelId(travelId);
 		Reservation reservation = reservationBO.getReservationById(reservationId);
 		
 		model.addAttribute("reservation", reservation);

@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
 
 <div class="px-3 ml-5 mt-4">
 	<!-- 일정제목 -->
@@ -49,21 +50,20 @@
 	<!-- 비용 -->
 	<div class="mt-2">
 		<label class="font-weight-bold mr-3 mt-2 text-secondary"
-			for="price">
+			for="price" maxlength="49">
 			비용
 		</label>
 		<div>
 			<c:choose>
-				<c:when test="${empty plan.price}">
+				<c:when test="${plan.price == 0}">
 					<input type="text" id="price" class="form-control"
 						placeholder="비용" maxlength="499">
 				</c:when>
-				<c:when test="${!empty plan.price}">
+				<c:when test="${plan.price != 0}">
 					<input type="text" id="price" class="form-control"
 						value="${plan.price}" maxlength="499">
 				</c:when>
 			</c:choose>
-		
 		</div>
 	</div>
 	
@@ -82,7 +82,7 @@
 				</c:when>
 				<c:when test="${!empty plan.memo}">
 					<textarea rows="3" id="memo" class="form-control"
-						maxlength="49">${plan.memo}</textarea>
+						maxlength="49">${fn:replace(plan.memo,'<br>','&#10;')}</textarea>
 				</c:when>
 			</c:choose>
 		
@@ -91,12 +91,16 @@
 		
 	</div>
 	
-	<button id="addBtn" class="btn w-100 mt-4"
+	<button id="addBtn" class="btn w-100 mt-4" data-plan-id="${plan.id}"
 		data-date-id="${date}"> C H A N G E </button>
 	
 </div>
 <script>
 $(document).ready(function() {
+	
+	$('#price').on('click', function() {
+		$(this).val('');
+	});
 	
 	$('#price').on('keyup', function() {
 		let target = $('#price').val();
@@ -117,7 +121,7 @@ $(document).ready(function() {
 	
 	$('#addBtn').on('click', function() {
 		
-		let planId = ${plan.id};
+		let planId = $(this).data('plan-id');
 		let planName = $('#planName').val().trim();
 		let time = $('#time').val().trim()
 		let location = $('#location').val().trim();
@@ -148,7 +152,7 @@ $(document).ready(function() {
 		$.ajax({
 			type: "PUT"
 			,url: "/plan/update"
-			,data: {"planId": planId, "itineraryId": ${itineraryId}, "date": date, 
+			,data: {"planId": planId, "travelId": ${travel.id}, "itineraryId": ${itineraryId}, "date": date, 
 				"planName": planName, "time": time, "location": location, "memo": memo
 				, "price": price}
 			,success: function(data) {

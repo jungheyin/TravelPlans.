@@ -6,12 +6,12 @@
 <div>
 	<div class="d-flex justify-content-between">
 		<h5 class="font-weight-bold ml-1 mt-2">숙 소</h5>
-		<a href="/reservation/accommodation_create_view?travelId=${travel.id}" class="mr-2" >
+		<a href="/reservation/accommodation_create_view?userId=${userId}&travelId=${travel.id}" class="mr-2" >
 			<img src="/static/icons/plus_skyBlue.png" alt="추가" width="35px">
 		</a> 
 	</div>
 	<c:forEach var="accommodation" items="${accommodationList}">
-	<a href="/reservation/accommodation_update_view?travelId=${travel.id}&accommodationId=${accommodation.id}"
+	<a href="/reservation/accommodation_update_view?userId=${userId}&travelId=${travel.id}&accommodationId=${accommodation.id}"
 				class="text-dark">
 		<div class="border p-3 mb-3">
 			<div class="d-flex justify-content-end mb-2 mr-2">

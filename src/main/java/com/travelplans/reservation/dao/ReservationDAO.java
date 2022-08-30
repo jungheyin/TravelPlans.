@@ -5,10 +5,10 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
-import com.travelplans.new_travel.model.Travel;
 import com.travelplans.reservation.model.Accommodation;
 import com.travelplans.reservation.model.Reservation;
 import com.travelplans.reservation.model.Traffic;
+import com.travelplans.travel.model.Travel;
 
 @Repository
 public interface ReservationDAO {
@@ -43,10 +43,6 @@ public interface ReservationDAO {
 			@Param("location") String location, 
 			@Param("price") Integer price, 
 			@Param("memo") String memo);
-	
-	public Travel selectLastTravel();
-	
-	public Travel selectTravelById(int id);
 	
 	public Traffic selectTrafficById(int trafficId);
 	
@@ -95,17 +91,23 @@ public interface ReservationDAO {
 			@Param("memo") String memo);
 	
 	
-	public int deleteTrafficByIdTravelId(
+	public int deleteTrafficByTrafficIdTravelId(
 			@Param("trafficId") int trafficId, 
 			@Param("travelId") int travelId);
 	
-	public int deleteAccommodationByIdTravelId(
+	public void deleteTrafficByTravelId(int travelId);
+	
+	public int deleteAccommodationByAccommodationIdTravelId(
 			@Param("accommodationId") int accommodationId, 
 			@Param("travelId") int travelId);
-
-	public int deleteReservationByIdTravelId(
+	
+	public void deleteAccommodationByTravelId(int travelId);
+	
+	public int deleteReservationByReservationIdTravelId(
 			@Param("reservationId") int reservationId, 
 			@Param("travelId") int travelId);
+	
+	public void deleteReservationByTravelId(int travelId);
 }
 
 

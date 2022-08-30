@@ -48,11 +48,23 @@ public class ItineraryBO {
 		Itinerary itineraryById = getItineraryById(itineraryId);
 		
 		if (itineraryById == null) {
-			logger.error("[update Itinerary] null itineraryId " + itineraryId);
+			logger.error("[update / Itinerary] itineraryBO null itineraryId: " + itineraryId);
 			return 0;
 		}
 		
 		return itineraryDAO.updateItinerary(itineraryId, travelId, date, title);
+	}
+	
+	public void deleteItineraryByTravelId(int travelId) {
+		
+		List<Itinerary> itineraryList = getItineraryByTravelId(travelId);
+		
+		if (itineraryList.size() < 0 ) {
+			logger.error("[delete / itinerary] itineraryBO itineraryList.size() < 0 travelId : " + travelId);
+			
+		}
+		
+		itineraryDAO.deleteItineraryByTravelId(travelId);
 	}
 	
 	// itineraryPrice 
@@ -62,8 +74,8 @@ public class ItineraryBO {
 		
 		// 결과 List
 		List<Integer> itineraryPriceList = new ArrayList<>();
-		
 		int itineraryPrice = 0;
+		
 		for (int i = 0; i < itineraryList.size(); i++) {
 			
 			int planPrice = planBO.generatePlanPrice(itineraryList.get(i).getId());

@@ -31,4 +31,6 @@ public interface ItineraryDAO {
 			@Param("date") String date, 
 			@Param("title") String title);
 	
+	public void deleteItineraryByTravelId(int travelId);
+	
 }

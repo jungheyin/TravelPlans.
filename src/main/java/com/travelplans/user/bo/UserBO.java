@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.travelplans.travel.bo.TravelBO;
 import com.travelplans.user.dao.UserDAO;
 import com.travelplans.user.model.User;
 
@@ -17,7 +18,10 @@ public class UserBO {
 	
 	@Autowired
 	private UserDAO userDAO;
-
+	
+	@Autowired
+	private TravelBO travelBO;
+	
 	public boolean existLoginId(String loginId) {
 		
 		return userDAO.selectLoginId(loginId);
@@ -41,8 +45,8 @@ public class UserBO {
 		return userDAO.selectUserByLoginIdPassword(loginId, password);
 	}
 	
-	public User getUserById(int id) {
-		return userDAO.selectUserById(id);
+	public User getUserById(int userId) {
+		return userDAO.selectUserById(userId);
 	}
 	
 	public User getUserByLoginIdEmail(String loginId, String email) {
@@ -59,10 +63,36 @@ public class UserBO {
 		User user = getUserById(userId);
 		
 		if (user == null) {
-			logger.error("[update User] null userId" + userId);
+			logger.error("[update / user] userBO user null userId: " + userId);
 			return 0;
 		}
 		
 		return userDAO.updateUser(userId, password);
+	}
+	
+	public int updateNickNameByUserId(int userId, String nickname) {
+		
+		User user = getUserById(userId);
+		
+		if (user == null) {
+			logger.error("[update / user] userBO user null userId: " + userId);
+			return 0;
+		}
+		
+		return userDAO.updateNickNameByUserId(userId, nickname);
+	}
+	
+	public int deleteUserByUserId(int userId) {
+		
+		User user = getUserById(userId);
+		
+		if (user == null) {
+			logger.error("[delete/ user] userBO user null userId: " + userId);
+			return 0;
+		}
+		
+		travelBO.deleteTravelByUserId(userId);
+		
+		return userDAO.deleteByUserId(userId);
 	}
 }

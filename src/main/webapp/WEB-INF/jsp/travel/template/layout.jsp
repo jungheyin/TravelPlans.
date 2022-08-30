@@ -33,7 +33,7 @@
 			<jsp:include page="../include/gnb.jsp" />
 		</header>
 		<section>
-			<jsp:include page="../${newTravelViewName}.jsp" />
+			<jsp:include page="../${travelViewName}.jsp" />
 		</section>
 		<footer>
 			<jsp:include page="../include/footer.jsp" />
